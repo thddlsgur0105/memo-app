@@ -3,18 +3,21 @@
 ## Blueprint
 
 1. Default memo function
-    > create-memo
-    > delete-memo
-    > update-memo (edit-memo)
+    > [ ] create-memo
+    > [ ] delete-memo
+    > [ ] update-memo (edit-memo)
 
 2. memo database 
     > [x] Local Storage
     > [o] MongoDB
 
 3. Dependencies
-    > NodeJS express [o] Install
+    > [o] NodeJS express Install
 
 4. devDependencies
-    > Nodemon [o]
-    > Morgan
-    > Babel (For using sexy javascript) [o] Install
+    > [o] Nodemon
+    > [o] Morgan 
+    > [o] Babel (For using sexy javascript) Install
+
+5. HTML template --> click, event --> get method Url --> Backend Server Communication 
+   > [ ] Connecting Server with HTML templates
