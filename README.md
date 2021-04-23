@@ -9,7 +9,7 @@
 
 2. memo database 
     > [x] Local Storage
-    > [o] MongoDB
+    > [ ] MongoDB
 
 3. Dependencies
     > [o] NodeJS express Install
@@ -20,4 +20,9 @@
     > [o] Babel (For using sexy javascript) Install
 
 5. HTML template --> click, event --> get method Url --> Backend Server Communication 
-   > [ ] Connecting Server with HTML templates
+   > [o] Connecting Server Pug engine
+   > [ ] Styling pug -- route: / -- Home Page
+
+
+### 탐구해야 할 부분
+ > [o] pug 파일에 정적파일 로드하는 방식 공부
