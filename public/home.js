@@ -37,27 +37,46 @@ function loadName() {
     }
 }
 
-function toDoItem(content, id) {
-    this.content = content;
+function toDoItem(text, id) {
+    this.text = text;
     this.id = id;
 }
 
-function paintToDo(toDo) {
+function handleDelBtnClick(event) {
+    const delBtnId = event.target.parentNode.id;
+    // Frontend Part
+    const delBtnLi = document.getElementById(delBtnId);
+    delBtnLi.classList.add("removing");
+    
+    // Backend Part
+}
+
+function paintToDo(text) {
     const li = document.createElement("li");
     const span = document.createElement("span");
-    span.innerText = toDo.content;
+    const delBtn = document.createElement("button");
+    const newId = TODOS_LIST.length + 1;
+    delBtn.innerText = "Delete";
+    delBtn.addEventListener("click", handleDelBtnClick);
+
+    // Rendering on Screen
+    span.innerText = text;
     li.appendChild(span);
+    li.appendChild(delBtn);
+    li.id = newId;
     jsToDoLists.appendChild(li);
+
+    // Working on localStorage
+    toDoObj = new toDoItem(text, newId);
+    TODOS_LIST.push(toDoObj);
+    localStorage.setItem(TODOS_LS, JSON.stringify(TODOS_LIST));
 }
 
 function handleToDos(event) {
     event.preventDefault();
     const currentValue = jsToDoInput.value;
     jsToDoInput.value = "";
-    newToDoItem = new toDoItem(currentValue, TODOS_LIST.length + 1);
-    paintToDo(newToDoItem);
-    TODOS_LIST.push(newToDoItem);
-    localStorage.setItem(TODOS_LS, JSON.stringify(TODOS_LIST));
+    paintToDo(currentValue);
 }
 
 function askForToDos() {
@@ -65,16 +84,21 @@ function askForToDos() {
     jsToDoForm.addEventListener("submit", handleToDos);
 }
 
-function init() {
-    loadName();
-    // Making To Do List Algorithm
+function loadToDos() {
     var currentToDos = localStorage.getItem(TODOS_LS);
     if (currentToDos) {
         currentToDos = JSON.parse(currentToDos);
-        currentToDos.forEach(element => {
-            paintToDo(element)
+        currentToDos.forEach(toDo => {
+            paintToDo(toDo.text)
         });
     }
+}
+
+function init() {
+    // Name Algorithm
+    loadName();
+    // To Do List Algorithm
+    loadToDos();
     askForToDos();
 }
 
