@@ -7,7 +7,7 @@ const jsForm = document.querySelector("#js-form"),
 
 const USER_LS = "currentUser";
 const TODOS_LS = "toDos";
-var TODOS_LIST = [];
+var toDoList = [];
 
 function paintGreeting(text) {
     jsHello.className = "showing";
@@ -37,25 +37,31 @@ function loadName() {
     }
 }
 
+function saveToDoList() {
+    localStorage.setItem(TODOS_LS, JSON.stringify(toDoList));
+}
+
 function toDoItem(text, id) {
     this.text = text;
     this.id = id;
 }
 
 function handleDelBtnClick(event) {
-    const delBtnId = event.target.parentNode.id;
+    const delBtn = event.target;
+    const delLi = delBtn.parentNode;
     // Frontend Part
-    const delBtnLi = document.getElementById(delBtnId);
-    delBtnLi.classList.add("removing");
-    
+    jsToDoLists.removeChild(delLi);
     // Backend Part
+    const cleanToDos = toDoList.filter(toDo => toDo.id !== parseInt(delLi.id));
+    toDoList = cleanToDos;
+    saveToDoList();
 }
 
 function paintToDo(text) {
     const li = document.createElement("li");
     const span = document.createElement("span");
     const delBtn = document.createElement("button");
-    const newId = TODOS_LIST.length + 1;
+    const newId = toDoList.length + 1;
     delBtn.innerText = "Delete";
     delBtn.addEventListener("click", handleDelBtnClick);
 
@@ -68,8 +74,8 @@ function paintToDo(text) {
 
     // Working on localStorage
     toDoObj = new toDoItem(text, newId);
-    TODOS_LIST.push(toDoObj);
-    localStorage.setItem(TODOS_LS, JSON.stringify(TODOS_LIST));
+    toDoList.push(toDoObj);
+    saveToDoList()
 }
 
 function handleToDos(event) {
