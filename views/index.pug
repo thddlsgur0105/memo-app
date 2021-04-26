@@ -10,6 +10,10 @@ html(lang="en")
         h1.hello.removing Hello
 
         form#js-form.removing
-            input(type="text", name="toDo" placeholder="What is your name?")
+            input(type="text", placeholder="What is your name?" required)
             button(type="submit") Submit 
+        form#js-todo-form.removing
+            input(type="text" placeholder="What is your main focus?") 
+            button(type="submit") Add
+        ul#js-todo-lists 
         script(src="/home.js") 
