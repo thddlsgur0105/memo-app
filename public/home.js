@@ -57,18 +57,42 @@ function handleDelBtnClick(event) {
     saveToDoList();
 }
 
+function handleEditBtnClick(event) {
+    // askForUpdated 띄우기
+    const editBtn = event.target;
+    const editLi = editBtn.parentNode;
+    const jsEditForm = document.createElement("form");
+    const jsEditInput = document.createElement("input");
+    const jsEditSubmit = document.createElement("button");
+    jsEditInput.setAttribute("placeholder", "what is your updated?");
+    jsEditSubmit.innerText = "Edited";
+    jsEditForm.appendChild(jsEditInput);
+    jsEditForm.appendChild(jsEditSubmit);
+    jsEditForm.id = editLi.id;
+    editLi.after(jsEditForm);
+    // 입력 받은 값을 바탕으로 frontend backend 내용 수정
+}
+
 function paintToDo(text) {
     const li = document.createElement("li");
     const span = document.createElement("span");
     const delBtn = document.createElement("button");
+    const editBtn = document.createElement("button");
     const newId = toDoList.length + 1;
+
+    // Delete
     delBtn.innerText = "Delete";
     delBtn.addEventListener("click", handleDelBtnClick);
+
+    // Edit
+    editBtn.innerText = "Edit";
+    editBtn.addEventListener("click", handleEditBtnClick);
 
     // Rendering on Screen
     span.innerText = text;
     li.appendChild(span);
     li.appendChild(delBtn);
+    li.appendChild(editBtn);
     li.id = newId;
     jsToDoLists.appendChild(li);
 
