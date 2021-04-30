@@ -3,7 +3,11 @@ const jsForm = document.querySelector("#js-form"),
     jsHello = document.querySelector(".hello"),
     jsToDoForm = document.querySelector("#js-todo-form"),
     jsToDoInput = jsToDoForm.querySelector("input"),
-    jsToDoLists = document.querySelector("#js-todo-lists");
+    jsToDoLists = document.querySelector("#js-todo-lists"),
+    jsEditForm = document.createElement("form"),
+    jsEditInput = document.createElement("input"),
+    jsEditedSubmit = document.createElement("button"),
+    jsEditBack = document.createElement("button");
 
 const USER_LS = "currentUser";
 const TODOS_LS = "toDos";
@@ -11,7 +15,7 @@ var toDoList = [];
 
 function paintGreeting(text) {
     jsHello.className = "showing";
-    jsHello.innerHTML = `Hello ${text}!`;
+    jsHello.innerHTML = `Hello ${text}`;
 }
 
 function handleSubmit(event) {
@@ -41,11 +45,6 @@ function saveToDoList() {
     localStorage.setItem(TODOS_LS, JSON.stringify(toDoList));
 }
 
-function toDoItem(text, id) {
-    this.text = text;
-    this.id = id;
-}
-
 function handleDelBtnClick(event) {
     const delBtn = event.target;
     const delLi = delBtn.parentNode;
@@ -57,20 +56,31 @@ function handleDelBtnClick(event) {
     saveToDoList();
 }
 
+function handleEditedSubmit(event) {
+    event.preventDefault();
+
+    //Frontend Part -- frontend에서 내용 updated 로 수정해주는 과정
+    const editedValue = jsEditInput.value;
+    jsEditInput.value = "";
+    const targetId = event.target.parentNode.id;
+    console.dir(document)
+    console.log(editedValue, targetId)
+    //Backend Part
+}
+
 function handleEditBtnClick(event) {
-    // askForUpdated 띄우기
     const editBtn = event.target;
     const editLi = editBtn.parentNode;
-    const jsEditForm = document.createElement("form");
-    const jsEditInput = document.createElement("input");
-    const jsEditSubmit = document.createElement("button");
+    
     jsEditInput.setAttribute("placeholder", "what is your updated?");
-    jsEditSubmit.innerText = "Edited";
+    jsEditedSubmit.innerText = "Edited";
+    jsEditBack.innerText = "Back";
     jsEditForm.appendChild(jsEditInput);
-    jsEditForm.appendChild(jsEditSubmit);
+    jsEditForm.appendChild(jsEditedSubmit);
+    jsEditForm.appendChild(jsEditBack);
     jsEditForm.id = editLi.id;
-    editLi.after(jsEditForm);
-    // 입력 받은 값을 바탕으로 frontend backend 내용 수정
+    jsEditedSubmit.addEventListener("click", handleEditedSubmit);
+    editLi.appendChild(jsEditForm);
 }
 
 function paintToDo(text) {
@@ -97,7 +107,10 @@ function paintToDo(text) {
     jsToDoLists.appendChild(li);
 
     // Working on localStorage
-    toDoObj = new toDoItem(text, newId);
+    toDoObj = {
+        text: text,
+        id: newId
+    };
     toDoList.push(toDoObj);
     saveToDoList()
 }

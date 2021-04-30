@@ -1,7 +1,3 @@
-.showing {
-    display: block;
-}
-
-.removing {
-    display: none;
-}
+@import "./reset.css";
+@import "./functional.css";
+@import "./homeStyle.css";
