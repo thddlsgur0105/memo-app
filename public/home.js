@@ -3,15 +3,19 @@ const jsForm = document.querySelector("#js-form"),
     jsHello = document.querySelector(".hello"),
     jsToDoForm = document.querySelector("#js-todo-form"),
     jsToDoInput = jsToDoForm.querySelector("input"),
-    jsToDoLists = document.querySelector("#js-todo-lists"),
     jsEditForm = document.createElement("form"),
     jsEditInput = document.createElement("input"),
     jsEditedSubmit = document.createElement("button"),
-    jsEditBack = document.createElement("button");
+    jsEditBack = document.createElement("button"),
+    jsToDoLists = document.querySelector("#js-todo-lists"),
+    jsCompleteLists = document.querySelector("#js-complete-lists");
 
 const USER_LS = "currentUser";
 const TODOS_LS = "toDos";
+const COMPLETE_LS = "complete";
+
 var toDoList = [];
+var completeList = [];
 
 function paintGreeting(text) {
     jsHello.className = "showing";
@@ -43,6 +47,10 @@ function loadName() {
 
 function saveToDoList() {
     localStorage.setItem(TODOS_LS, JSON.stringify(toDoList));
+}
+
+function saveCompleteList() {
+    localStorage.setItem(COMPLETE_LS, JSON.stringify(completeList));
 }
 
 function handleDelBtnClick(event) {
@@ -80,26 +88,44 @@ function handleEditedSubmit(event) {
     saveToDoList();
 }
 
+function handleEditBack(event) {
+    event.preventDefault();
+    const targetBackLi = event.target.parentNode;
+    targetBackLi.className = "removing";
+}
+
 function handleEditBtnClick(event) {
     const editBtn = event.target;
     const editLi = editBtn.parentNode;
     
     jsEditInput.setAttribute("placeholder", "what is your updated?");
-    jsEditedSubmit.innerText = "Edited";
-    jsEditBack.innerText = "Back";
     jsEditForm.appendChild(jsEditInput);
-    jsEditForm.appendChild(jsEditedSubmit);
-    jsEditForm.appendChild(jsEditBack);
     jsEditForm.id = editLi.id;
+    
+    jsEditedSubmit.innerText = "Edited";
+    jsEditForm.appendChild(jsEditedSubmit);
     jsEditedSubmit.addEventListener("click", handleEditedSubmit);
+    
+    jsEditBack.innerText = "Back";
+    jsEditForm.appendChild(jsEditBack);
+    jsEditBack.addEventListener("click", handleEditBack);
+    
     editLi.appendChild(jsEditForm);
+    jsEditForm.className = "showing";
 }
 
-function paintToDo(text) {
+function handleCompleteBtnClick(event) {
+    const targetCompleteNode = event.target.parentNode;
+    targetCompleteNode.className = "removing"
+    jsCompleteLists
+}
+
+function paintToDo(text, toPaint) {
     const li = document.createElement("li");
     const span = document.createElement("span");
     const delBtn = document.createElement("button");
     const editBtn = document.createElement("button");
+    const completeBtn = document.createElement("button");
     const newId = toDoList.length + 1;
 
     // Delete
@@ -110,13 +136,23 @@ function paintToDo(text) {
     editBtn.innerText = "Edit";
     editBtn.addEventListener("click", handleEditBtnClick);
 
+    // Complete Section Rendering
+    completeBtn.innerText = "Complete";
+    completeBtn.addEventListener("click", handleCompleteBtnClick);
+
     // Rendering on Screen
     span.innerText = text;
     li.appendChild(span);
     li.appendChild(delBtn);
     li.appendChild(editBtn);
+    li.appendChild(completeBtn);
     li.id = newId;
-    jsToDoLists.appendChild(li);
+
+    if (toPaint === "toDo") {
+        jsToDoLists.appendChild(li);
+    } else if(toPaint === "Completed") {
+        jsCompleteLists.appendChild(li);
+    }
 
     // Working on localStorage
     toDoObj = {
@@ -124,6 +160,7 @@ function paintToDo(text) {
         id: newId
     };
     toDoList.push(toDoObj);
+
     saveToDoList()
 }
 
@@ -131,7 +168,7 @@ function handleToDos(event) {
     event.preventDefault();
     const currentValue = jsToDoInput.value;
     jsToDoInput.value = "";
-    paintToDo(currentValue);
+    paintToDo(currentValue, "toDo");
 }
 
 function askForToDos() {
@@ -144,7 +181,7 @@ function loadToDos() {
     if (currentToDos) {
         currentToDos = JSON.parse(currentToDos);
         currentToDos.forEach(toDo => {
-            paintToDo(toDo.text)
+            paintToDo(toDo.text, "toDo")
         });
     }
 }

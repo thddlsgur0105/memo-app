@@ -4,11 +4,11 @@
 
 1. Default memo function
     > [-] create-memo
-    > [-] delete-memo
+    > [o] delete-memo
     > [-] update-memo (edit-memo)
 
 2. memo database 
-    > [x] Local Storage
+    > [o] Local Storage
     > [-] MongoDB
 
 3. Dependencies
@@ -25,15 +25,13 @@
 
 6. 개발 기능 && 스케줄
    > [o] 삭제기능
-   > [-] 편집 수정완료 기능
-   > [-] 편집 뒤로가기 기능
+   > [o] 편집 수정완료 기능
+   > [o] 편집 뒤로가기 기능
+   > [-] 편집 뒤로가기 기능 논리구조 이해 필요
    > [-] 보기 좋게 home 창 스타일링 + 이름 묻고 다음 창으로 넘어가는 방식 구현
-   > [-] edit 기능 구현하고 오류 수정
+   > [-] 편집 이후에 edit 관련 창 깔끔하게 없애주는 기능
    > [-] memo 에서 진행중 영역 , 완료 영역 등등 여러 기능들 추가적으로 구현
-
-
-7. 오류
-   > edit 버튼 클릭 이후에 한 번 더 클릭 시 추가적으로 버튼 생성 오류
-
-### 탐구해야 할 부분
- > [o] pug 파일에 정적파일 로드하는 방식 공부
+   > [o] pug 파일에 정적파일 로드하는 기능
+   > [-] toDo Part, Completed Part 영역 구분해서 전달해주는 기능
+   > [-] Completed Part 추가하면서 edit, delete 기능 수정
+   > [-] Completed Part 에서는 complete btn 다른 기능으로 수정
