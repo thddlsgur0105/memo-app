@@ -62,10 +62,22 @@ function handleEditedSubmit(event) {
     //Frontend Part -- frontend에서 내용 updated 로 수정해주는 과정
     const editedValue = jsEditInput.value;
     jsEditInput.value = "";
+    const targetLi = event.target.parentNode.parentNode;
     const targetId = event.target.parentNode.id;
-    console.dir(document)
-    console.log(editedValue, targetId)
+    const targetText = targetLi.firstChild;
+    targetText.innerText = editedValue;
+
     //Backend Part
+    toDoList.forEach(element => {
+        if (element.id === parseInt(targetId)) {
+            const newEditedObj = {
+                text: editedValue,
+                id: parseInt(targetId)
+            };
+            Object.assign(element, newEditedObj);
+        }
+    });
+    saveToDoList();
 }
 
 function handleEditBtnClick(event) {
