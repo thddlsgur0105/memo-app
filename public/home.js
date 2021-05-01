@@ -14,6 +14,9 @@ const USER_LS = "currentUser";
 const TODOS_LS = "toDos";
 const COMPLETE_LS = "complete";
 
+const TODO = "toDo";
+const COMPLETE = "Complete";
+
 var toDoList = [];
 var completeList = [];
 
@@ -56,11 +59,14 @@ function saveCompleteList() {
 function handleDelBtnClick(event) {
     const delBtn = event.target;
     const delLi = delBtn.parentNode;
+
     // Frontend Part
     jsToDoLists.removeChild(delLi);
+    
     // Backend Part
     const cleanToDos = toDoList.filter(toDo => toDo.id !== parseInt(delLi.id));
     toDoList = cleanToDos;
+
     saveToDoList();
 }
 
@@ -117,7 +123,10 @@ function handleEditBtnClick(event) {
 function handleCompleteBtnClick(event) {
     const targetCompleteNode = event.target.parentNode;
     targetCompleteNode.className = "removing"
-    jsCompleteLists
+    const targetCompleteText = targetCompleteNode.firstChild.innerText;
+    
+    handleDelBtnClick(event);
+    paintToDo(targetCompleteText, COMPLETE);
 }
 
 function paintToDo(text, toPaint) {
@@ -126,49 +135,64 @@ function paintToDo(text, toPaint) {
     const delBtn = document.createElement("button");
     const editBtn = document.createElement("button");
     const completeBtn = document.createElement("button");
-    const newId = toDoList.length + 1;
-
+    
     // Delete
     delBtn.innerText = "Delete";
     delBtn.addEventListener("click", handleDelBtnClick);
-
+    
     // Edit
     editBtn.innerText = "Edit";
     editBtn.addEventListener("click", handleEditBtnClick);
-
-    // Complete Section Rendering
+    
+    // Complete Section Rendering -- Only in To Do Section
     completeBtn.innerText = "Complete";
     completeBtn.addEventListener("click", handleCompleteBtnClick);
-
+    
     // Rendering on Screen
     span.innerText = text;
+    
+    // li에 tag들 쌓는 순서 중요
+    // span >> delBtn >> editBtn >> completeBtn
     li.appendChild(span);
     li.appendChild(delBtn);
     li.appendChild(editBtn);
-    li.appendChild(completeBtn);
-    li.id = newId;
-
-    if (toPaint === "toDo") {
+    
+    if (toPaint === TODO) {
+        const newId = toDoList.length + 1;
+        li.id = newId;
+        li.appendChild(completeBtn);
         jsToDoLists.appendChild(li);
-    } else if(toPaint === "Completed") {
+        
+        // Just like Backend..?
+        toDoObj = {
+            text: text,
+            id: newId
+        };
+        toDoList.push(toDoObj);
+
+    } else if (toPaint === COMPLETE) {
+        const newId = completeList.length + 1;
+        li.id = newId;
         jsCompleteLists.appendChild(li);
+        
+        // Just like Backend..?
+        completeObj = {
+            text: text,
+            id: newId
+        };
+        completeList.push(completeObj);
     }
 
-    // Working on localStorage
-    toDoObj = {
-        text: text,
-        id: newId
-    };
-    toDoList.push(toDoObj);
-
-    saveToDoList()
+    // Saving on localStorage
+    saveToDoList();
+    saveCompleteList();
 }
 
 function handleToDos(event) {
     event.preventDefault();
     const currentValue = jsToDoInput.value;
     jsToDoInput.value = "";
-    paintToDo(currentValue, "toDo");
+    paintToDo(currentValue, TODO);
 }
 
 function askForToDos() {
@@ -181,7 +205,17 @@ function loadToDos() {
     if (currentToDos) {
         currentToDos = JSON.parse(currentToDos);
         currentToDos.forEach(toDo => {
-            paintToDo(toDo.text, "toDo")
+            paintToDo(toDo.text, TODO)
+        });
+    }
+}
+
+function loadComplete() {
+    var currentComplete = localStorage.getItem(COMPLETE_LS);
+    if (currentComplete) {
+        currentComplete = JSON.parse(currentComplete);
+        currentComplete.forEach(complete => {
+            paintToDo(complete.text, COMPLETE);
         });
     }
 }
@@ -189,8 +223,10 @@ function loadToDos() {
 function init() {
     // Name Algorithm
     loadName();
+
     // To Do List Algorithm
     loadToDos();
+    loadComplete();
     askForToDos();
 }
 

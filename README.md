@@ -33,5 +33,7 @@
    > [-] memo 에서 진행중 영역 , 완료 영역 등등 여러 기능들 추가적으로 구현
    > [o] pug 파일에 정적파일 로드하는 기능
    > [-] toDo Part, Completed Part 영역 구분해서 전달해주는 기능
-   > [-] Completed Part 추가하면서 edit, delete 기능 수정
+   > [-] Completed Part 추가 -- [-] edit 기능 수정
+   > [-] Completed Part 추가 -- [-] delete 기능 수정
    > [-] Completed Part 에서는 complete btn 다른 기능으로 수정
+   > [-] localStorage 에서 저장시 일정 data 이상에서 휘발되는 문제 해결 필요 -- Complete Partㄴ
