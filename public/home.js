@@ -59,15 +59,25 @@ function saveCompleteList() {
 function handleDelBtnClick(event) {
     const delBtn = event.target;
     const delLi = delBtn.parentNode;
-
-    // Frontend Part
-    jsToDoLists.removeChild(delLi);
+    const targetSectionId = delLi.parentNode.id;
     
-    // Backend Part
-    const cleanToDos = toDoList.filter(toDo => toDo.id !== parseInt(delLi.id));
-    toDoList = cleanToDos;
+    if (targetSectionId === "js-todo-lists") {
+        // Frontend Part
+        jsToDoLists.removeChild(delLi);
+        
+        // Backend Part
+        const cleanToDos = toDoList.filter(toDo => toDo.id !== parseInt(delLi.id));
+        toDoList = cleanToDos;
+    
+        saveToDoList();
+    } else if (targetSectionId === "js-complete-lists") {
+        jsCompleteLists.removeChild(delLi);
 
-    saveToDoList();
+        const cleanComplete = completeList.filter(toDo => toDo.id !== parseInt(delLi.id));
+        completeList = cleanComplete;
+
+        saveCompleteList();
+    }
 }
 
 function handleEditedSubmit(event) {
@@ -75,23 +85,38 @@ function handleEditedSubmit(event) {
 
     //Frontend Part -- frontend에서 내용 updated 로 수정해주는 과정
     const editedValue = jsEditInput.value;
-    jsEditInput.value = "";
     const targetLi = event.target.parentNode.parentNode;
+    const targetSection = targetLi.parentNode;
+    const targetSectionId = targetSection.id;
     const targetId = event.target.parentNode.id;
     const targetText = targetLi.firstChild;
     targetText.innerText = editedValue;
 
     //Backend Part
-    toDoList.forEach(element => {
-        if (element.id === parseInt(targetId)) {
-            const newEditedObj = {
-                text: editedValue,
-                id: parseInt(targetId)
-            };
-            Object.assign(element, newEditedObj);
-        }
-    });
-    saveToDoList();
+    if (targetSectionId === "js-todo-lists") {
+        toDoList.forEach(element => {
+            if (element.id === parseInt(targetId)) {
+                const newEditedObj = {
+                    text: editedValue,
+                    id: parseInt(targetId)
+                };
+                Object.assign(element, newEditedObj);
+            }
+        });
+        saveToDoList();
+    } else if (targetSectionId === "js-complete-lists") {
+        completeList.forEach(element => {
+            if (element.id === parseInt(targetId)) {
+                const newEditedObj = {
+                    text: editedValue,
+                    id: parseInt(targetId)
+                };
+                Object.assign(element, newEditedObj);
+            }
+        });
+        saveCompleteList();
+    }
+
 }
 
 function handleEditBack(event) {
