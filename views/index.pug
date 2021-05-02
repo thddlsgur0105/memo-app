@@ -7,19 +7,19 @@ html(lang="en")
         title This is Home!
         link(rel="stylesheet", href="/styles.css")
     body 
-        section.inner 
-            h1.hello.removing Hello
+        h1.hello.removing Hello
 
-            form#js-form.removing
-                input(type="text", placeholder="What is your name?" required)
-                button(type="submit") Submit 
-            form#js-todo-form.removing
-                input(type="text" placeholder="What is your main focus?") 
-                button(type="submit") Add
-            section
-                h2 To Do
-                ul#js-todo-lists 
-            section 
-                h2 Complete
-                ul#js-complete-lists
+        form#js-form.removing
+            input(type="text", placeholder="What is your name?" required)
+            button(type="submit") Submit 
+        form#js-todo-form.removing
+            input(type="text" placeholder="What is your main focus?") 
+            button(type="submit") Add
+        section.section  
+            section.section__toDo
+                h2.section__text To Do
+                ul#js-todo-lists.section__ul
+            section.section__complete
+                h2.section__text Complete
+                ul#js-complete-lists.section__ul
         script(src="/home.js") 
