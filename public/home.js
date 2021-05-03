@@ -22,15 +22,19 @@ var completeList = [];
 
 function paintGreeting(text) {
     jsHello.className = "showing";
-    jsHello.innerHTML = `Hello ${text}`;
+    jsHello.innerHTML = `Hello, ${text}`;
 }
 
 function handleSubmit(event) {
     event.preventDefault();
     const currentValue = jsInput.value;
     jsInput.value = "";
+
+    // Frontend
     paintGreeting(currentValue);
     jsForm.className = "removing";
+    
+    // Backend
     localStorage.setItem(USER_LS, currentValue);
 }
 
@@ -157,6 +161,7 @@ function handleCompleteBtnClick(event) {
 function paintToDo(text, toPaint) {
     const li = document.createElement("li");
     const span = document.createElement("span");
+
     const delBtn = document.createElement("button");
     const editBtn = document.createElement("button");
     const completeBtn = document.createElement("button");
@@ -225,18 +230,17 @@ function askForToDos() {
     jsToDoForm.addEventListener("submit", handleToDos);
 }
 
-function loadToDos() {
+function loadData() {
     var currentToDos = localStorage.getItem(TODOS_LS);
+    var currentComplete = localStorage.getItem(COMPLETE_LS);
+    
     if (currentToDos) {
         currentToDos = JSON.parse(currentToDos);
         currentToDos.forEach(toDo => {
             paintToDo(toDo.text, TODO)
         });
     }
-}
 
-function loadComplete() {
-    var currentComplete = localStorage.getItem(COMPLETE_LS);
     if (currentComplete) {
         currentComplete = JSON.parse(currentComplete);
         currentComplete.forEach(complete => {
@@ -250,8 +254,7 @@ function init() {
     loadName();
 
     // To Do List Algorithm
-    loadToDos();
-    loadComplete();
+    loadData();
     askForToDos();
 }
 
