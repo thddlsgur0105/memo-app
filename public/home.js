@@ -61,10 +61,16 @@ function saveCompleteList() {
 }
 
 function handleDelBtnClick(event) {
-    const delBtn = event.target;
+    var delBtn;
+    if (event.target.tagName === "BUTTON") {
+        delBtn = event.target;
+    } else if (event.target.tagName === "I") {
+        delBtn = event.target.parentNode;
+    }
+
     const delLi = delBtn.parentNode;
     const targetSectionId = delLi.parentNode.id;
-    
+
     if (targetSectionId === "js-todo-lists") {
         // Frontend Part
         jsToDoLists.removeChild(delLi);
@@ -152,10 +158,14 @@ function handleEditBtnClick(event) {
 function handleCompleteBtnClick(event) {
     const targetCompleteNode = event.target.parentNode;
     targetCompleteNode.className = "removing"
-    const targetCompleteText = targetCompleteNode.firstChild.innerText;
+    const targetCompleteText = event.target.innerText;
     
     handleDelBtnClick(event);
     paintToDo(targetCompleteText, COMPLETE);
+}
+
+function addClass(toAdd, text) {
+    toAdd.classList.add(text);
 }
 
 function paintToDo(text, toPaint) {
@@ -165,17 +175,34 @@ function paintToDo(text, toPaint) {
     const delBtn = document.createElement("button");
     const editBtn = document.createElement("button");
     const completeBtn = document.createElement("button");
+
+
+    // Delete Icon
+    const delIcon = document.createElement("i");
+    addClass(delIcon, "fas");
+    addClass(delIcon, "fa-minus");
     
     // Delete
-    delBtn.innerText = "Delete";
+    delBtn.appendChild(delIcon);
     delBtn.addEventListener("click", handleDelBtnClick);
     
+
+    // Edit Icon
+    const editIcon = document.createElement("i");
+    addClass(editIcon, "fas");
+    addClass(editIcon, "fa-edit");
+
     // Edit
-    editBtn.innerText = "Edit";
+    editBtn.appendChild(editIcon);
     editBtn.addEventListener("click", handleEditBtnClick);
     
+    // Complete
+    const completeIcon = document.createElement("i");
+    addClass(completeIcon, "fas");
+    addClass(completeIcon, "fa-check-circle");
+
     // Complete Section Rendering -- Only in To Do Section
-    completeBtn.innerText = "Complete";
+    completeBtn.appendChild(completeIcon);
     completeBtn.addEventListener("click", handleCompleteBtnClick);
     
     // Rendering on Screen
