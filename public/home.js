@@ -136,7 +136,13 @@ function handleEditBack(event) {
 }
 
 function handleEditBtnClick(event) {
-    const editBtn = event.target;
+    var editBtn;
+    if (event.target.tagName === "BUTTON") {
+        editBtn = event.target;
+    } else if (event.target.tagName === "I") {
+        editBtn = event.target.parentNode;
+    }
+    
     const editLi = editBtn.parentNode;
     
     jsEditInput.setAttribute("placeholder", "what is your updated?");
@@ -156,11 +162,16 @@ function handleEditBtnClick(event) {
 }
 
 function handleCompleteBtnClick(event) {
-    const targetCompleteNode = event.target.parentNode;
-    targetCompleteNode.className = "removing"
-    const targetCompleteText = event.target.innerText;
-    
     handleDelBtnClick(event);
+    var targetCompleteBtn;
+    if (event.target.tagName === "BUTTON") {
+        targetCompleteBtn = event.target;
+    } else if (event.target.tagName === "I") {
+        targetCompleteBtn = event.target.parentNode;
+    }
+
+    const targetCompleteLi = targetCompleteBtn.parentNode;
+    const targetCompleteText = targetCompleteLi.firstChild.innerText;
     paintToDo(targetCompleteText, COMPLETE);
 }
 
