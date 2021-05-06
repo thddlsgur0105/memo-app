@@ -19,7 +19,7 @@
     display: grid;
 }
 
-.section__ul li {
+.btn {
     margin-bottom: 10px;
     padding: 10px;
     border: 1px solid var(--color-bg-secondary);

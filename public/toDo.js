@@ -16,6 +16,7 @@ const COMPLETE_LS = "complete";
 
 const TODO = "toDo";
 const COMPLETE = "Complete";
+const BTN = "btn";
 
 var toDoList = [];
 var completeList = [];
@@ -224,6 +225,7 @@ function paintToDo(text, toPaint) {
     li.appendChild(span);
     li.appendChild(delBtn);
     li.appendChild(editBtn);
+    li.classList.add(BTN);
     
     if (toPaint === TODO) {
         const newId = toDoList.length + 1;

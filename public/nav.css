@@ -1,0 +1,25 @@
+.nav {
+    position: fixed;
+    bottom: 100px;
+}
+
+.nav__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.nav__main {
+    position: absolute;
+    z-index: 1;
+}
+
+.nav__sub {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    z-index: -1;
+}

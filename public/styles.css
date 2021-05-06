@@ -1,5 +1,8 @@
 @import "./reset.css";
-@import "./functional.css";
-@import "./homeStyle.css";
 @import "./root.css";
+
+@import "./homeStyle.css";
 @import "./screen-memo.css";
+@import "./nav.css";
+
+@import "./functional.css";

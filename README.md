@@ -23,20 +23,17 @@
    + [o] Connecting Server Pug engine
    + [-] Styling pug -- route: / -- Home Page
 
-6. btn animation은 navigation 의 cog Btn에 우선 적용해서 스타일링
+6. route
+   
+   globalRouter
+    / -> Home
+    /login -> Login
+    /logout -> Logout
+
+    userRouter
+    /users/
 
 7. 개발 기능 && 스케줄
-   + [o] 삭제기능
-   + [o] 편집 수정완료 기능
-   + [o] 편집 뒤로가기 기능
-   + [o] pug 파일에 정적파일 로드하는 기능
-   + [o] Completed Part edit 기능 수정
-   + [o] Completed Part delete 기능 수정
-   + [o] memo 에서 진행중 영역 , 완료 영역 등등 여러 기능들 추가적으로 구현
-   + [o] toDo Part, Completed Part 영역 구분해서 전달해주는 기능
-   + [o] localStorage 에서 저장 -- 데이터는 왜 휘발됨?
-   + [o] editBtn click시 event의 target 객체가 다르게 지정되는 오류
-
    + [-] 편집 뒤로가기 기능 논리구조 이해 필요
    + [-] 보기 좋게 home 창 스타일링 + 이름 묻고 다음 창으로 넘어가는 방식 구현
    + [-] 편집 이후에 edit 관련 창 깔끔하게 없애주는 기능

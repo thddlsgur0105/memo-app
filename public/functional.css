@@ -5,3 +5,8 @@
 .removing {
     display: none;
 }
+
+.left-top-position {
+    top: -30px;
+    left: -30px;
+}
