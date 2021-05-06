@@ -1,13 +1,13 @@
 const jsNavContainer = document.querySelector(".nav"),
       jsNavMain = document.querySelector(".nav__main"),
       jsNavIcon = jsNavMain.querySelector("i"),
-      jsNavSub = jsNavContainer.querySelector(".nav__sub");
+      jsNavSearch = jsNavContainer.querySelector(".nav__search");
 
 function handleNavEnter() {
     jsNavIcon.classList.replace("far", "fas");
 
     //SUB
-    jsNavSub.classList.add("move")
+    jsNavSearch.classList.add("moveTopLeft")
 }
 
 function handleNavLeave() {

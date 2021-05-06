@@ -6,10 +6,10 @@
     display: none;
 }
 
-.nav .move {
+.nav .moveTopLeft {
     transition: all .1s ease-in-out;
 }
 
-.nav:hover .move {
+.nav:hover .moveTopLeft {
     transform: translate(-40px, -40px);
 }
