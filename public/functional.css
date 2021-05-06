@@ -6,7 +6,10 @@
     display: none;
 }
 
-.left-top-position {
-    top: -30px;
-    left: -30px;
+.nav .move {
+    transition: all .1s ease-in-out;
+}
+
+.nav:hover .move {
+    transform: translate(-40px, -40px);
 }
