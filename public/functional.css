@@ -6,10 +6,14 @@
     display: none;
 }
 
-.nav .moveTopLeft {
+.nav__sub {
     transition: all .1s ease-in-out;
 }
 
 .nav:hover .moveTopLeft {
     transform: translate(-40px, -40px);
+}
+
+.nav:hover .moveTopRight {
+    transform: translate(40px, -40px);
 }

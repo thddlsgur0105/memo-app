@@ -31,7 +31,8 @@
     /logout -> Logout
 
     userRouter
-    /users/
+    /users/memo -> Memo
+    
 
 7. 개발 기능 && 스케줄
    + [-] 편집 뒤로가기 기능 논리구조 이해 필요

@@ -4,7 +4,7 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title This is Home!
+        title This is User Memo!
         link(rel="stylesheet", href="/styles.css")
     body 
         h1.hello.removing Hello
@@ -24,13 +24,7 @@ html(lang="en")
                 h2.section__text Complete
                 ul#js-complete-lists.section__ul
         
-        section.nav 
-            .btn.nav__btn.nav__main.showing
-                i.far.fa-user.fa-2x
-
-            .btn.nav__btn.nav__search
-                i.fas.fa-search.fa-lg
-
+        include partials/nav.pug
 
         script(src="/toDo.js")
         script(src="/nav.js") 
