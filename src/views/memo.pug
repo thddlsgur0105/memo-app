@@ -1,31 +1,27 @@
-doctype html
-html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title This is User Memo!
-        link(rel="stylesheet", href="/styles.css")
-    body 
-        h1.hello.removing Hello
+extends base.pug
 
-        form#js-form.removing
-            input(type="text", placeholder="What is your name?" required)
-            button(type="submit") Submit 
-        form#js-todo-form.removing
-            input(type="text" placeholder="What is your main focus?") 
-            button(type="submit")
-                i.fas.fa-plus.fa-2x
-        section.section  
-            section.section__toDo
-                h2.section__text To Do
-                ul#js-todo-lists.section__ul
-            section.section__complete
-                h2.section__text Complete
-                ul#js-complete-lists.section__ul
-        
-        include partials/nav.pug
+block title 
+    title Memo | Daniel 
 
-        script(src="/toDo.js")
-        script(src="/nav.js") 
-        script(src="https://kit.fontawesome.com/6478f529f2.js", crossorigin="anonymous")
+block content 
+    h1.hello.removing Hello
+
+    form#js-form.removing
+        input(type="text", placeholder="What is your name?" required)
+        button(type="submit") Submit 
+    form#js-todo-form.removing
+        input(type="text" placeholder="What is your main focus?") 
+        button(type="submit")
+            i.fas.fa-plus.fa-2x
+    section.section  
+        section.section__toDo
+            h2.section__text To Do
+            ul#js-todo-lists.section__ul
+        section.section__complete
+            h2.section__text Complete
+            ul#js-complete-lists.section__ul
+
+block script
+    script(src="/toDo.js")
+    script(src="/nav.js") 
+    script(src="https://kit.fontawesome.com/6478f529f2.js", crossorigin="anonymous")

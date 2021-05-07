@@ -1,4 +1,10 @@
-export const welcome = (req, res) => res.render("welcome");
+export const welcome = (req, res) => res.render("welcome", { pageTitle: "Welcome" });
 export const login = (req, res) => res.send("Login");
 export const logout = (req, res) => res.send("Logout");
 export const memo = (req, res) => res.render("memo");
+export const miniMemo = (req, res) => res.send("Mini Memo");
+export const userDetail = (req, res) => res.send("User Detail Database");
+export const addMemo =(req, res) => res.send("Add Memo Content");
+export const deleteMemo = (req, res) => res.send("Delete Memo Content");
+export const editMemo = (req, res) => res.send("Edit Memo Content");
+export const completeMemo = (req, res) => res.send("Complete Memo Content");
