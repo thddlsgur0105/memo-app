@@ -1,14 +1,17 @@
 extends base.pug
 
 block content 
-    h2 main 
+    main 
+        a(href="/login") Login  
     
-    ul 
-        li  
-            a(href="")
-                i.fab.fa-github-alt.fa-2x
-                |Github Authentication 
-        li     
-            a(href="") 
-                i.fas.fa-user-circle.fa-2x 
-                |Local Authentication 
+    aside 
+        h3 Authentication 
+        ul 
+            li  
+                a(href="")
+                    i.fab.fa-github-alt.fa-2x
+                    |Github Authentication 
+            li     
+                a(href="") 
+                    i.fas.fa-user-circle.fa-2x 
+                    |Local Authentication 

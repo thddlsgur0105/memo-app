@@ -7,18 +7,18 @@
 /login -> Log In
 /logout -> Log out
 
+<!-- memoRouter -->
+/memo/add -> Add Memo Content
+/memo/:id/delete -> Delete Memo Content
+/memo/:id/edit -> Edit Memo Content
+/memo/:id/inComplete -> Not complete Memo Content
+/memo/:id/complete -> Complete Memo Content
+
 <!-- userRouter -->
 # /users/:id/detail -> User Detail Database
-
 # /users/:id/memo -> Mini Memo
-/users/:id/memo/add -> Add Memo Content
-/users/:id/memo/delete -> Delete Memo Content
-/users/:id/memo/edit -> Edit Memo Content
-/users/:id/memo/complete -> Complete Memo Content
-
-# /users/:id/search -> User Search
-
-# /users/:id/chat -> Realtime Chat
+# /users/search -> User Search
+# /users/chat -> Realtime Chat
 
 ## Required
 

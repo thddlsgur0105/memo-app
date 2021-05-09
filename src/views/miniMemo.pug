@@ -1,4 +1,9 @@
 extends base.pug
+include mixins/toDo.pug
 
 block content 
-    h1 This is Mini Memo Page! 
+    main 
+        for toDo in toDos 
+            +toDo(toDo)
+    aside 
+        a(href="/memo/add") Add Memo!
