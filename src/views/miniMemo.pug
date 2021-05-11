@@ -2,8 +2,10 @@ extends base.pug
 include mixins/toDo.pug
 
 block content 
-    main 
+    main  
+        a(href="/memo/add") Add Memo!
+    aside  
         for toDo in toDos 
             +toDo(toDo)
-    aside 
-        a(href="/memo/add") Add Memo!
+        else
+            h1 Nothing found in your memo..
