@@ -23,7 +23,6 @@ export const userDetail = (req, res) => res.render("userDetail", { pageTitle: "u
 // Mini Memo Page
 export const miniMemo = async (req, res) => {
     // Searching user data from currentUser's id
-    // Getting currentUser's memo database
     const ToDos = await ToDo.find({});
     return res.render("miniMemo", { pageTitle: "miniMemo", fakeUser, toDos: ToDos });
 };

@@ -2,8 +2,9 @@ mixin toDo(info)
     div  
         h2 Title: #{info.title}
         h5 Description: #{info.description}
-        h5 Author: #{info.author}
-        h5 Created at: #{info.createdAt}
+        small Author: #{info.author} 
+        br
+        small Created At: #{info.createdAt}
 
     div 
         a(href=`/memo/${info.id}/delete`) Delete 
