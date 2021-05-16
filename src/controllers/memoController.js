@@ -11,18 +11,19 @@ export const getAddMemo =(req, res) => res.render("addMemo", { pageTitle: "addMe
 export const postAddMemo = async (req, res) => {
     // Add new memo to currentUser's memo database
     const { title, description, hashtags } = req.body;
-    const toDo = new ToDo({
+
+    await ToDo.create({
         title,
         description,
         author: fakeUser.username,
         createdAt: Date.now(),
-        hashtags: hashtags.split(",").map((word) => `#${word}`),
+        hashtags: hashtags.split(",").map(word => word.startsWith("#") ? word : `#${word}`),
         meta: {
             completed: false,
-            priority: 1,
+            priority: 0,
         },
     });
-    await toDo.save();
+    
     return res.redirect(`/users/${fakeUser.id}/memo`);
 };
 
@@ -36,6 +37,7 @@ export const getEditMemo = async (req, res) => {
     }
     return res.render("editMemo", { pageTitle: "editMemo", fakeUser, toDo });
 };
+
 export const postEditMemo = async (req, res) => {
     const { id } = req.params;
     const { title, description, hashtags } = req.body;

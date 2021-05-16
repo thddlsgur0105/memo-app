@@ -9,20 +9,48 @@ const fakeUser =
 
 // Welcome Page
 export const welcome = (req, res) => {
-    // Log out currentUser
-    return res.render("welcome", { pageTitle: "Welcome", fakeUser });
+    return res.render("welcome", { pageTitle: "Welcome" });
 };
-export const login = (req, res) => res.send("Login");
+export const getLogin = (req, res) => {
+    // Login Template Rendering
+    return res.render("login", { pageTitle: "Login" });
+};
 
-// Not in Welcome page function
-export const logout = (req, res) => res.send("Logout");
+export const postLogin = (req, res) => {
+    const { username } = req.body;
+    // Searching User data from database
+    // Get user id
+    return res.redirect(`/users/${fakeUser.id}/detail`)
+};
+
+export const getJoin = (req, res) => {
+    return res.render("join", { pageTitle: "Join" })
+};
+
+export const postJoin = (req, res) => {
+    const { username } = req.body;
+    // Create User data 
+    // Get user id
+    return res.redirect(`/users/${fakeUser.id}/detail`)
+};
+
+export const logout = (req, res) => {
+    // Log user out
+    return res.redirect("/")
+};
 
 // User Detail Page
-export const userDetail = (req, res) => res.render("userDetail", { pageTitle: "userDetail", fakeUser });
+export const userDetail = (req, res) => {
+    const { id } = req.params;
+    // Get User data from database
+    return res.render("userDetail", { pageTitle: "userDetail", fakeUser });
+};
 
 // Mini Memo Page
 export const miniMemo = async (req, res) => {
-    // Searching user data from currentUser's id
+    const { id } = req.params;
+    // Get User data from database
+    // Get CurrentUser's memo data from database
     const ToDos = await ToDo.find({});
     return res.render("miniMemo", { pageTitle: "miniMemo", fakeUser, toDos: ToDos });
 };

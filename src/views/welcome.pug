@@ -1,17 +1,9 @@
-extends base.pug
+extends base-welcome.pug
 
 block content 
     main 
-        a(href="/login") Login  
-    
-    aside 
-        h3 Authentication 
         ul 
-            li  
-                a(href="")
-                    i.fab.fa-github-alt.fa-2x
-                    |Github Authentication 
-            li     
-                a(href="") 
-                    i.fas.fa-user-circle.fa-2x 
-                    |Local Authentication 
+            li 
+                a(href="/login") Login 
+            li 
+                a(href="/join") Join  
