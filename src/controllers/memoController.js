@@ -1,4 +1,4 @@
-import ToDo from "../models/ToDo"; 
+import ToDo, { addHashtags } from "../models/ToDo"; 
 
 const fakeUser =
     {
@@ -15,9 +15,9 @@ export const postAddMemo = async (req, res) => {
     await ToDo.create({
         title,
         description,
-        author: fakeUser.username,
         createdAt: Date.now(),
-        hashtags: hashtags.split(",").map(word => word.startsWith("#") ? word : `#${word}`),
+        author: fakeUser.id,
+        hashtags: addHashtags(hashtags),
         meta: {
             completed: false,
             priority: 0,
@@ -27,7 +27,12 @@ export const postAddMemo = async (req, res) => {
     return res.redirect(`/users/${fakeUser.id}/memo`);
 };
 
-export const deleteMemo = (req, res) => res.send("Delete Memo Content");
+export const deleteMemo = async (req, res) => {
+    const { id } = req.params;
+    await ToDo.findByIdAndDelete(id);
+
+    return res.redirect(`/users/${fakeUser.id}/memo`);
+};
 
 export const getEditMemo = async (req, res) => {
     const { id } = req.params;
@@ -41,7 +46,11 @@ export const getEditMemo = async (req, res) => {
 export const postEditMemo = async (req, res) => {
     const { id } = req.params;
     const { title, description, hashtags } = req.body;
-    await ToDo.findByIdAndUpdate(id, { title, description, hashtags });
+    await ToDo.findByIdAndUpdate(id, {
+        title,
+        description,
+        hashtags: addHashtags(hashtags),
+    });
     return res.redirect(`/users/${fakeUser.id}/memo`);
 };
 

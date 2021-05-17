@@ -51,7 +51,7 @@ export const miniMemo = async (req, res) => {
     const { id } = req.params;
     // Get User data from database
     // Get CurrentUser's memo data from database
-    const ToDos = await ToDo.find({});
+    const ToDos = await ToDo.find({}).sort({ createdAt: "desc" });
     return res.render("miniMemo", { pageTitle: "miniMemo", fakeUser, toDos: ToDos });
 };
 
