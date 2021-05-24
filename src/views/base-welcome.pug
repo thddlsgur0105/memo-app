@@ -7,7 +7,17 @@ html(lang="en")
         link(rel="stylesheet", href="https://unpkg.com/mvp.css")
         title #{pageTitle}
     body 
-        header 
+        header
             h1=pageTitle 
         main 
-            block content 
+            if (errorMessage)
+                p=errorMessage 
+            block content
+        footer 
+            ul.nav 
+                h2 navigation 
+
+                li 
+                    a(href="/login") Login 
+                li 
+                    a(href="/join") Join 

@@ -17,31 +17,34 @@ export const getLogin = (req, res) => {
     return res.render("login", { pageTitle: "Login" });
 };
 
-export const postLogin = (req, res) => {
-    const { username } = req.body;
-    // 인증과정 필요
-    // Searching User data from database
-    // Get user id
+export const postLogin = async (req, res) => {
+    const { email, password } = req.body;
+    // 인증 알고리즘 
+    const existingEmail = await User.findOne({ email });
+    if (!existingEmail) {
+        return res.render("login", { pageTitle: "Login", errorMessage: "해당 이메일이 존재하지 않습니다.." })
+    }
+    // 페스워드 비교 알고리즘 -- bcrypt 암호화 먼저 하고 계속 진행하자
     return res.redirect(`/users/${fakeUser.id}/detail`)
 };
 
 export const getJoin = (req, res) => {
-    // 회원가입 pug 템플릿 렌더링
-    // User 모델 생성위한 input 정보를 받고 백엔드로 전송
     return res.render("join", { pageTitle: "Join" })
 };
 
 export const postJoin = async (req, res) => {
-    // input 정보를 받아와서 새로운 User 모델 생성
     // password 는 추후에 bcrypt 이용해서 hash 화하는 과정 필요
-    // location 역시 api 활용해서 가져오고 User 모델의 정보로 담는 과정 필요
-    const { username, email, password } = req.body;
-    const currentUser = await User.create({
+    const { username, email, password, location } = req.body;
+    const existsDocument = await User.exists({$or: [{ username }, { email }]});
+    if (existsDocument) {
+        return res.render("join", { pageTitle: "Join" ,errorMessage: "유저이름 혹은 이메일이 중복되었습니다. 다시 확인해주세요.." })
+    }
+    await User.create({
         username,
         email,
         password,
+        location
     });
-    // Join을 통해 정보 생성 후에 로그인할 수 있는 템플릿으로 전달
     return res.redirect("/login");
 };
 

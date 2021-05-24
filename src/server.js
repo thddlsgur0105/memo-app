@@ -23,9 +23,6 @@ app.use(session({
     store: sessionStore.createSessionStore({
         type: "mongodb",
     }),
-    cookie: {
-        secure: true, 
-    },
 }));
 
 app.use(middleware);
