@@ -26,3 +26,5 @@ localStorage -> Memo page [complete]
 
 Authentication -> Welcome page
 Mongodb -> Memo page
+
+# 세션 관련 부분 로그인 구현 / 오류 해결 필요

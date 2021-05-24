@@ -36,14 +36,13 @@ export const postJoin = async (req, res) => {
     // password 는 추후에 bcrypt 이용해서 hash 화하는 과정 필요
     // location 역시 api 활용해서 가져오고 User 모델의 정보로 담는 과정 필요
     const { username, email, password } = req.body;
-    await User.create({
+    const currentUser = await User.create({
         username,
         email,
         password,
     });
-    // 세션에 유저 정보 저장
-    // 세션에 유저에 대한 정보가 존재할 경우에 기본 welcome template이 아닌 개인적인 정보창으로 렌더링
-    return res.redirect(`/users/${fakeUser.id}/detail`)
+    // Join을 통해 정보 생성 후에 로그인할 수 있는 템플릿으로 전달
+    return res.redirect("/login");
 };
 
 export const logout = (req, res) => {
