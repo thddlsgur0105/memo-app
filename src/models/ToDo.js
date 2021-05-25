@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const toDoSchema = new mongoose.Schema({
     title: String,
     description: String,
-    author: Number,
+    author: String,
     createdAt: Date,
     hashtags: [{ type: String }],
     meta: {

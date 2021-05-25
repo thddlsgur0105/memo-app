@@ -27,5 +27,4 @@ localStorage -> Memo page [complete]
 Authentication -> Welcome page
 Mongodb -> Memo page
 
-# 세션 관련 부분 로그인 구현 / 오류 해결 필요
-# 쿠키 정보를 세션을 이용해서 어떻게 브라우저에 할당하는지...
+# 현재 메모와 관련된 데이터베이스는 공용상태.. 각 유저 별 메모들을 뽑아서 할당 필요
