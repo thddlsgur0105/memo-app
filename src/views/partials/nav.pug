@@ -1,13 +1,19 @@
 ul.nav 
     h2 navigation 
 
-    li 
-        a(href=`/users/${user.id}/memo`) User Memo 
-    li 
-        a(href=`/users/${user.id}/detail`) User Detail Database 
-    li 
-        a(href="/users/search") User Search 
-    li 
-        a(href="/users/chat") Realtime Chat
-    li 
-        a(href="/logout") Log Out
+    if !loggedIn
+        li 
+            a(href="/login") Login 
+        li 
+            a(href="/join") Join 
+    else 
+        li 
+            a(href=`/users/${user._id}/memo`) User Memo 
+        li 
+            a(href=`/users/${user._id}/detail`) User Detail Database 
+        li 
+            a(href="/users/search") User Search 
+        li 
+            a(href="/users/chat") Realtime Chat
+        li 
+            a(href="/logout") Log Out

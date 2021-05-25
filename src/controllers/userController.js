@@ -7,7 +7,6 @@ export const welcome = (req, res) => {
     return res.render("welcome", { pageTitle: "Welcome" });
 };
 export const getLogin = (req, res) => {
-    // 로그인 pug 템플릿 렌더링
     return res.render("login", { pageTitle: "Login" });
 };
 
@@ -61,14 +60,14 @@ export const userDetail = async (req, res) => {
     return res.render("userDetail", { pageTitle: "userDetail", user });
 };
 
-// Mini Memo Page
-export const miniMemo = async (req, res) => {
+// Memo Page
+export const memo = async (req, res) => {
     const { id } = req.params;
     // 유저 정보 찾기
     const user = await User.findById(id);
     // 메모 데이터베이스에서 찾은 유저와 관련된 정보만을 뽑아서 배열로 반환
     const toDos = await ToDo.find({}).sort({ createdAt: "desc" });
-    return res.render("miniMemo", { pageTitle: "miniMemo", user, toDos });
+    return res.render("memo", { pageTitle: "memo", toDos });
 };
 
 // User Search Page

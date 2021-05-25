@@ -1,27 +1,11 @@
 extends base.pug
-
-block title 
-    title Memo | Daniel 
+include mixins/toDo.pug
 
 block content 
-    h1.hello.removing Hello
-
-    form#js-form.removing
-        input(type="text", placeholder="What is your name?" required)
-        button(type="submit") Submit 
-    form#js-todo-form.removing
-        input(type="text" placeholder="What is your main focus?") 
-        button(type="submit")
-            i.fas.fa-plus.fa-2x
-    section.section  
-        section.section__toDo
-            h2.section__text To Do
-            ul#js-todo-lists.section__ul
-        section.section__complete
-            h2.section__text Complete
-            ul#js-complete-lists.section__ul
-
-block script
-    script(src="/toDo.js")
-    script(src="/nav.js") 
-    script(src="https://kit.fontawesome.com/6478f529f2.js", crossorigin="anonymous")
+    main  
+        a(href="/memo/add") Add Memo!
+    aside  
+        for toDo in toDos 
+            +toDo(toDo)
+        else
+            h1 Nothing found in your memo..

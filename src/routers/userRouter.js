@@ -1,11 +1,11 @@
 import express from "express";
-import { chat, miniMemo, search, userDetail } from "../controllers/userController";
+import { chat, memo, search, userDetail } from "../controllers/userController";
 
 const userRouter = express.Router();
 
 userRouter.get("/:id/detail", userDetail);
 
-userRouter.get("/:id/memo", miniMemo);
+userRouter.get("/:id/memo", memo);
 
 userRouter.get("/search", search);
 
