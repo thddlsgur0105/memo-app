@@ -7,8 +7,8 @@ block content
         input(name="hashtags", type="text", placeholder="Hashtags", value=toDo.hashtags.join())
         hr
         p 완료 여부를 선택해주세요.
-        input(type="radio", id="completed", name="completed", value="true", checked=toDo.completed)
+        input(type="radio", id="completed", name="completed", value="true", checked=toDo.meta.completed)
         label(for="completed") 완료  
-        input(type="radio", id="notCompleted", name="completed", value="false", checked=(!toDo.completed))
+        input(type="radio", id="notCompleted", name="completed", value="false", checked=(!toDo.meta.completed))
         label(for="notCompleted") 미완   
         input(type="submit", value="Submit!") 
