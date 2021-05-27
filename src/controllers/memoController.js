@@ -1,10 +1,12 @@
 import ToDo, { addHashtags } from "../models/ToDo"; 
 
+// 완료
 export const getAddMemo =(req, res) => {
     return res.render("addMemo", { pageTitle: "addMemo" })
 };
+
+// 미완
 export const postAddMemo = async (req, res) => {
-    // Add new memo to currentUser's memo database
     const { title, description, hashtags } = req.body;
     const { user } = req.session;
 
@@ -23,23 +25,37 @@ export const postAddMemo = async (req, res) => {
     return res.redirect(`/users/${user._id}/memo`);
 };
 
+// 완료
 export const deleteMemo = async (req, res) => {
-    const { id } = req.params;
     const { user } = req.session;
+    if (!user) {
+        return res.status(403).redirect("/");
+    }
+    const { id } = req.params;
+    const deleteToDo = await ToDo.findOne({ $and: [{ _id: id }, { author: user.username }] })
+    if (!deleteToDo) {
+        await req.session.destroy();
+        return res.status(403).redirect("/");
+    }
     await ToDo.findByIdAndDelete(id);
-
     return res.redirect(`/users/${user._id}/memo`);
 };
 
+// 완료
 export const getEditMemo = async (req, res) => {
-    const { id } = req.params;
-    const toDo = await ToDo.findById(id);
-    if (!toDo) {
-        return res.render("404", { pageTitle: "Nothing Found.." })
+    const { user } = req.session;
+    if (!user) {
+        return res.status(403).redirect("/");
     }
-    return res.render("editMemo", { pageTitle: "editMemo", toDo });
+    const { id } = req.params;
+    const editToDo = await ToDo.findOne({ $and: [{ _id: id }, { author: user.username }]})
+    if (!editToDo) {
+        return res.status(404).render("404", { pageTitle: "Nothing Found.." })
+    }
+    return res.render("editMemo", { pageTitle: "editMemo", toDo: editToDo });
 };
 
+// 미완
 export const postEditMemo = async (req, res) => {
     const { id } = req.params;
     const { title, description, hashtags } = req.body;
@@ -52,4 +68,5 @@ export const postEditMemo = async (req, res) => {
     return res.redirect(`/users/${user._id}/memo`);
 };
 
+// 미완
 export const completeMemo = (req, res) => res.send("Complete Memo Content");

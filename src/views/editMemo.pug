@@ -5,4 +5,10 @@ block content
         input(name="title", type="text", placeholder="Title", value=toDo.title)
         input(name="description", type="text", placeholder="Description", value=toDo.description)
         input(name="hashtags", type="text", placeholder="Hashtags", value=toDo.hashtags.join())
+        hr
+        p 완료 여부를 선택해주세요.
+        input(type="radio", id="completed", name="completed", value="true", checked=toDo.completed)
+        label(for="completed") 완료  
+        input(type="radio", id="notCompleted", name="completed", value="false", checked=(!toDo.completed))
+        label(for="notCompleted") 미완   
         input(type="submit", value="Submit!") 
