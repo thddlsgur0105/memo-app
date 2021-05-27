@@ -18,7 +18,7 @@ export const postAddMemo = async (req, res) => {
         hashtags: addHashtags(hashtags),
         meta: {
             completed: false,
-            priority: 0,
+            priority: 1,
         },
     });
     
