@@ -7,9 +7,9 @@ block content
         input(name="hashtags", type="text", placeholder="Hashtags", value=toDo.hashtags.join())
         hr
         p 완료 여부를 선택해주세요.
-        input(type="radio", id="completed", name="completed", value="true", checked=toDo.meta.completed)
+        input(type="radio", id="completed", name="completed", value="true", checked=(toDo.meta.completed === "true" ? true : false))
         label(for="completed") 완료  
-        input(type="radio", id="notCompleted", name="completed", value="false", checked=(!toDo.meta.completed))
+        input(type="radio", id="notCompleted", name="completed", value="false", checked=(toDo.meta.completed === "false" ? true : false))
         label(for="notCompleted") 미완   
         hr
         p 우선순위를 선택해주세요.

@@ -52,7 +52,8 @@ export const postJoin = async (req, res) => {
             username,
             email,
             password,
-            location
+            location,
+            total: 0,
         });
         return res.redirect("/login");
     } catch(error) {
@@ -81,20 +82,17 @@ export const userDetail = async (req, res) => {
 // 미완
 export const memo = async (req, res) => {
     const { id } = req.params;
-    const { user: { _id } } = req.session;
-    if (id !== String(_id)) {
+    const { user } = req.session;
+    if (id !== String(user._id)) {
         return res.redirect("/")
     }
     try {
-        const currentUser = await User.findById(id);
         // 기본 설정은 최신순으로 보여줌
         // 우선순위에 따라 보여주는 버튼 클릭시 그 메모부분만 선택적으로 재정렬해서 보여줌
-        const toDos = await ToDo.find({ author: currentUser.username }).sort({ createdAt: "desc" });
+        const toDos = await ToDo.find({ author: user.username }).sort({ createdAt: -1 });
         // toDos 라는 array에서 meta.completed 가 true 인 것과 false 인 것을 구분해서 새로운 array로 구현
-        console.log("Here are toDos:", toDos)
-        const completedToDos = toDos.filter(toDo => toDo.meta.completed === true);
-        console.log("Here are comepleted toDos:", completedToDos)
-        const inCompletedToDos = toDos.filter(toDo => toDo.meta.completed === false);
+        const completedToDos = toDos.filter(toDo => toDo.meta.completed === "true");
+        const inCompletedToDos = toDos.filter(toDo => toDo.meta.completed === "false");
         return res.render("memo", { pageTitle: "memo", main: inCompletedToDos, aside: completedToDos });
     } catch(error) {
         return res.status(404).render("404", { pageTitle: "404", errorMessage: error.message })
@@ -102,7 +100,14 @@ export const memo = async (req, res) => {
 };
 
 // 미완
-export const search = (req, res) => res.render("search", { pageTitle: "search", fakeUser });
+export const search = async (req, res) => {
+    const { user } = req.session;
+    let users = await User.find({ total: { $lt: user.total } });
+    // users.shift();
+    // users.pop();
+    // console.log(users)
+    return res.render("search", { pageTitle: "search", user })
+};
 
 // 미완
 export const chat = (req, res) => res.render("chat", { pageTitle: "chat", fakeUser });

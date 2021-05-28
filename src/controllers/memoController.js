@@ -17,7 +17,7 @@ export const postAddMemo = async (req, res) => {
         author: user.username,
         hashtags: addHashtags(hashtags),
         meta: {
-            completed: false,
+            completed: "false",
             priority: 1,
         },
     });
@@ -60,7 +60,7 @@ export const postEditMemo = async (req, res) => {
     const { id } = req.params;
     const { title, description, hashtags, completed, priority } = req.body;
     const { user } = req.session;
-    console.log("Here is Priority:", priority)
+
     await ToDo.findByIdAndUpdate(id, {
         title,
         description,
@@ -69,6 +69,7 @@ export const postEditMemo = async (req, res) => {
             meta: { completed, priority }
         },
     });
+
     return res.redirect(`/users/${user._id}/memo`);
 };
 

@@ -7,7 +7,7 @@ const toDoSchema = new mongoose.Schema({
     createdAt: Date,
     hashtags: [{ type: String }],
     meta: {
-        completed: Boolean,
+        completed: String,
         priority: Number,
     },
 });
