@@ -13,10 +13,10 @@ block content
         label(for="notCompleted") 미완   
         hr
         p 우선순위를 선택해주세요.
-        input(type="radio", id="priority", name="priority", value="1", checked=(toDo.meta.priority === 1 ? true : false ))
-        label(for="priority") 낮음
-        input(type="radio", id="priority", name="priority", value="2", checked=(toDo.meta.priority === 2 ? true : false ))
-        label(for="priority") 보통
-        input(type="radio", id="priority", name="priority", value="3", checked=(toDo.meta.priority === 3 ? true : false ))
-        label(for="priority") 높음
+        input(type="radio", id="one", name="priority", value="1", checked=(toDo.meta.priority === 1 ? true : false ))
+        label(for="one") 낮음
+        input(type="radio", id="two", name="priority", value="2", checked=(toDo.meta.priority === 2 ? true : false ))
+        label(for="two") 보통
+        input(type="radio", id="threee", name="priority", value="3", checked=(toDo.meta.priority === 3 ? true : false ))
+        label(for="three") 높음
         input(type="submit", value="Submit!") 

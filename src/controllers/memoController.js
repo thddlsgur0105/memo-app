@@ -55,18 +55,18 @@ export const getEditMemo = async (req, res) => {
     return res.render("editMemo", { pageTitle: "editMemo", toDo: editToDo });
 };
 
-// 미완 
-// $set 활용해서 우선순위도 설정해주는 알고리즘으로 작성 
+// 완료
 export const postEditMemo = async (req, res) => {
     const { id } = req.params;
-    const { title, description, hashtags, completed } = req.body;
+    const { title, description, hashtags, completed, priority } = req.body;
     const { user } = req.session;
+    console.log("Here is Priority:", priority)
     await ToDo.findByIdAndUpdate(id, {
         title,
         description,
         hashtags: addHashtags(hashtags),
         $set: {
-            meta: { completed }
+            meta: { completed, priority }
         },
     });
     return res.redirect(`/users/${user._id}/memo`);

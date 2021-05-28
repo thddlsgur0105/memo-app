@@ -78,7 +78,7 @@ export const userDetail = async (req, res) => {
     return res.render("userDetail", { pageTitle: "userDetail", user });
 };
 
-// 완료
+// 미완
 export const memo = async (req, res) => {
     const { id } = req.params;
     const { user: { _id } } = req.session;
@@ -87,8 +87,15 @@ export const memo = async (req, res) => {
     }
     try {
         const currentUser = await User.findById(id);
+        // 기본 설정은 최신순으로 보여줌
+        // 우선순위에 따라 보여주는 버튼 클릭시 그 메모부분만 선택적으로 재정렬해서 보여줌
         const toDos = await ToDo.find({ author: currentUser.username }).sort({ createdAt: "desc" });
-        return res.render("memo", { pageTitle: "memo", toDos });
+        // toDos 라는 array에서 meta.completed 가 true 인 것과 false 인 것을 구분해서 새로운 array로 구현
+        console.log("Here are toDos:", toDos)
+        const completedToDos = toDos.filter(toDo => toDo.meta.completed === true);
+        console.log("Here are comepleted toDos:", completedToDos)
+        const inCompletedToDos = toDos.filter(toDo => toDo.meta.completed === false);
+        return res.render("memo", { pageTitle: "memo", main: inCompletedToDos, aside: completedToDos });
     } catch(error) {
         return res.status(404).render("404", { pageTitle: "404", errorMessage: error.message })
     }
