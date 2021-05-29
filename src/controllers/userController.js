@@ -4,12 +4,12 @@ import User from "../models/User";
 
 // 완료
 export const welcome = (req, res) => {
-    return res.render("welcome", { pageTitle: "Welcome" });
+    return res.render("welcome", { pageTitle: "환영합니다" });
 };
 
 // 완료
 export const getLogin = (req, res) => {
-    return res.render("login", { pageTitle: "Login" });
+    return res.render("login", { pageTitle: "로그인" });
 };
 
 // 완료
@@ -34,7 +34,7 @@ export const postLogin = async (req, res) => {
 
 // 완료
 export const getJoin = (req, res) => {
-    return res.render("join", { pageTitle: "Join" })
+    return res.render("join", { pageTitle: "회원가입" })
 };
 
 // 완료
@@ -76,8 +76,8 @@ export const userDetail = async (req, res) => {
         await req.session.destroy();
         return res.redirect("/")
     }
-    // 유저에 대한 세부적인 내용들 표시
-    return res.render("userDetail", { pageTitle: "userDetail", userDetail });
+    // ** 유저에 대한 세부적인 내용들 표시
+    return res.render("userDetail", { pageTitle: "내 정보", userDetail });
 };
 
 // 미완
@@ -89,12 +89,12 @@ export const memo = async (req, res) => {
     }
     try {
         // 기본 설정은 최신순으로 보여줌
-        // 우선순위에 따라 보여주는 버튼 클릭시 그 메모부분만 선택적으로 재정렬해서 보여줌
+        // ** 우선순위에 따라 보여주는 버튼 클릭시 그 메모부분만 선택적으로 재정렬해서 보여줌
         const toDos = await ToDo.find({ author: user.username }).sort({ createdAt: -1 });
         // toDos 라는 array에서 meta.completed 가 true 인 것과 false 인 것을 구분해서 새로운 array로 구현
         const completedToDos = toDos.filter(toDo => toDo.meta.completed === "true");
         const inCompletedToDos = toDos.filter(toDo => toDo.meta.completed === "false");
-        return res.render("memo", { pageTitle: "memo", main: inCompletedToDos, aside: completedToDos });
+        return res.render("memo", { pageTitle: "메모장", main: inCompletedToDos, aside: completedToDos });
     } catch(error) {
         return res.status(404).render("404", { pageTitle: "404", errorMessage: error.message })
     }
@@ -113,10 +113,10 @@ export const search = async (req, res) => {
     // 주변 유저들과 관련된 정보 추가 제공
     const { user } = req.session;
     const relatedUsers = await User.find({ total: { $gt: user.total } });
-    return res.render("search", { pageTitle: "search", relatedUsers, searchingUsers })
+    return res.render("search", { pageTitle: "친구", relatedUsers, searchingUsers })
 };
 
-// 유저와 관련된 데이터베이스에서 전달받아 주소로서 전달하는 user id와 세션에 저장된 id를 비교해 검증하는 과정 고려
+// ** 유저와 관련된 데이터베이스에서 전달받아 주소로서 전달하는 user id와 세션에 저장된 id를 비교해 검증하는 과정 고려
 export const addFriend = async (req, res) => {
     // 추가할 유저의 id
     const { id } = req.params;

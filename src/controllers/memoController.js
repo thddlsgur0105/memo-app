@@ -2,7 +2,7 @@ import ToDo, { addHashtags } from "../models/ToDo";
 
 // 완료
 export const getAddMemo =(req, res) => {
-    return res.render("addMemo", { pageTitle: "addMemo" })
+    return res.render("addMemo", { pageTitle: "메모 추가" })
 };
 
 // 완료
