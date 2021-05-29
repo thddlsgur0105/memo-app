@@ -73,5 +73,3 @@ export const postEditMemo = async (req, res) => {
     return res.redirect(`/users/${user._id}/memo`);
 };
 
-// 미완
-export const completeMemo = (req, res) => res.send("Complete Memo Content");

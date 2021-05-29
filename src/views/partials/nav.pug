@@ -1,19 +1,17 @@
 ul.nav 
-    h2 navigation 
+    h2 네비게이션 
 
     if !loggedIn
         li 
-            a(href="/login") Login 
+            a(href="/login") 로그인
         li 
-            a(href="/join") Join 
+            a(href="/join") 회원가입
     else 
         li 
-            a(href=`/users/${user._id}/memo`) User Memo 
+            a(href=`/users/${user._id}/memo`) 메모장 
         li 
-            a(href=`/users/${user._id}/detail`) User Detail Database 
+            a(href=`/users/${user._id}/detail`) 내 정보 
         li 
-            a(href="/users/search") User Search 
+            a(href="/users/search") 검색
         li 
-            a(href="/users/chat") Realtime Chat
-        li 
-            a(href="/logout") Log Out
+            a(href="/logout") 로그아웃

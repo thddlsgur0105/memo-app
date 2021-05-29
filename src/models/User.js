@@ -7,6 +7,10 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true },
     location: String,
     total: Number,
+    friends: {
+        type: [String],
+        default: undefined,
+    },
 })
 
 userSchema.pre("save", function () {

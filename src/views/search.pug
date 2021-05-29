@@ -1,4 +1,19 @@
 extends base.pug
+include mixins/card
 
 block content 
-    h1 This is Search Page! 
+    form(method="GET")
+        input(type="text", name="searchingBy", placeholder="검색할 유저의 이름을 입력하세요.")
+        input(type="submit", value="Submit")
+
+    main 
+        for user in searchingUsers 
+            +card(user)
+        else 
+            h1 검색결과가 없습니다..
+
+    aside 
+        for user in relatedUsers 
+            +card(user)
+        else 
+            h1 관련된 유저의 정보가 없습니다..

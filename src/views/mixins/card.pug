@@ -1,0 +1,6 @@
+mixin card(user)
+    div.card
+        a(href="#") #{user.username} 
+        p=user.total 
+        a(href=`/users/${user._id}/add`) 친구추가
+    hr

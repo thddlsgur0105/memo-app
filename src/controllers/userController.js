@@ -54,6 +54,7 @@ export const postJoin = async (req, res) => {
             password,
             location,
             total: 0,
+            friends: [],
         });
         return res.redirect("/login");
     } catch(error) {
@@ -70,13 +71,13 @@ export const logout = async (req, res) => {
 // 미완
 export const userDetail = async (req, res) => {
     const { id } = req.params;
-    const user = await User.findById(id);
-    if (!user) {
+    const userDetail = await User.findById(id);
+    if (!userDetail) {
         await req.session.destroy();
         return res.redirect("/")
     }
     // 유저에 대한 세부적인 내용들 표시
-    return res.render("userDetail", { pageTitle: "userDetail", user });
+    return res.render("userDetail", { pageTitle: "userDetail", userDetail });
 };
 
 // 미완
@@ -99,15 +100,39 @@ export const memo = async (req, res) => {
     }
 };
 
-// 미완
+// 완료
 export const search = async (req, res) => {
+    // 주변 유저들을 입력받아 탐색하는 기능
+    const { searchingBy } = req.query;
+    let searchingUsers = [];
+    if (searchingBy) {
+        searchingUsers = await User.find({
+            username: { $regex: `^${searchingBy}.*`, $options: "i" }
+        })
+    }
+    // 주변 유저들과 관련된 정보 추가 제공
     const { user } = req.session;
-    let users = await User.find({ total: { $lt: user.total } });
-    // users.shift();
-    // users.pop();
-    // console.log(users)
-    return res.render("search", { pageTitle: "search", user })
+    const relatedUsers = await User.find({ total: { $gt: user.total } });
+    return res.render("search", { pageTitle: "search", relatedUsers, searchingUsers })
 };
 
-// 미완
-export const chat = (req, res) => res.render("chat", { pageTitle: "chat", fakeUser });
+// 유저와 관련된 데이터베이스에서 전달받아 주소로서 전달하는 user id와 세션에 저장된 id를 비교해 검증하는 과정 고려
+export const addFriend = async (req, res) => {
+    // 추가할 유저의 id
+    const { id } = req.params;
+
+    // 로그인된 유저의 id
+    const { user } = req.session;
+    const currentUser = await User.findById(user._id);
+    const myFriends = currentUser.friends;
+    console.log(myFriends);
+    console.log(myFriends.includes(id))
+
+    if (!myFriends.includes(id)) {
+        // 유저의 정보를 백엔드의 유저 데이터베이스에 업데이트 해주는 과정
+        const updateUser = await User.findById(user._id);
+        updateUser.friends.push(id);
+        await updateUser.save(); 
+    }
+    return res.redirect(`/users/${user._id}/detail`)
+}
