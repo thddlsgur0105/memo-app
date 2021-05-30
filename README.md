@@ -1,9 +1,9 @@
-# This is my first memo application
+# 첫 번째 메모 앱입니다!
 
 ## 전체 서버 경로들
 
 <!-- globalRouter -->
-# / -> Welcome
+/ -> Welcome
 /login -> Log In
 /logout -> Log out
 
@@ -15,12 +15,17 @@
 /memo/:id/complete -> Complete Memo Content
 
 <!-- userRouter -->
-# /users/:id/detail -> User Detail Database
-# /users/:id/memo -> Mini Memo
-# /users/search -> User Sea
-# /users/chat -> Realtime Chat
+/users/:id/detail -> User Detail Database
+/users/:id/memo -> Mini Memo
+/users/search -> User Search
+/users/chat -> Realtime Chat
 
 ## 구현해야 할 프론트엔드 작업들
+
+[-] webpack 환경 설정 -> 프론트 엔드 작업 환경 구축
+
+[-] 우선은 중요도에 따라서 카드의 색을 다르게 지정하는 기능
+-> priority = 3 : 빨강 / priority = 2 : 노랑 / priority = 1 : 초록 
 
 [-] 유저 디테일에서 세부적인 내용들을 데이터 시각화를 통해 유저에게 보여줌
 -> D3.js 프레임워크를 활용해서 데이터를 시각화시킬 예정 
@@ -29,9 +34,6 @@
 
 [-] 데이터 시각화 관련 부분은 유저 세부정보 뿐만아니라 친구 부분의 유저 카드에도 간소화시켜서 보여줄 수 있음
 -> 유저에 관한 전반적인 정보들을 시각적으로 바로 확인할 수 있음
-
-[-] 우선은 중요도에 따라서 카드의 색을 다르게 지정하는 기능
--> priority = 3 : 빨강 / priority = 2 : 노랑 / priority = 1 : 초록 
 
 ## 구현해야 할 백엔드 작업들
 
