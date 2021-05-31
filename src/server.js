@@ -18,7 +18,7 @@ app.use(express.static('public'));
 
 app.use(session({
     secret: "Hello",
-    resave: true,
+    resave: false,
     saveUninitialized: true,
     store: sessionStore.createSessionStore({
         type: "mongodb",
@@ -26,6 +26,8 @@ app.use(session({
 }));
 
 app.use(localUser);
+
+app.use("/static", express.static("assets"));
 
 app.use("/", globalRouter);
 app.use("/users", userRouter);
