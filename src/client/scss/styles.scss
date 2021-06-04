@@ -1,6 +1,5 @@
 @import "./_variables";
-
-body {
-    background-color: $white;
-    color: blue;
-}
+@import "./reset.scss";
+@import "./base.scss";
+@import "./nav.scss";
+@import "./form.scss";

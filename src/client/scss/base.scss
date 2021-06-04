@@ -1,0 +1,23 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    font-size: 20px;
+    font-weight: 600;
+    display: grid;
+    grid-template-rows: 0.5fr 8fr 1fr 0.5fr;
+    background-color: $blue_light;
+    color: $white;
+    > * {
+        transition: all .3s ease-in-out;
+    }
+    > *:hover {
+        background-color: $white;
+        color: $gray_heavy;
+    }
+    .header,
+    .footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
