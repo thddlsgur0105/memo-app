@@ -7,10 +7,10 @@ body {
     grid-template-rows: 0.5fr 8fr 1fr 0.5fr;
     background-color: $blue_light;
     color: $white;
-    > * {
+    > .main {
         transition: all .3s ease-in-out;
     }
-    > *:hover {
+    > .main:hover {
         background-color: $white;
         color: $gray_heavy;
     }

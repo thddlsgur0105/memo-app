@@ -1,6 +1,6 @@
 mixin card(user)
     div.card
-        a(href="#") #{user.username} 
-        p=user.total 
-        a(href=`/users/${user._id}/add`) 친구추가
-    hr
+        h1.card__btn #{user.username} 
+        //- p=user.total 
+        a.card__btn(href=`/users/${user._id}/add`)
+            span 친구추가

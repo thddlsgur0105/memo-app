@@ -2,17 +2,21 @@ extends base.pug
 include mixins/card
 
 block content 
-    form(method="GET")
-        input(type="text", name="searchingBy", placeholder="검색할 유저의 이름을 입력하세요.")
-        input(type="submit", value="Submit")
+    div.search-bar
+        form.form(method="GET")
+            input.form__input(type="text", name="searchingBy", placeholder="검색할 유저의 이름을 입력하세요.")
+            input.form__btn(type="submit", value="검색")
+    hr
 
-    main 
+    main.search-result
+        h2 검색결과
         for user in searchingUsers 
             +card(user)
         else 
             h1 검색결과가 없습니다..
-
-    aside 
+    hr
+    aside.search-result
+        h2 가까운 친구 
         for user in relatedUsers 
             +card(user)
         else 
