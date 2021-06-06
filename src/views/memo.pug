@@ -2,14 +2,15 @@ extends base.pug
 include mixins/toDo.pug
 
 block content 
-    a.btn.memo-btn(href="/memo/add") 메모 추가 
-    main   
+    button.btn.memo-btn#jsMemoBtn 메모 추가 
+    main.memo-notComplete 
         section.memo-section
             for m in main   
                 +toDo(m)
             else
                 h2 할 일이 없습니다..
-    aside 
+    hr
+    aside.memo-complete 
         section.memo-section 
             for a in aside 
                 +toDo(a)

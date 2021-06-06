@@ -1,8 +1,16 @@
 .memo-section {
     padding: 10px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     grid-gap: 10px;
+    .memo {
+        border: 2px solid $white;
+    }
+    .memo__description,
+    .memo__title {
+        padding: 10px;
+        font-size: 1.2em;
+    }
 }
 
 .memo-btn {
@@ -13,4 +21,14 @@
     color: $gray_heavy;
     font-size: 1rem;
     text-decoration: none;
+    cursor: pointer;
+}
+
+.main:hover {
+    .memo-notComplete .memo {
+        border: 2px solid $yellow_heavy;
+    }
+    .memo-complete .memo {
+        border: 2px solid $gray_light;
+    }
 }

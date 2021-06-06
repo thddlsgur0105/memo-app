@@ -16,7 +16,7 @@
   \*******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scss/styles.scss */ \"./src/client/scss/styles.scss\");\n\n\n//# sourceURL=webpack://memo-app/./src/client/js/main.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scss/styles.scss */ \"./src/client/scss/styles.scss\");\n\nvar jsMemoBtn = document.querySelector(\"#jsMemoBtn\");\n\nfunction handleBtnClick(event) {\n  event.preventDefault();\n  console.log(event);\n}\n\njsMemoBtn.addEventListener(\"click\", handleBtnClick);\n\n//# sourceURL=webpack://memo-app/./src/client/js/main.js?");
 
 /***/ }),
 

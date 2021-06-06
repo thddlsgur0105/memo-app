@@ -7,6 +7,8 @@ mixin toDo(info)
         //- small 날짜: #{info.createdAt}
         //- br 
         div.memo__btn 
-            a(href=`/memo/${info.id}/delete`) Delete 
-            a(href=`/memo/${info.id}/edit`) Edit 
-    
+            a(href=`/memo/${info.id}/delete`)
+                i.fas.fa-trash.fa-lg 
+        div.memo__btn
+            a(href=`/memo/${info.id}/edit`)
+                i.fas.fa-pen.fa-lg 
