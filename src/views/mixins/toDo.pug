@@ -1,13 +1,12 @@
 mixin toDo(info)
-    div  
-        h2 제목: #{info.title}
-        h5 설명: #{info.description}
-        small 글쓴이: #{info.author} 
-        br
-        small 날짜: #{info.createdAt}
-
-    div 
-        a(href=`/memo/${info.id}/delete`) Delete 
-        br 
-        a(href=`/memo/${info.id}/edit`) Edit 
-    hr
+    div.memo
+        h2.memo__title #{info.title}
+        h5.memo__description #{info.description}
+        //- small 글쓴이: #{info.author} 
+        //- br
+        //- small 날짜: #{info.createdAt}
+        //- br 
+        div.memo__btn 
+            a(href=`/memo/${info.id}/delete`) Delete 
+            a(href=`/memo/${info.id}/edit`) Edit 
+    

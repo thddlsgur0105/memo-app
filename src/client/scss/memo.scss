@@ -1,0 +1,16 @@
+.memo-section {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+}
+
+.memo-btn {
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $gray_heavy;
+    font-size: 1rem;
+    text-decoration: none;
+}

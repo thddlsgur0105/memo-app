@@ -21,3 +21,14 @@ body {
         align-items: center;
     }
 }
+
+.btn {
+    margin-top: 10px;
+        width: 70px;
+        height: 38px;
+        border: 1px solid $gray_light;
+        border-radius: 10px;
+        outline: none;
+        background-color: $white_heavy;
+        font-weight: 600;
+}
