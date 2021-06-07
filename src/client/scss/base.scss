@@ -23,8 +23,9 @@ body {
 }
 
 .btn {
-    margin-top: 10px;
-        width: 100px;
+        margin: 10px 0px;
+        display: inline-block;
+        padding: 0px 10px;
         height: 38px;
         border: 1px solid $gray_light;
         border-radius: 10px;

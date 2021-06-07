@@ -14,14 +14,17 @@
 }
 
 .memo-btn {
-    margin: 10px auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     color: $gray_heavy;
     font-size: 1rem;
     text-decoration: none;
     cursor: pointer;
+    transition: all .5s ease-in-out;
 }
 
 .main:hover {

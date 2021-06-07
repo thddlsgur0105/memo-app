@@ -2,7 +2,9 @@ extends base.pug
 include mixins/toDo.pug
 
 block content 
-    button.btn.memo-btn#jsMemoBtn 메모 추가 
+    header.flex-center#jsMemoHeader 
+        button.btn.memo-btn#jsMemoBtn 
+            i.fas.fa-plus
     main.memo-notComplete 
         section.memo-section
             for m in main   

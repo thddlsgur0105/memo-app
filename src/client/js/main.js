@@ -1,10 +1,17 @@
 import "../scss/styles.scss";
 
-const jsMemoBtn = document.querySelector("#jsMemoBtn")
+const jsMemoHeader = document.querySelector("#jsMemoHeader");
+const jsMemoBtn = jsMemoHeader.querySelector("#jsMemoBtn")
 
 function handleBtnClick(event) {
     event.preventDefault();
-    console.log(event)
+    let targetNode = event.target;
+    if (targetNode.tagName === "I") {
+        targetNode = targetNode.parentNode;
+    }
+    targetNode.classList.toggle("clicked");
 }
 
-jsMemoBtn.addEventListener("click", handleBtnClick);
+if (jsMemoHeader) {
+    jsMemoBtn.addEventListener("click", handleBtnClick);
+}
