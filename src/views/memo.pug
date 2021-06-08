@@ -8,16 +8,14 @@ block content
         div.input-box.hide#jsMemoInput
             input.input(type="text", placeholder="할 일")
             input.input(type="text", placeholder="세부정보")
-    main.memo-notComplete 
+    main.memo-notComplete#jsMemoMain  
         section.memo-section
             for m in main   
                 +toDo(m)
-            else
-                h2 할 일이 없습니다..
+           
     hr
     aside.memo-complete 
         section.memo-section 
             for a in aside 
                 +toDo(a)
-            else
-                h2 할 일이 없습니다..
+            

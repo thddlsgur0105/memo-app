@@ -2,10 +2,6 @@ mixin toDo(info)
     div.memo
         h2.memo__title #{info.title}
         h5.memo__description #{info.description}
-        //- small 글쓴이: #{info.author} 
-        //- br
-        //- small 날짜: #{info.createdAt}
-        //- br 
         div.memo__btn 
             a(href=`/memo/${info.id}/delete`)
                 i.fas.fa-trash.fa-lg 
