@@ -3,7 +3,24 @@
     height: 50px;
 }
 
+@keyframes showing {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 .clicked {
-    left: 0;
-    transform: translateX(0);
+    left: 90%;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    animation: showing .3s linear forwards;
+    display: flex;
 }
