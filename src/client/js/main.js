@@ -60,8 +60,7 @@ function paintMemo(obj) {
 }
 
 function getInput(contents) {
-    const title = contents[0].value;
-    const description = contents[1].value;
+    const [title, description] = [contents[0].value, contents[1].value];
     return { title, description }
 }
 
@@ -86,25 +85,32 @@ function handleBtnClick(event) {
             // Frontend Process
             paintMemo(newMemoObj);
 
-            // Backend Process -- localStorage Procass
+            console.log("before", memoArray);
+           // Backend Process -- localStorage Procass
             saveMemo(newMemoObj);
+            console.log("after", memoArray);
         }
     }
 }
 
 
 function init() {
+
     // 기존의 localStorage 내용 로드
     let myMemo = localStorage.getItem("myMemo");
     myMemo = JSON.parse(myMemo);
 
-    // frontend Process
-    myMemo.forEach(oneMemo => {
-        paintMemo(oneMemo);
-    });
+    if (myMemo) {
+        myMemo.forEach(oneMemo => {
+            // frontend Process
+            paintMemo(oneMemo);
+    
+            //bakcend Process
+            memoArray.push(oneMemo);
+        });
+    }
 
-    // backend Process
-    memoArray.push(myMemo);
+    
 
     // memo click Btn 활성화
     if (jsMemoHeader) {
