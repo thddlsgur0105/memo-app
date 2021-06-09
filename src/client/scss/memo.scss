@@ -9,8 +9,23 @@
     }
     .memo__description,
     .memo__title {
+        display: flex;
+        align-items: center;
         padding: 10px;
         font-size: 1.1em;
+    }
+}
+
+.memo {
+    display: grid;
+    grid-template-columns: 3fr 4fr 1fr 1fr 1fr;
+    grid-gap: 5px;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    .memo__btn {
+        margin: 10px auto;
     }
 }
 
@@ -18,7 +33,6 @@
     display: flex;
     align-items: center;
     padding: 10px 0px;
-    border-bottom: 2px solid $gray_light;
 }
 
 .memo-btn {
@@ -50,15 +64,5 @@
             font-weight: 600;
             color: $blue_light;
         }
-    }
-}
-
-
-.main:hover {
-    .memo-notComplete .memo {
-        border: 2px solid $yellow_heavy;
-    }
-    .memo-complete .memo {
-        border: 2px solid $gray_light;
     }
 }

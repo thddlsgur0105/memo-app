@@ -8,7 +8,14 @@ const jsMemoContents = jsMemoInput.querySelectorAll("input")
 const jsMemoMain = document.querySelector("#jsMemoMain"); 
 const jsNewMemoSection = jsMemoMain.querySelector(".memo-section");
 
-function newMemo(obj) {
+var memoArray = [];
+
+function saveMemo(obj) {
+    memoArray.push(obj);
+    localStorage.setItem("myMemo", JSON.stringify(memoArray));
+}
+
+function paintMemo(obj) {
     // .memo box
     const divBox = document.createElement("div");
     divBox.className = "memo";
@@ -30,9 +37,25 @@ function newMemo(obj) {
     deleteIcon.classList.add("fas", "fa-trash", "fa-lg");
     deleteBtn.appendChild(deleteIcon);
 
+    // edit button
+    const editBtn = document.createElement("button");
+    editBtn.className = "btn";
+    const editIcon = document.createElement("i");
+    editIcon.classList.add("fas", "fa-pen", "fa-lg");
+    editBtn.appendChild(editIcon);
+
+    // complete button
+    const completeBtn = document.createElement("button");
+    completeBtn.className = "btn";
+    const completeIcon = document.createElement("i");
+    completeIcon.classList.add("fas", "fa-chevron-down", "fa-lg");
+    completeBtn.appendChild(completeIcon);
+
     divBox.appendChild(titleBox);
     divBox.appendChild(descriptionBox);
     divBox.appendChild(deleteBtn);
+    divBox.appendChild(editBtn);
+    divBox.appendChild(completeBtn);
     jsNewMemoSection.appendChild(divBox);
 }
 
@@ -58,16 +81,35 @@ function handleBtnClick(event) {
         // hide input
         jsMemoInput.classList.replace("show", "hide");
         const newMemoObj = getInput(jsMemoContents);
-        // newMemo를 프론트엔드로 화면의 jsMemoMain 영역에 생성
-        newMemo(newMemoObj);
-        // 백엔드로 그 해당 newMemo에 관한 내용을 mongo 데이터베이스에 저장
-        // 화면 새로고침 시 데이터베이스의 내용들이 로드되면서 프론트엔드가 사라지고 결과는 다르지 않게 됨
-        
-        
-        // 삭제 시 프론트엔드 단에서 요소 제거 -> 백엔드에서 관련 요소 제거 -> 새로고침 시 없어짐
+        // 저장하는 것이 가능한 데이터라면
+        if (newMemoObj.title !== "") {
+            // Frontend Process
+            paintMemo(newMemoObj);
+
+            // Backend Process -- localStorage Procass
+            saveMemo(newMemoObj);
+        }
     }
 }
 
-if (jsMemoHeader) {
-    jsMemoBtn.addEventListener("click", handleBtnClick);
+
+function init() {
+    // 기존의 localStorage 내용 로드
+    let myMemo = localStorage.getItem("myMemo");
+    myMemo = JSON.parse(myMemo);
+
+    // frontend Process
+    myMemo.forEach(oneMemo => {
+        paintMemo(oneMemo);
+    });
+
+    // backend Process
+    memoArray.push(myMemo);
+
+    // memo click Btn 활성화
+    if (jsMemoHeader) {
+        jsMemoBtn.addEventListener("click", handleBtnClick);
+    }
 }
+
+init();
