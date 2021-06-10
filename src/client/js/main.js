@@ -8,17 +8,39 @@ const jsMemoContents = jsMemoInput.querySelectorAll("input")
 const jsMemoMain = document.querySelector("#jsMemoMain"); 
 const jsNewMemoSection = jsMemoMain.querySelector(".memo-section");
 
-var memoArray = [];
+let memoArray = [];
 
 function saveMemo(obj) {
     memoArray.push(obj);
     localStorage.setItem("myMemo", JSON.stringify(memoArray));
 }
 
-function paintMemo(obj) {
+function handleDeleteBtnClick(event) {
+    event.preventDefault();
+    let targetNode = event.target;
+    if (targetNode.tagName === "I") {
+        targetNode = targetNode.parentNode;
+    }
+    const targetMemo = targetNode.parentNode
+    const targetId = targetMemo.id;
+    // Delete target in Frontend
+    targetMemo.remove();
+
+    // Delete target in Backend
+    // 기존의 localStorage 내용 로드
+    memoArray = memoArray.filter(oneMemo => oneMemo.id !== parseInt(targetId))
+    localStorage.setItem("myMemo", JSON.stringify(memoArray))
+}
+
+function paintMemo() {
+    // object id for delete Btn
+    const newId = memoArray.length + 1;
+    obj = { title: jsMemoContents[0].value, description: jsMemoContents[1].value, id: newId }
+
     // .memo box
     const divBox = document.createElement("div");
     divBox.className = "memo";
+    divBox.id = obj.id;
 
     // .memo__title box
     const titleBox = document.createElement("h2");
@@ -37,6 +59,8 @@ function paintMemo(obj) {
     deleteIcon.classList.add("fas", "fa-trash", "fa-lg");
     deleteBtn.appendChild(deleteIcon);
 
+    deleteBtn.addEventListener("click", handleDeleteBtnClick);
+
     // edit button
     const editBtn = document.createElement("button");
     editBtn.className = "btn";
@@ -44,27 +68,25 @@ function paintMemo(obj) {
     editIcon.classList.add("fas", "fa-pen", "fa-lg");
     editBtn.appendChild(editIcon);
 
-    // complete button
-    const completeBtn = document.createElement("button");
-    completeBtn.className = "btn";
-    const completeIcon = document.createElement("i");
-    completeIcon.classList.add("fas", "fa-chevron-down", "fa-lg");
-    completeBtn.appendChild(completeIcon);
+    // option button
+    const optionBtn = document.createElement("button");
+    optionBtn.className = "btn";
+    const optionIcon = document.createElement("i");
+    optionIcon.classList.add("fas", "fa-chevron-left", "fa-lg");
+    optionBtn.appendChild(optionIcon);
 
     divBox.appendChild(titleBox);
     divBox.appendChild(descriptionBox);
     divBox.appendChild(deleteBtn);
     divBox.appendChild(editBtn);
-    divBox.appendChild(completeBtn);
+    divBox.appendChild(optionBtn);
     jsNewMemoSection.appendChild(divBox);
+
+    // backend process
+    saveMemo(obj);
 }
 
-function getInput(contents) {
-    const [title, description] = [contents[0].value, contents[1].value];
-    return { title, description }
-}
-
-function handleBtnClick(event) {
+function handleAddBtnClick(event) {
     event.preventDefault();
     let targetNode = event.target;
     if (targetNode.tagName === "I") {
@@ -79,16 +101,11 @@ function handleBtnClick(event) {
         jsMemoIcon.classList.replace("fa-check", "fa-plus");
         // hide input
         jsMemoInput.classList.replace("show", "hide");
-        const newMemoObj = getInput(jsMemoContents);
+
         // 저장하는 것이 가능한 데이터라면
         if (newMemoObj.title !== "") {
-            // Frontend Process
-            paintMemo(newMemoObj);
-
-            console.log("before", memoArray);
-           // Backend Process -- localStorage Procass
-            saveMemo(newMemoObj);
-            console.log("after", memoArray);
+            // Frontend Process && Backend Process
+            paintMemo();
         }
     }
 }
@@ -97,24 +114,20 @@ function handleBtnClick(event) {
 function init() {
 
     // 기존의 localStorage 내용 로드
-    let myMemo = localStorage.getItem("myMemo");
-    myMemo = JSON.parse(myMemo);
-
-    if (myMemo) {
-        myMemo.forEach(oneMemo => {
-            // frontend Process
-            paintMemo(oneMemo);
+    loadedArray = localStorage.getItem("myMemo");
+    parsedArray = JSON.parse(loadedArray);
     
-            //bakcend Process
-            memoArray.push(oneMemo);
+
+    if (parsedArray) {
+        parsedArray.forEach(oneMemo => {
+            // frontend Process
+            paintMemo();
         });
     }
 
-    
-
     // memo click Btn 활성화
     if (jsMemoHeader) {
-        jsMemoBtn.addEventListener("click", handleBtnClick);
+        jsMemoBtn.addEventListener("click", handleAddBtnClick);
     }
 }
 
