@@ -32,10 +32,7 @@ function handleDeleteBtnClick(event) {
     localStorage.setItem("myMemo", JSON.stringify(memoArray))
 }
 
-function paintMemo() {
-    // object id for delete Btn
-    const newId = memoArray.length + 1;
-    obj = { title: jsMemoContents[0].value, description: jsMemoContents[1].value, id: newId }
+function paintMemo(obj) {
 
     // .memo box
     const divBox = document.createElement("div");
@@ -81,9 +78,6 @@ function paintMemo() {
     divBox.appendChild(editBtn);
     divBox.appendChild(optionBtn);
     jsNewMemoSection.appendChild(divBox);
-
-    // backend process
-    saveMemo(obj);
 }
 
 function handleAddBtnClick(event) {
@@ -102,10 +96,19 @@ function handleAddBtnClick(event) {
         // hide input
         jsMemoInput.classList.replace("show", "hide");
 
-        // 저장하는 것이 가능한 데이터라면
+        const newMemoObj = {
+            title: jsMemoContents[0].value,
+            description: jsMemoContents[1].value,
+            id: memoArray.length + 1,
+        }
+
         if (newMemoObj.title !== "") {
-            // Frontend Process && Backend Process
-            paintMemo();
+
+            // Frontend Process
+            paintMemo(newMemoObj);
+
+            // Backend Process
+            saveMemo(newMemoObj);
         }
     }
 }
@@ -114,14 +117,23 @@ function handleAddBtnClick(event) {
 function init() {
 
     // 기존의 localStorage 내용 로드
-    loadedArray = localStorage.getItem("myMemo");
-    parsedArray = JSON.parse(loadedArray);
+    const loadedArray = localStorage.getItem("myMemo");
+    const parsedArray = JSON.parse(loadedArray);
     
 
     if (parsedArray) {
         parsedArray.forEach(oneMemo => {
+            const memoObj = {
+                title: oneMemo.title,
+                description: oneMemo.description,
+                id: memoArray.length + 1,
+            }
+
             // frontend Process
-            paintMemo();
+            paintMemo(memoObj);
+
+            // backend process
+            saveMemo(memoObj);
         });
     }
 
