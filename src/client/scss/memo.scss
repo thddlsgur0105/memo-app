@@ -51,18 +51,19 @@
 
 .input-box {
     width: 80%;
-    .input {
-        width: 80%;
-        padding: 10px;
-        margin: 10px;
-        box-sizing: border-box;
-        border: 2px solid $blue_light;
-        border-radius: 10px;
-        outline: none;
-        &::placeholder {
-            font-size: 15px;
-            font-weight: 600;
-            color: $blue_light;
-        }
+}
+
+.input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px;
+    box-sizing: border-box;
+    border: 2px solid $blue_light;
+    border-radius: 10px;
+    outline: none;
+    &::placeholder {
+        font-size: 15px;
+        font-weight: 600;
+        color: $blue_light;
     }
 }
