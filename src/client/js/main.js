@@ -212,6 +212,7 @@ function init() {
     const loadedArray = sessionStorage.getItem("toDos");
     const parsedArray = JSON.parse(loadedArray);
     
+    const jsonArray = []
 
     if (parsedArray) {
         parsedArray.forEach(oneMemo => {
@@ -221,12 +222,21 @@ function init() {
                 id: memoArray.length + 1,
             }
 
+            jsonArray.push(memoObj);
+
             // frontend Process
             paintMemo(memoObj);
 
             // backend process
             saveMemo(memoObj);
         });
+
+        const stringifiedArray = JSON.stringify(jsonArray);
+
+        const httpRequest = new XMLHttpRequest();
+        httpRequest.open('GET', "server", true);
+        httpRequest.send(stringifiedArray);
+
     }
 
     // memo click Btn 활성화

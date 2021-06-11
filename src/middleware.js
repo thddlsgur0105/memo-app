@@ -21,7 +21,6 @@ export const totalCompleted = async (req, res, next) => {
 
 export const something = (req, res, next) => {
     // Get my toDos from sesionStorage 
-    console.dir(req.session)
-
+    
     next();
 }
