@@ -12,7 +12,7 @@ let memoArray = [];
 
 function saveMemo(obj) {
     memoArray.push(obj);
-    localStorage.setItem("toDos", JSON.stringify(memoArray));
+    sessionStorage.setItem("toDos", JSON.stringify(memoArray));
 }
 
 function handleDeleteBtnClick(event) {
@@ -29,7 +29,7 @@ function handleDeleteBtnClick(event) {
 
     // Delete target in Backend
     memoArray = memoArray.filter(oneMemo => oneMemo.id !== parseInt(targetId))
-    localStorage.setItem("toDos", JSON.stringify(memoArray))
+    sessionStorage.setItem("toDos", JSON.stringify(memoArray))
 }
 
 function handleOptionBtnClick(event) {
@@ -119,7 +119,7 @@ function handleEditBtnClick(event) {
             }
         })
         
-        localStorage.setItem("toDos", JSON.stringify(memoArray))
+        sessionStorage.setItem("toDos", JSON.stringify(memoArray))
     }
 }
 
@@ -208,8 +208,8 @@ function handleAddBtnClick(event) {
 
 function init() {
 
-    // 기존의 localStorage 내용 로드
-    const loadedArray = localStorage.getItem("toDos");
+    // 기존의 sessionStorage 내용 로드
+    const loadedArray = sessionStorage.getItem("toDos");
     const parsedArray = JSON.parse(loadedArray);
     
 

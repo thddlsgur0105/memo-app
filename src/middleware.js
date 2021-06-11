@@ -1,6 +1,5 @@
 import ToDo from "./models/ToDo";
 import User from "./models/User";
-import { LocalStorage } from "node-localstorage";
 
 export const localUser = (req, res, next) => {
     res.locals.loggedIn = Boolean(req.session.loggedIn);
@@ -21,12 +20,8 @@ export const totalCompleted = async (req, res, next) => {
 }
 
 export const something = (req, res, next) => {
-
-    const localStorage = new LocalStorage('./scratch');
-
-    // Get my toDos from localStorage 
-    const toDos = localStorage.getItem("toDos");
-    console.log("this is toDos", toDos);
+    // Get my toDos from sesionStorage 
+    console.dir(req.session)
 
     next();
 }
