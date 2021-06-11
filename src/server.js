@@ -2,7 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import session from "express-session";
 import sessionStore from "sessionstore";
-import { localUser } from "./middleware";
+import { localUser, something } from "./middleware";
 import globalRouter from "./routers/globalRouter";
 import userRouter from "./routers/userRouter";
 import memoRouter from "./routers/memoRouter";
@@ -27,6 +27,7 @@ app.use(session({
 
 app.use(localUser);
 
+app.use(something);
 app.use("/static", express.static("assets"));
 
 app.use("/", globalRouter);

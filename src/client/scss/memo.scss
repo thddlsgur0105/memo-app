@@ -27,6 +27,13 @@
     .memo__btn {
         margin: 10px auto;
     }
+    .input {
+        padding: 0px;
+        transition: border .3s ease-in-out;
+    }
+    .input:focus {
+        border: 2px solid $white;
+    }
 }
 
 .memo-header {
@@ -61,6 +68,8 @@
     border: 2px solid $blue_light;
     border-radius: 10px;
     outline: none;
+    font-size: 19px;
+    font-weight: 600;
     &::placeholder {
         font-size: 15px;
         font-weight: 600;
