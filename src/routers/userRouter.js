@@ -12,6 +12,6 @@ userRouter.get("/search", search);
 
 userRouter.get("/:id/add", addFriend);
 
-userRouter.get("/:id/server", something)
+userRouter.post("/:id/server", something)
 
 export default userRouter;

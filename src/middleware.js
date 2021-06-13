@@ -20,7 +20,6 @@ export const totalCompleted = async (req, res, next) => {
 }
 
 export const something = (req, res, next) => {
-    // Get my toDos from sesionStorage 
+    // JSON형태로 서버에 jsonArray를 받고 mongoDB에 저장    
     
-    next();
 }

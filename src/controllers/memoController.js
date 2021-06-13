@@ -73,3 +73,7 @@ export const postEditMemo = async (req, res) => {
     return res.redirect(`/users/${user._id}/memo`);
 };
 
+export const something = (req, res, next) => {
+    // JSON형태로 서버에 저장된 jsonArray를 받고 mongoDB에 저장    
+    next();
+}
