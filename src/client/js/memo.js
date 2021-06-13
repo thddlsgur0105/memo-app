@@ -235,23 +235,12 @@ function init() {
         // Ajax와 RESTAPI로 한 번만 CREATE해서 서버에 저장
         const stringifiedArray = JSON.stringify(jsonArray);
 
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', "./server", true);
-        xhr.setRequestHeader("content-type", "application/json")
-        xhr.send(stringifiedArray);
-
-        xhr.onload = () => {
-            if (xhr.status === 200 || xhr.status === 201) {
-                console.log(xhr.responseText)
-            } else {
-                console.log(xhr.status)
-            }
-        }
-    }
-
-    // memo click Btn 활성화
+        document.cookie = `something=${stringifiedArray}`;
+    
+        // memo click Btn 활성화
     if (jsMemoHeader) {
         jsMemoBtn.addEventListener("click", handleAddBtnClick);
+        }
     }
 }
 
