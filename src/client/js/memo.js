@@ -208,7 +208,13 @@ function init() {
 
     // 기존의 sessionStorage 내용 로드
     const loadedArray = sessionStorage.getItem("toDos");
-    const parsedArray = JSON.parse(loadedArray);
+    let parsedArray;
+
+    if (!loadedArray) {
+        parsedArray = null;
+    } else {
+        parsedArray = JSON.parse(loadedArray);
+    }
     
     const jsonArray = []
 
@@ -229,19 +235,21 @@ function init() {
             saveMemo(memoObj);
         });
 
-        console.log(jsonArray);
+        console.log("Hi", jsonArray);
 
-        // frontend javascript 역시 import export 활용해서 모든 init 부분에 Ajax 활용을 추가해주는 방향? 
-        // Ajax와 RESTAPI로 한 번만 CREATE해서 서버에 저장
-        const stringifiedArray = JSON.stringify(jsonArray);
-
-        document.cookie = `something=${stringifiedArray}`;
+        if (jsonArray) {
+            // frontend javascript 역시 import export 활용해서 모든 init 부분에 Ajax 활용을 추가해주는 방향? 
+            // Ajax와 RESTAPI로 한 번만 CREATE해서 서버에 저장
+            const stringifiedArray = JSON.stringify(jsonArray);
+            document.cookie = `something=${stringifiedArray}`;
+        }
     
-        // memo click Btn 활성화
+    }
+
+    // memo click Btn 활성화
     if (jsMemoHeader) {
         jsMemoBtn.addEventListener("click", handleAddBtnClick);
         }
-    }
 }
 
 init();

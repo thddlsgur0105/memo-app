@@ -19,19 +19,21 @@ export const totalCompleted = async (req, res, next) => {
     next();
 }
 
-async function saveMongo(data) {
-    
-}
 
-export const something = (req, res, next) => {
+export const something = async (req, res, next) => {
     // JSON형태로 서버에 jsonArray를 받고 mongoDB에 저장    
-    const stringifiedArray = req.cookies.something;
-    const parsedArray = JSON.parse(stringifiedArray);
-    parsedArray.forEach(data => {
-        // saving to MongoDB
-        saveMongo(data);
-    });
-    console.log(parsedArray);
-    console.log(req.session);
+    try {
+        const stringifiedArray = req.cookies.something;
+        const parsedArray = JSON.parse(stringifiedArray);
+        parsedArray.forEach(data => {
+            // user.username 과 관련된 database 전부 desctroy
+        
+            // mongoDB에 새로운 database 생성
+        });
+        console.log(parsedArray);
+        console.log(req.session);
+    } catch(error) {
+        console.log(error.message);
+    }
     next();
 }
