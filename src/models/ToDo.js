@@ -6,10 +6,6 @@ const toDoSchema = new mongoose.Schema({
     author: String,
     createdAt: Date,
     hashtags: [{ type: String }],
-    meta: {
-        completed: String,
-        priority: Number,
-    },
 });
 
 const ToDo = mongoose.model("ToDo", toDoSchema);

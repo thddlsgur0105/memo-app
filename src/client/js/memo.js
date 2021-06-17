@@ -216,8 +216,6 @@ function init() {
         parsedArray = JSON.parse(loadedArray);
     }
     
-    const jsonArray = []
-
     if (parsedArray) {
         parsedArray.forEach(oneMemo => {
             const memoObj = {
@@ -226,23 +224,12 @@ function init() {
                 id: memoArray.length + 1,
             }
 
-            jsonArray.push(memoObj);
-
             // frontend Process
             paintMemo(memoObj);
 
             // backend process
             saveMemo(memoObj);
         });
-
-        console.log("Hi", jsonArray);
-
-        if (jsonArray) {
-            // frontend javascript 역시 import export 활용해서 모든 init 부분에 Ajax 활용을 추가해주는 방향? 
-            // Ajax와 RESTAPI로 한 번만 CREATE해서 서버에 저장
-            const stringifiedArray = JSON.stringify(jsonArray);
-            document.cookie = `something=${stringifiedArray}`;
-        }
     
     }
 

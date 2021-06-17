@@ -10,12 +10,6 @@ block content
             input.input(type="text", placeholder="세부정보")
     main.memo-notComplete#jsMemoMain  
         section.memo-section
-            for m in main   
-                +toDo(m)
-    aside.memo-complete 
-        section.memo-section 
-            for a in aside 
-                +toDo(a)
 
 block script 
     script(src="/static/js/main.js")

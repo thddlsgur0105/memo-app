@@ -2,9 +2,9 @@ extends base
 
 block content 
     form.form(method="POST")
-        input.form__input(type="text", placeholder="Username", name="username" required)
-        input.form__input(type="email", placeholder="Email", name="email", required)
-        input.form__input(type="password", placeholder="Password", name="password", required)
-        input.form__input(type="password", placeholder="Verify Password", name="password2", required)        
-        input.form__input(type="text", placeholder="Location", name="location", required)
+        input.form__input(type="text", placeholder="이름", name="username" required)
+        input.form__input(type="email", placeholder="이메일", name="email", required)
+        input.form__input(type="password", placeholder="비밀번호", name="password", required)
+        input.form__input(type="password", placeholder="비밀번호 확인", name="password2", required)        
+        input.form__input(type="text", placeholder="거주지", name="location", required)
         input.btn.form__btn(type="submit", value="회원가입")

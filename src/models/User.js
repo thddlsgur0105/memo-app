@@ -6,10 +6,8 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     location: String,
-    total: Number,
     friends: {
         type: [String],
-        default: undefined,
     },
 })
 
