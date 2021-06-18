@@ -1,4 +1,22 @@
 extends base.pug
 
 block content 
-    h2 유저의 세부 정보 페이지입니다.
+    .card.card-profile 
+        .card__img 
+            i.fas.fa-user-alt.fa-3x 
+            span 내 정보
+        .card__description 
+            .card__username 
+                span= `이름: ${userDetail.username}`
+            .card__email 
+                span= `이메일: ${userDetail.email}`
+            .card__location   
+                span= `거주지: ${userDetail.location}`
+            
+    .card.card-profile 
+        .card__img 
+            i.fas.fa-user-friends.fa-3x 
+            span 친구목록
+        .card__description 
+            each friend in userDetail.friends         
+                h1 friend 

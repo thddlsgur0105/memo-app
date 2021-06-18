@@ -1,5 +1,10 @@
 mixin card(user)
     div.card
-        h1.btn.card__btn #{user.username} 
-        a.btn.card__btn(href=`/users/${user._id}/add`)
-            span 친구추가
+        .card__description 
+            |#{user.username}
+        .card__btns 
+            a.card__btn(href=`/users/${user._id}/add`)
+                i.fas.fa-user-plus.fa-lg
+            a.card__btn(href=`/users/${user._id}/delete`)
+                i.fas.fa-user-minus.fa-lg
+            

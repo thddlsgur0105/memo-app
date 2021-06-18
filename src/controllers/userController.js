@@ -74,7 +74,7 @@ export const userDetail = async (req, res) => {
         await req.session.destroy();
         return res.redirect("/")
     }
-    // ** 유저에 대한 세부적인 내용들 표시
+    
     return res.render("userDetail", { pageTitle: "내 정보", userDetail });
 };
 
@@ -106,17 +106,17 @@ export const search = async (req, res) => {
 export const addFriend = async (req, res) => {
     // 추가할 유저의 id
     const { id } = req.params;
+    const friend = await User.findById(id);
 
     // 로그인된 유저의 id
     const { user } = req.session;
     const currentUser = await User.findById(user._id);
     const myFriends = currentUser.friends;
 
-    if (!myFriends.includes(id)) {
+    if (!myFriends.includes(friend.username)) {
         // 유저의 정보를 백엔드의 유저 데이터베이스에 업데이트 해주는 과정
-        const updateUser = await User.findById(user._id);
-        updateUser.friends.push(id);
-        await updateUser.save(); 
+        myFriends.push(friend.username);
+        await currentUser.save(); 
     }
     return res.redirect(`/users/${id}/detail`)
 }
