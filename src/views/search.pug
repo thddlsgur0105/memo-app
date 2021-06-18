@@ -9,8 +9,7 @@ block content
 
     main.search-result
         h2 검색결과
-        for user in searchingUsers 
-            +card(user)
-        else 
-            h1 검색결과가 없습니다..
-    
+        .search-result__container 
+            for user in searchingUsers 
+                +card(user)
+            

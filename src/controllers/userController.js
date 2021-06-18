@@ -69,13 +69,13 @@ export const logout = async (req, res) => {
 // 유저 세부정보
 export const userDetail = async (req, res) => {
     const { id } = req.params;
-    const userDetail = await User.findById(id);
-    if (!userDetail) {
+    const user = await User.findById(id);
+    if (!user) {
         await req.session.destroy();
         return res.redirect("/")
     }
     
-    return res.render("userDetail", { pageTitle: "내 정보", userDetail });
+    return res.render("userDetail", { pageTitle: "내 정보", user });
 };
 
 // 메모 데이터베이스와 연동 X

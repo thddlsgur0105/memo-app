@@ -7,16 +7,20 @@ block content
             span 내 정보
         .card__description 
             .card__username 
-                span= `이름: ${userDetail.username}`
+                span= `이름: ${user.username}`
             .card__email 
-                span= `이메일: ${userDetail.email}`
+                span= `이메일: ${user.email}`
             .card__location   
-                span= `거주지: ${userDetail.location}`
+                span= `거주지: ${user.location}`
             
     .card.card-profile 
         .card__img 
             i.fas.fa-user-friends.fa-3x 
             span 친구목록
-        .card__description 
-            each friend in userDetail.friends         
-                h1 friend 
+        .card__friends 
+            each one in user.friends     
+                div.card
+                    .card__img 
+                        i.fas.fa-user.fa-lg  
+                    .card__description
+                        span=one

@@ -1,6 +1,5 @@
 .card {
     width: 80%;
-    height: 40%;
     margin: 10px auto;
     padding: 10px;
     box-sizing: border-box;
@@ -29,4 +28,13 @@
             margin-bottom: 10px;
         }
     }
+    .card__friends {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+    }
+}
+
+.card-profile {
+    min-height: 40%;
 }

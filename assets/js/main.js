@@ -9,6 +9,16 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/client/js/load.js":
+/*!*******************************!*\
+  !*** ./src/client/js/load.js ***!
+  \*******************************/
+/***/ (() => {
+
+eval("console.log(\"Hi\");\n\n//# sourceURL=webpack://memo-app/./src/client/js/load.js?");
+
+/***/ }),
+
 /***/ "./src/client/js/main.js":
 /*!*******************************!*\
   !*** ./src/client/js/main.js ***!
@@ -16,7 +26,7 @@
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scss/styles.scss */ \"./src/client/scss/styles.scss\");\n/* harmony import */ var _memo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./memo */ \"./src/client/js/memo.js\");\n/* harmony import */ var _memo__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_memo__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\n//# sourceURL=webpack://memo-app/./src/client/js/main.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scss/styles.scss */ \"./src/client/scss/styles.scss\");\n/* harmony import */ var _memo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./memo */ \"./src/client/js/memo.js\");\n/* harmony import */ var _memo__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_memo__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _load__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./load */ \"./src/client/js/load.js\");\n/* harmony import */ var _load__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_load__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\n\n//# sourceURL=webpack://memo-app/./src/client/js/main.js?");
 
 /***/ }),
 
