@@ -1,10 +1,10 @@
 const jsMemoHeader = document.querySelector("#jsMemoHeader");
-const jsMemoBtn = jsMemoHeader.querySelector("#jsMemoBtn");
-const jsMemoIcon = jsMemoBtn.querySelector("#jsMemoIcon");
-const jsMemoInput = jsMemoHeader.querySelector("#jsMemoInput");
-const jsMemoContents = jsMemoInput.querySelectorAll("input")
+const jsMemoBtn = jsMemoHeader ? (jsMemoHeader.querySelector("#jsMemoBtn")) : null;
+const jsMemoIcon = jsMemoBtn ? (jsMemoBtn.querySelector("#jsMemoIcon")) : null;
+const jsMemoInput = jsMemoHeader ? (jsMemoHeader.querySelector("#jsMemoInput")) : null;
+const jsMemoContents = jsMemoInput ? (jsMemoInput.querySelectorAll("input")) : null;
 const jsMemoMain = document.querySelector("#jsMemoMain"); 
-const jsNewMemoSection = jsMemoMain.querySelector(".memo-section");
+const jsNewMemoSection = jsMemoMain ? (jsMemoMain.querySelector(".memo-section")) : null;
 
 let memoArray = [];
 
@@ -204,7 +204,7 @@ function handleAddBtnClick(event) {
 }
 
 
-function init() {
+function initMemo() {
 
     // 기존의 sessionStorage 내용 로드
     const loadedArray = sessionStorage.getItem("toDos");
@@ -234,9 +234,10 @@ function init() {
     }
 
     // memo click Btn 활성화
-    if (jsMemoHeader) {
-        jsMemoBtn.addEventListener("click", handleAddBtnClick);
-        }
+    
+    jsMemoBtn.addEventListener("click", handleAddBtnClick);
 }
 
-init();
+if (jsMemoHeader && jsMemoMain) {
+    initMemo();
+}

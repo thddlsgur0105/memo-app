@@ -12,8 +12,37 @@
     }
 }
 
+@keyframes slider-left {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+
+@keyframes slider-right {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
 .clicked {
     left: 90%;
+}
+
+.btn-clicked {
+    color: $blue_light;
+    background-color: $white;
 }
 
 .hide {
@@ -24,4 +53,18 @@
     animation: showing .3s linear forwards;
     display: flex;
     align-items: center;
+}
+
+.hide-slider {
+    animation: slider-left .4s ease-in-out forwards;
+}
+
+.show-slider {
+    animation: slider-right .4s ease-in-out forwards;
+}
+
+.init-hide {
+    transform: translateX(-100%);
+    opacity: 0;
+    display: none;
 }

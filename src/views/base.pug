@@ -8,14 +8,18 @@ html(lang="en")
         title #{pageTitle} | #{user ? user.username : "비회원"}
     body 
         header.header 
-            h1=pageTitle 
+            span.header__title #{pageTitle}
+            div.btn.header__btn#jsNavBtn
+                i.fas.fa-bars
         main.main 
             if (errorMessage)
                 p=errorMessage 
             block content 
-        
+        aside.aside
+            .clock__container#jsClockContainer
+                span.clock__time#jsClockTime 00:00:00
         include partials/nav.pug
         footer.footer 
-            p &copy; #{new Date().getFullYear()} MemoApp 
+            span &copy; #{new Date().getFullYear()} MemoApp 
         block script
         script(src="https://kit.fontawesome.com/6478f529f2.js", crossorigin="anonymous")
