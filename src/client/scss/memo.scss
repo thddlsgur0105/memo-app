@@ -18,7 +18,7 @@
 
 .memo {
     display: grid;
-    grid-template-columns: 3fr 4fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 3fr 1fr 1fr 1fr;
     grid-gap: 5px;
     width: 100%;
     padding: 10px;
@@ -58,21 +58,26 @@
 
 .input-box {
     width: 80%;
+    display: flex;
+    align-items: center;
 }
 
 .input {
     width: 80%;
+    height: 40px;
     padding: 10px;
     margin: 10px;
     box-sizing: border-box;
-    border: 2px solid $blue_light;
-    border-radius: 10px;
+    border: 2px solid $white;
+    border-radius: 20px;
     outline: none;
+    background: inherit;
+    color: $white;
     font-size: 19px;
     font-weight: 600;
     &::placeholder {
         font-size: 15px;
         font-weight: 600;
-        color: $blue_light;
+        color: $white;
     }
 }

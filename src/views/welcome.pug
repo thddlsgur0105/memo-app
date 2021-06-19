@@ -1,9 +1,14 @@
 extends base
 
 block content 
-    .welcome__container 
-        .welcome__card
-            h1 검색창
+    .welcome__container#jsLoadContainer 
+        .welcome__card#jsLoadCard 
+            .input-box.welcome__input-box
+                input.input.welcome__input(type="text", placeholder="이름")
+                input.input.welcome__input(type="text", placeholder="링크 주소")
+                button.btn.welcome__btn 
+                    span 링크 저장
+            .welcome__result#jsLoadResult 
         
 block script 
     script(src="/static/js/main.js") 

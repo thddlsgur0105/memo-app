@@ -50,9 +50,7 @@
 }
 
 .show {
-    animation: showing .3s linear forwards;
-    display: flex;
-    align-items: center;
+    animation: showing .3s ease-in-out forwards;
 }
 
 .hide-slider {

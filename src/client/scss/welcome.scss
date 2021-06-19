@@ -11,4 +11,23 @@
     height: 80%;
     border: 2px solid $white;
     border-radius: 20px;
+    .welcome__result {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        width: 90%;
+        margin: 0 auto;
+        height: 80%;
+    }
+}
+
+.welcome__input-box {
+    width: 100%;
+    justify-content: center;
+    .welcome__input {
+        width: auto;
+    }
+    .welcome__btn {
+        margin: 10px;
+        font-weight: 600;
+    }
 }
