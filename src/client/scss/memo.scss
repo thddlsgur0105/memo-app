@@ -39,16 +39,15 @@
 .memo-header {
     display: flex;
     align-items: center;
-    padding: 10px 0px;
+    padding: 10px;
 }
 
 .memo-btn {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    margin: 10px;
     color: inherit;
     font-size: 1rem;
     text-decoration: none;
@@ -57,13 +56,11 @@
 }
 
 .input-box {
-    width: 80%;
     display: flex;
     align-items: center;
 }
 
 .input {
-    width: 80%;
     height: 40px;
     padding: 10px;
     margin: 10px;

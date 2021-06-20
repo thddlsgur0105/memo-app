@@ -1,8 +1,8 @@
 const jsMemoHeader = document.querySelector("#jsMemoHeader");
 const jsMemoBtn = jsMemoHeader ? (jsMemoHeader.querySelector("#jsMemoBtn")) : null;
 const jsMemoIcon = jsMemoBtn ? (jsMemoBtn.querySelector("#jsMemoIcon")) : null;
-const jsMemoInput = jsMemoHeader ? (jsMemoHeader.querySelector("#jsMemoInput")) : null;
-const jsMemoContents = jsMemoInput ? (jsMemoInput.querySelectorAll("input")) : null;
+const jsMemoInputBox = jsMemoHeader ? (jsMemoHeader.querySelector("#jsMemoInputBox")) : null;
+const jsMemoInput = jsMemoInputBox ? (jsMemoInputBox.querySelectorAll("input")) : null;
 const jsMemoMain = document.querySelector("#jsMemoMain"); 
 const jsNewMemoSection = jsMemoMain ? (jsMemoMain.querySelector(".memo-section")) : null;
 
@@ -180,15 +180,15 @@ function handleAddBtnClick(event) {
     if (targetNode.classList.contains("clicked")) {
         jsMemoIcon.classList.replace("fa-plus", "fa-check");
         // show input
-        jsMemoInput.classList.replace("hide", "show");
+        jsMemoInputBox.classList.replace("hide", "show");
     } else {
         jsMemoIcon.classList.replace("fa-check", "fa-plus");
         // hide input
-        jsMemoInput.classList.replace("show", "hide");
+        jsMemoInputBox.classList.replace("show", "hide");
 
         const newMemoObj = {
-            title: jsMemoContents[0].value,
-            description: jsMemoContents[1].value,
+            title: jsMemoInput[0].value,
+            description: jsMemoInput[1].value,
             id: memoArray.length + 1,
         }
 

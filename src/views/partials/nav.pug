@@ -1,6 +1,9 @@
 ul.nav.init-hide#jsNavUl 
     
     if !loggedIn
+        li.nav__home.btn.nav__btn 
+            a(href="/")
+                i.fas.fa-home.fa-lg 
         li.nav__login.btn.nav__btn 
             a(href="/login") 
                 i.fas.fa-user.fa-lg
