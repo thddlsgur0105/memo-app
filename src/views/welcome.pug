@@ -3,10 +3,10 @@ extends base
 block content 
     .welcome__container#jsLoadContainer 
         .welcome__card#jsLoadCard 
-            .input-box.welcome__input-box
-                input.input.welcome__input(type="text", placeholder="이름")
+            .input-box.welcome__input-box#jsLoadInputBox
+                input.input.welcome__input(type="text", placeholder="이름(영어)")
                 input.input.welcome__input(type="text", placeholder="링크 주소")
-                button.btn.welcome__btn 
+                button.btn.welcome__btn#jsLoadInputBtn 
                     span 링크 저장
             .welcome__result#jsLoadResult 
         

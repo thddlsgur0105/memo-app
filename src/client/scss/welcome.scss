@@ -13,10 +13,25 @@
     border-radius: 20px;
     .welcome__result {
         display: grid;
+        grid-template-rows: repeat(4, 1fr);
         grid-template-columns: repeat(5, 1fr);
         width: 90%;
         margin: 0 auto;
         height: 80%;
+        .welcome__link {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin: 10px;
+            width: 50px;
+            border: 2px solid $white;
+            border-radius: 50%;
+            transition: all .3s ease-in-out;
+            &:hover {
+                color: $blue-light;
+                background-color: $white;
+            }
+        }
     }
 }
 
