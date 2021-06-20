@@ -7,14 +7,57 @@ const jsLoadResult = jsLoadCard ? (jsLoadCard.querySelector("#jsLoadResult")) : 
 
 let flagArray;
 
+function saveLink(array) {
+    localStorage.setItem("links", JSON.stringify(array))
+}
+
+function handleContainerHover(event) {
+    const targetContainer = event.target;
+    const targetBtn = targetContainer.querySelector(".link__btn");
+    if (targetContainer.classList.contains("leaved")) {
+        targetContainer.classList.replace("leaved", "hovered");
+        targetBtn.classList.replace("hide-btn", "show-btn");
+    } else {
+        targetContainer.classList.add("hovered");
+        targetBtn.classList.replace("hide", "show-btn");
+    }
+}
+
+function handleContainerLeave(event) {
+    const targetContainer = event.target;
+    const targetBtn = targetContainer.querySelector(".link__btn");
+    targetContainer.classList.replace("hovered", "leaved");
+    targetBtn.classList.replace("show-btn", "hide-btn");
+}
+
+function handleDeleteBtnClick(event) {
+    let targetNode = event.target;
+    if (targetNode.tagName === "I") {
+        targetNode = targetNode.parentNode;
+    } 
+    const targetContainer = targetNode.parentNode;
+    const targetId = targetContainer.querySelector("a").id;
+    
+    // frontend process
+    jsLoadResult.removeChild(targetContainer);
+
+    // backend process
+    flagArray = flagArray.filter(one => one.id !== parseInt(targetId));
+    saveLink(flagArray);
+}
+
 function paintLink(obj) {
     const [name, link, id]  = [obj.name, obj.link, obj.id];
 
     // container
-    const linkContainer = document.createElement("a");
-    linkContainer.classList.add("welcome__link")
-    linkContainer.href = link;
-    linkContainer.id = id;
+    const linkContainer = document.createElement("div");
+    linkContainer.className = "welcome__container";
+
+    // anchor
+    const linkAnchor = document.createElement("a");
+    linkAnchor.classList.add("welcome__link")
+    linkAnchor.href = link;
+    linkAnchor.id = id;
 
     // icon
     const linkIcon = document.createElement("i");
@@ -25,10 +68,25 @@ function paintLink(obj) {
     linkSpan.innerHTML = name;
     linkSpan.style.display = "none";
 
-    linkContainer.appendChild(linkIcon);
-    linkContainer.appendChild(linkSpan);
+    linkAnchor.appendChild(linkIcon);
+    linkAnchor.appendChild(linkSpan);
 
-    jsLoadResult.appendChild(linkContainer)
+    // delete Btn
+    const deleteBtn = document.createElement("button");
+    deleteBtn.classList.add("btn", "link__btn", "hide");
+    deleteBtn.addEventListener("click", handleDeleteBtnClick);
+    
+    const deleteIcon = document.createElement("i");
+    deleteIcon.classList.add("fas", "fa-trash");
+    deleteBtn.appendChild(deleteIcon);
+    
+    linkContainer.appendChild(linkAnchor);
+    linkContainer.appendChild(deleteBtn);
+
+    linkContainer.addEventListener("mouseenter", handleContainerHover);
+    linkContainer.addEventListener("mouseleave", handleContainerLeave);
+
+    jsLoadResult.appendChild(linkContainer);
 }
 
 function handleInputBtnClick(event) {
@@ -48,10 +106,6 @@ function handleInputBtnClick(event) {
 
     // backend process
     saveLink(flagArray);
-}
-
-function saveLink(array) {
-    localStorage.setItem("links", JSON.stringify(array))
 }
 
 function LoadInit() {
