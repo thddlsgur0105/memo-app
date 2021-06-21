@@ -2,18 +2,44 @@ extends base.pug
 include mixins/card
 
 block content 
-    .search-container 
-        .search-bar
-            form.form.search-bar__form(method="GET")
-                input.form__input(type="text", name="searchingBy", placeholder="검색할 유저의 이름을 입력하세요.")
-                input.btn.form__btn(type="submit", value="검색")
+    .search__box 
+        .user-profile 
+            .card.card-profile 
+                .card__img 
+                    i.fas.fa-user-alt.fa-lg
+                    span 내 정보
+                .card__description 
+                    .card__username 
+                        span= `이름: ${user.username}`
+                    .card__email 
+                        span= `이메일: ${user.email}`
+                    .card__location   
+                        span= `거주지: ${user.location}`                  
+            .card.card-profile.card-profile-friends 
+                .card__img 
+                    i.fas.fa-user-friends.fa-lg
+                    span 친구목록
+                .card__friends 
+                    each one in user.friends     
+                        .card.card-container 
+                            .card__img 
+                                i.fas.fa-user.fa-lg  
+                            .card__description.hide 
+                                span=one
+        .search-container 
+            .search__border-box
+                .search-bar
+                    form.form.search-bar__form(method="GET")
+                        input.form__input(type="text", name="searchingBy", placeholder="검색할 유저의 이름을 입력하세요.")
+                        input.btn.form__btn(type="submit", value="검색")
 
-        .search-result
-            h2 검색결과
-            .search-result__container 
-                for user in searchingUsers 
-                    +card(user)
-
+                .search-result
+                    h2 검색결과
+                    .search-result__container 
+                        for user in searchingUsers 
+                            +card(user)
+    
+            
 block script
    script(src="/static/js/main.js")
             

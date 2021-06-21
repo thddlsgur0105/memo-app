@@ -1,6 +1,28 @@
+.search__box {
+    display: flex;
+    align-items: flex-start;
+    height: 100%;
+    .user-profile {
+        box-sizing: border-box;
+        padding: 10px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
 .search-container {
-    border: 2px solid $white;
-    border-radius: 20px;
+    box-sizing: border-box;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    .search__border-box {
+        box-sizing: border-box;
+        border: 2px solid $white;
+        border-radius: 20px;
+        width: 100%;
+        height: 100%;
+    }
 }
 
 .search-bar {

@@ -16,18 +16,18 @@ export const postLogin = async (req, res) => {
     const { email, password } = req.body;
     const existingUser = await User.findOne({ email });
     if (!existingUser) {
-        return res.status(400).render("login", { pageTitle: "Login", errorMessage: "해당 이메일이 존재하지 않습니다.." })
+        return res.status(400).render("login", { pageTitle: "로그인", errorMessage: "해당 이메일이 존재하지 않습니다.." })
     }
     const comfirmPassword = bcrypt.compareSync(password, existingUser.password);
     if (!comfirmPassword) {
-        return res.status(400).render("login", { pageTitle: "Login", errorMessage: "패스워드가 일치하지 않습니다.." })
+        return res.status(400).render("login", { pageTitle: "로그인", errorMessage: "패스워드가 일치하지 않습니다.." })
     }
     
     // 세션에 들어가 있는 유저에 대한 정보는 데이터베이스에서 가져온 불변 데이터.
     req.session.user = existingUser;
     req.session.loggedIn = true;
 
-    return res.redirect(`/users/${existingUser.id}/detail`)
+    return res.redirect(`/users/${existingUser.id}/memo`)
 };
 
 
@@ -56,7 +56,7 @@ export const postJoin = async (req, res) => {
         });
         return res.redirect("/login");
     } catch(error) {
-        return res.status(400).render("join", { pageTitle: "Join", errorMessage: error.message })
+        return res.status(400).render("join", { pageTitle: "회원가입", errorMessage: error.message })
     }
 };
 
@@ -64,18 +64,6 @@ export const postJoin = async (req, res) => {
 export const logout = async (req, res) => {
     await req.session.destroy();
     return res.redirect("/")
-};
-
-// 유저 세부정보
-export const userDetail = async (req, res) => {
-    const { id } = req.params;
-    const user = await User.findById(id);
-    if (!user) {
-        await req.session.destroy();
-        return res.redirect("/")
-    }
-    
-    return res.render("userDetail", { pageTitle: "내 정보", user });
 };
 
 // 메모 데이터베이스와 연동 X
@@ -90,7 +78,14 @@ export const memo = async (req, res) => {
 };
 
 // 친구 검색
-export const search = async (req, res) => {
+export const user = async (req, res) => {
+    // 로그인 된 유저의 세부사항을 보여주는 기능
+    const { id } = req.params;
+    const user = await User.findById(id);
+    if (!user) {
+        await req.session.destroy();
+        return res.redirect("/")
+    }
     // 주변 유저들을 입력받아 탐색하는 기능
     const { searchingBy } = req.query;
     let searchingUsers = [];
@@ -99,7 +94,7 @@ export const search = async (req, res) => {
             username: { $regex: `^${searchingBy}.*`, $options: "i" }
         })
     }
-    return res.render("search", { pageTitle: "친구", searchingUsers })
+    return res.render("search", { pageTitle: "유저", searchingUsers, user })
 };
 
 // 친구 추가
@@ -118,5 +113,5 @@ export const addFriend = async (req, res) => {
         myFriends.push(friend.username);
         await currentUser.save(); 
     }
-    return res.redirect(`/users/${id}/detail`)
+    return res.redirect(`/users/${user._id}/user`)
 }
