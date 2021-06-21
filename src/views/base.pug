@@ -15,6 +15,8 @@ html(lang="en")
             if (errorMessage)
                 p=errorMessage 
             block content 
+        aside.side-bar 
+            block side-bar 
         aside.aside
             .clock__container#jsClockContainer
                 span.clock__time#jsClockTime 00:00:00

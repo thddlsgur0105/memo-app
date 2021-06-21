@@ -47,13 +47,14 @@ export const postJoin = async (req, res) => {
         return res.status(400).render("join", { pageTitle: "Join", errorMessage: "패스워드가 일치하지 않습니다.." })
     }
     try {
-        await User.create({
+        const newUser = new User({
             username,
             email,
-            password,
+            password: bcrypt.hashSync(password, 5),
             location,
             friends: [],
         });
+        newUser.save();
         return res.redirect("/login");
     } catch(error) {
         return res.status(400).render("join", { pageTitle: "회원가입", errorMessage: error.message })

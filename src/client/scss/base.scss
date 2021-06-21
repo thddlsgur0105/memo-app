@@ -7,7 +7,7 @@ body {
     font-weight: 600;
     display: grid;
     grid-template-areas: 
-        "head . aside"
+        "head side-bar aside"
         "nav main ."
         ". . footer";
     grid-template-rows: 1fr 5fr 1fr;
@@ -31,6 +31,9 @@ body {
     }
     .main {
         grid-area: main;
+    }
+    .side-bar {
+        grid-area: side-bar;
     }
     .aside {
         grid-area: aside;

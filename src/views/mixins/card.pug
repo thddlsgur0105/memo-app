@@ -1,7 +1,7 @@
 mixin card(user)
-    div.card
-        .card__description
-            |#{user.username}
-        .card__btns 
+    div.card.search-result__card 
+        .card__btns.search-result__card-btns 
             a.card__btn(href=`/users/${user._id}/add`)
                 i.fas.fa-user-plus 
+        .card__description.hide 
+            |#{user.username}
