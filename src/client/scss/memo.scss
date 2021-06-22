@@ -1,3 +1,27 @@
+.memo-container {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    width: 200%;
+    height: 100%;
+    .memo-container__toDo {
+        overflow-y: auto;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+    .memo-container__completed {
+        overflow-y: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: yellowgreen;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}
+
 .memo-section {
     padding: 10px;
     display: grid;

@@ -3,3 +3,4 @@ import "./memo";
 import "./nav";
 import "./clock";
 import "./load";
+import "./scroll";
