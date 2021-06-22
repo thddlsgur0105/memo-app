@@ -2,8 +2,8 @@ extends base.pug
 include mixins/toDo.pug
 
 block content 
-    section.memo-container
-        section.memo-container__toDo 
+    section.memo-container#jsMemoContainer 
+        section.memo-container__toDo#jsMemoContainerToDo  
             header.memo-header#jsMemoHeader 
                 .input-box.hide#jsMemoInputBox 
                     input.input(type="text", placeholder="할 일")
@@ -12,14 +12,14 @@ block content
                     i.fas.fa-plus#jsMemoIcon 
             main.memo-notComplete#jsMemoMain  
                 section.memo-section
-        section.memo-container__completed 
+        section.memo-container__completed#jsMemoContainerCompleted 
             h1 Completed! 
 
 
 block side-bar 
     section.side-bar__container#jsSideBarContainer 
         .side-bar__toDo#jsSideBarToDo
-            button.btn.side-bar__btn.side-bar__btn-left.hide 
+            button.btn.side-bar__btn.side-bar__btn-left.init-hide-bar#jsSideBarToDoBtn(disabled)
                 span.side-bar__span 할 일
         .side-bar__status
         .side-bar__completed#jsSideBarCompleted

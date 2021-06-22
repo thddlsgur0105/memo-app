@@ -86,7 +86,7 @@
 }
 
 .show {
-    animation: showing .3s ease-in-out forwards;
+    animation: showing .2s ease-in-out forwards;
 }
 
 .hide-slider {
@@ -113,4 +113,14 @@
 
 .hide-bar {
     animation: hide-bar .2s ease-in-out forwards;
+    &:disabled {
+        cursor: default;
+    }
+}
+
+.init-hide-bar {
+    opacity: 0;
+    &:disabled {
+        cursor: default;
+    }
 }
