@@ -4,18 +4,22 @@
     grid-template-columns: repeat(2, 1fr);
     width: 200%;
     height: 100%;
+
     .memo-container__toDo {
         overflow-y: auto;
+
         &::-webkit-scrollbar {
             display: none;
         }
     }
+
     .memo-container__completed {
         overflow-y: auto;
         display: flex;
         justify-content: center;
         align-items: center;
         background-color: yellowgreen;
+
         &::-webkit-scrollbar {
             display: none;
         }
@@ -27,36 +31,69 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 10px;
+
     .memo {
         border: 2px solid $white;
         transition: all .5s ease-in-out;
     }
+
     .memo__description,
     .memo__title {
         display: flex;
         align-items: center;
-        padding: 10px;
-        font-size: 1.1em;
+        padding: 10px 22px;
     }
 }
 
 .memo {
     display: grid;
-    grid-template-columns: 2fr 3fr 1fr 1fr 1fr;
+    grid-template-columns: 200px 300px 1fr 1fr 1fr 1fr;
+    grid-template-areas: "title description option delete edit completed";
     grid-gap: 5px;
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
-    border-radius: 20px;
-    .memo__btn {
-        margin: 10px auto;
+    border-radius: 30px;
+
+    .btn {
+        justify-self: center;
+        align-self: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
     }
+
     .input {
-        padding: 0px;
-        transition: border .3s ease-in-out;
+        height: 50px;
+        transition: border .2s ease-in-out;
     }
+
     .input:focus {
-        border: 2px solid $white;
+        border: 2px solid #0984e3;
+    }
+
+    .memo__title {
+        grid-area: title;
+    }
+
+    .memo__description {
+        grid-area: description;
+    }
+
+    .memo__option {
+        grid-area: option;
+    }
+
+    .memo__delete {
+        grid-area: delete;
+    }
+
+    .memo__edit {
+        grid-area: edit;
+    }
+
+    .memo__completed {
+        grid-area: completed;
     }
 }
 
@@ -96,6 +133,7 @@
     color: $white;
     font-size: 19px;
     font-weight: 600;
+
     &::placeholder {
         font-size: 15px;
         font-weight: 600;

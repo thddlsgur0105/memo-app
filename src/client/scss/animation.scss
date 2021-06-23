@@ -7,6 +7,7 @@
     0% {
         opacity: 0;
     }
+
     100% {
         opacity: 1;
     }
@@ -72,6 +73,23 @@
     }
 }
 
+@keyframes go-complete-area {
+    0% {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+
+    20% {
+        opacity: .8;
+        transform: translateX(-20%);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
 .clicked {
     left: 90%;
 }
@@ -113,6 +131,7 @@
 
 .hide-bar {
     animation: hide-bar .2s ease-in-out forwards;
+
     &:disabled {
         cursor: default;
     }
@@ -120,7 +139,12 @@
 
 .init-hide-bar {
     opacity: 0;
+
     &:disabled {
         cursor: default;
     }
+}
+
+.go-complete-area {
+    animation: go-complete-area .6s ease-in-out forwards;
 }

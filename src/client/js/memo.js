@@ -121,6 +121,30 @@ function handleEditBtnClick(event) {
     }
 }
 
+function handleCompleteBtnClick(event) {
+    event.preventDefault();
+    let targetNode = event.target;
+    if (targetNode.tagName === "I") {
+        targetNode = targetNode.parentNode;
+    }
+    // sessionStorage의  toDos 영역에서 해당 id의 obj 삭제
+    const targetMemo = targetNode.parentNode;
+    const targetId = targetMemo.id;
+
+    // Delete target in Frontend
+    // 삭제 시 animation을 통해 completed 영역으로 보내는 컨셉
+    targetMemo.classList.add("go-complete-area")
+    targetMemo.addEventListener("animationend", (event) => {
+        event.target.remove();
+    })
+
+    // Delete target in Backend
+    memoArray = memoArray.filter(oneMemo => oneMemo.id !== parseInt(targetId))
+    sessionStorage.setItem("toDos", JSON.stringify(memoArray))
+
+    // sessionStorage의 completed 영역에 해당 id의 obj paint -> id는 초기화시킴
+}
+
 function paintMemo(obj) {
 
     // .memo box
@@ -138,9 +162,17 @@ function paintMemo(obj) {
     descriptionBox.className = "memo__description";
     descriptionBox.innerHTML = obj.description;
 
+    // option button
+    const optionBtn = document.createElement("button");
+    optionBtn.classList.add("btn", "memo__option");
+    const optionIcon = document.createElement("i");
+    optionIcon.classList.add("fas", "fa-chevron-right", "fa-lg");
+    optionBtn.appendChild(optionIcon);
+    optionBtn.addEventListener("click", handleOptionBtnClick);
+
     // delete button
     const deleteBtn = document.createElement("button");
-    deleteBtn.classList.add("btn", "hide")
+    deleteBtn.classList.add("btn", "memo__delete", "hide");
     const deleteIcon = document.createElement("i");
     deleteIcon.classList.add("fas", "fa-trash", "fa-lg");
     deleteBtn.appendChild(deleteIcon);
@@ -148,25 +180,27 @@ function paintMemo(obj) {
 
     // edit button
     const editBtn = document.createElement("button");
-    editBtn.classList.add("btn", "hide");
+    editBtn.classList.add("btn", "memo__edit", "hide");
     const editIcon = document.createElement("i");
     editIcon.classList.add("fas", "fa-pen", "fa-lg");
     editBtn.appendChild(editIcon);
     editBtn.addEventListener("click", handleEditBtnClick);
 
-    // option button
-    const optionBtn = document.createElement("button");
-    optionBtn.className = "btn";
-    const optionIcon = document.createElement("i");
-    optionIcon.classList.add("fas", "fa-chevron-right", "fa-lg");
-    optionBtn.appendChild(optionIcon);
-    optionBtn.addEventListener("click", handleOptionBtnClick);
+    // complete button
+    const completeBtn = document.createElement("button");
+    completeBtn.classList.add("btn", "memo__complete", "hide");
+    const completeIcon = document.createElement("i");
+    completeIcon.classList.add("fas", "fa-check", "fa-lg");
+    completeBtn.appendChild(completeIcon);
+    completeBtn.addEventListener("click", handleCompleteBtnClick);
 
     divBox.appendChild(titleBox);
     divBox.appendChild(descriptionBox);
+    divBox.appendChild(optionBtn);
     divBox.appendChild(deleteBtn);
     divBox.appendChild(editBtn);
-    divBox.appendChild(optionBtn);
+    divBox.appendChild(completeBtn);
+
     jsNewMemoSection.appendChild(divBox);
 }
 
