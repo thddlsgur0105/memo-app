@@ -90,6 +90,23 @@
     }
 }
 
+@keyframes go-toDo-area {
+    0% {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+
+    20% {
+        opacity: .8;
+        transform: translateX(20%);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(-120%);
+    }
+}
+
 .clicked {
     left: 90%;
 }
@@ -147,4 +164,8 @@
 
 .go-complete-area {
     animation: go-complete-area .6s ease-in-out forwards;
+}
+
+.go-toDo-area {
+    animation: go-toDo-area .6s ease-in-out forwards;
 }

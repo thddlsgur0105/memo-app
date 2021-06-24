@@ -10,6 +10,7 @@ const jsNewMemoSection = jsMemoMain ? (jsMemoMain.querySelector(".memo-section")
 const jsMemoMainCompleted = document.querySelector("#jsMemoMainCompleted");
 const jsNewMemoSectionCompleted = jsMemoMainCompleted ? (jsMemoMainCompleted.querySelector(".memo-section")) : null;
 
+
 let memoArray = [];
 let memoCompleteArray = [];
 
@@ -17,7 +18,12 @@ function saveMemo(obj, targetList) {
     if (targetList === "toDo") {
         memoArray.push(obj);
         sessionStorage.setItem("toDos", JSON.stringify(memoArray));
+    } else if (targetList === "completed") {
+        memoCompleteArray.push(obj);
+        sessionStorage.setItem("completed", JSON.stringify(memoCompleteArray));
     }
+    // 예외 오류처리
+
 }
 
 function handleDeleteBtnClick(event) {
@@ -27,14 +33,21 @@ function handleDeleteBtnClick(event) {
         targetNode = targetNode.parentNode;
     }
     const targetMemo = targetNode.parentNode
+    const targetMainSection = targetMemo.parentNode.parentNode;
+
     const targetId = targetMemo.id;
 
     // Delete target in Frontend
     targetMemo.remove();
 
     // Delete target in Backend
-    memoArray = memoArray.filter(oneMemo => oneMemo.id !== parseInt(targetId))
-    sessionStorage.setItem("toDos", JSON.stringify(memoArray))
+    if (targetMainSection.id === "jsMemoMain") {
+        memoArray = memoArray.filter(oneMemo => oneMemo.id !== parseInt(targetId))
+        sessionStorage.setItem("toDos", JSON.stringify(memoArray))
+    } else if (targetMainSection.id === "jsMemoMainCompleted") {
+        memoCompleteArray = memoCompleteArray.filter(oneMemo => oneMemo.id !== parseInt(targetId))
+        sessionStorage.setItem("completed", JSON.stringify(memoCompleteArray))
+    }
 }
 
 function handleOptionBtnClick(event) {
@@ -57,7 +70,7 @@ function handleOptionBtnClick(event) {
         const targetIcon = targetNode.querySelector("i")
         targetIcon.classList.replace("fa-chevron-right", "fa-chevron-left")
     } else {
-        // show all option Btns
+        // hide all option Btns
         const targetHideBtns = targetContainer.querySelectorAll("button.show");
         targetHideBtns.forEach(targetHideBtn => {
             targetHideBtn.classList.replace("show", "hide");
@@ -77,6 +90,7 @@ function handleEditBtnClick(event) {
     }
     targetNode.classList.toggle("clicked");
     const targetContainer = targetNode.parentNode;
+    const targetMainSection = targetContainer.parentNode.parentNode;
 
     if (targetNode.classList.contains("clicked")) {
         // replace memo title to input bar
@@ -112,19 +126,38 @@ function handleEditBtnClick(event) {
 
         // edit on backend Section
         const editedContainerId = targetContainer.id;
-        memoArray = memoArray.map(oneMemo => {
-            if (oneMemo.id === parseInt(editedContainerId)) {
-                return {
-                    title: editedInputBars[0].value,
-                    description: editedInputBars[1].value,
-                    id: oneMemo.id,
+        if (targetMainSection.id === "jsMemoMain") {
+            memoArray = memoArray.map(oneMemo => {
+                if (oneMemo.id === parseInt(editedContainerId)) {
+                    return {
+                        title: editedInputBars[0].value,
+                        description: editedInputBars[1].value,
+                        id: oneMemo.id,
+                    }
+                } else {
+                    return oneMemo;
                 }
-            } else {
-                return oneMemo;
-            }
-        })
+            })
+
+            sessionStorage.setItem("toDos", JSON.stringify(memoArray))
+
+        } else if (targetMainSection.id === "jsMemoMainCompleted") {
+            memoCompleteArray = memoCompleteArray.map(oneMemo => {
+                if (oneMemo.id === parseInt(editedContainerId)) {
+                    return {
+                        title: editedInputBars[0].value,
+                        description: editedInputBars[1].value,
+                        id: oneMemo.id,
+                    }
+                } else {
+                    return oneMemo;
+                }
+            })
+
+            sessionStorage.setItem("completed", JSON.stringify(memoCompleteArray))
+
+        }
         
-        sessionStorage.setItem("toDos", JSON.stringify(memoArray))
     }
 }
 
@@ -134,22 +167,76 @@ function handleCompleteBtnClick(event) {
     if (targetNode.tagName === "I") {
         targetNode = targetNode.parentNode;
     }
-    // sessionStorage의  toDos 영역에서 해당 id의 obj 삭제
     const targetMemo = targetNode.parentNode;
     const targetId = targetMemo.id;
 
     // Delete target in Frontend
-    // 삭제 시 animation을 통해 completed 영역으로 보내는 컨셉
     targetMemo.classList.add("go-complete-area")
-    targetMemo.addEventListener("animationend", (event) => {
-        event.target.remove();
+    targetMemo.addEventListener("animationend", function() {
+        this.remove();
     })
 
     // Delete target in Backend
-    memoArray = memoArray.filter(oneMemo => oneMemo.id !== parseInt(targetId))
+    let goCompleteObj;
+    memoArray = memoArray.filter(oneMemo => {
+        if (oneMemo.id === parseInt(targetId)) {
+            goCompleteObj = oneMemo;
+        }
+        return oneMemo.id !== parseInt(targetId);
+    })
     sessionStorage.setItem("toDos", JSON.stringify(memoArray))
 
+    // completed 영역에 해당하는 completeBtn 생성
+    const newMemoObj = {
+        title: goCompleteObj.title,
+        description: goCompleteObj.description,
+        id: memoCompleteArray.length + 1,
+    }
+    
+    // paint on frontend
+    paintMemo(newMemoObj, "completed");
 
+    // paint on backend
+    saveMemo(newMemoObj, "completed");
+}
+
+function handleToDoBtnClick(event) {
+    event.preventDefault();
+    let targetNode = event.target;
+    if (targetNode.tagName === "I") {
+        targetNode = targetNode.parentNode;
+    }
+    const targetMemo = targetNode.parentNode;
+    const targetId = targetMemo.id;
+
+    // Delete target in Frontend
+    targetMemo.classList.add("go-toDo-area")
+    targetMemo.addEventListener("animationend", function() {
+        this.remove();
+    })
+
+    // Delete target in Backend
+    let goToDoObj;
+    memoCompleteArray = memoCompleteArray.filter(oneMemo => {
+        if (oneMemo.id === parseInt(targetId)) {
+            goToDoObj = oneMemo;
+        }
+        return oneMemo.id !== parseInt(targetId);
+    })
+    sessionStorage.setItem("completed", JSON.stringify(memoCompleteArray))
+
+    // completed 영역에 해당하는 completeBtn 생성
+    const newMemoObj = {
+        title: goToDoObj.title,
+        description: goToDoObj.description,
+        id: memoArray.length + 1,
+    }
+    
+    // paint on frontend
+    paintMemo(newMemoObj, "toDo");
+
+    // paint on backend
+    saveMemo(newMemoObj, "toDo");
 }
 
 function paintMemo(obj, targetList) {
@@ -314,10 +401,10 @@ function initMemo() {
             };
 
             // frontend process
-            paintMemo(memoObj);
+            paintMemo(memoObj, "completed");
 
             // backend process
-            saveMemo(memoObj);
+            saveMemo(memoObj, "completed");
         })
     }
 
