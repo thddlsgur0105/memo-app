@@ -3,14 +3,21 @@ const jsMemoBtn = jsMemoHeader ? (jsMemoHeader.querySelector("#jsMemoBtn")) : nu
 const jsMemoIcon = jsMemoBtn ? (jsMemoBtn.querySelector("#jsMemoIcon")) : null;
 const jsMemoInputBox = jsMemoHeader ? (jsMemoHeader.querySelector("#jsMemoInputBox")) : null;
 const jsMemoInput = jsMemoInputBox ? (jsMemoInputBox.querySelectorAll("input")) : null;
+
 const jsMemoMain = document.querySelector("#jsMemoMain"); 
 const jsNewMemoSection = jsMemoMain ? (jsMemoMain.querySelector(".memo-section")) : null;
 
-let memoArray = [];
+const jsMemoMainCompleted = document.querySelector("#jsMemoMainCompleted");
+const jsNewMemoSectionCompleted = jsMemoMainCompleted ? (jsMemoMainCompleted.querySelector(".memo-section")) : null;
 
-function saveMemo(obj) {
-    memoArray.push(obj);
-    sessionStorage.setItem("toDos", JSON.stringify(memoArray));
+let memoArray = [];
+let memoCompleteArray = [];
+
+function saveMemo(obj, targetList) {
+    if (targetList === "toDo") {
+        memoArray.push(obj);
+        sessionStorage.setItem("toDos", JSON.stringify(memoArray));
+    }
 }
 
 function handleDeleteBtnClick(event) {
@@ -142,10 +149,10 @@ function handleCompleteBtnClick(event) {
     memoArray = memoArray.filter(oneMemo => oneMemo.id !== parseInt(targetId))
     sessionStorage.setItem("toDos", JSON.stringify(memoArray))
 
-    // sessionStorage의 completed 영역에 해당 id의 obj paint -> id는 초기화시킴
+
 }
 
-function paintMemo(obj) {
+function paintMemo(obj, targetList) {
 
     // .memo box
     const divBox = document.createElement("div");
@@ -186,22 +193,43 @@ function paintMemo(obj) {
     editBtn.appendChild(editIcon);
     editBtn.addEventListener("click", handleEditBtnClick);
 
-    // complete button
-    const completeBtn = document.createElement("button");
-    completeBtn.classList.add("btn", "memo__complete", "hide");
-    const completeIcon = document.createElement("i");
-    completeIcon.classList.add("fas", "fa-check", "fa-lg");
-    completeBtn.appendChild(completeIcon);
-    completeBtn.addEventListener("click", handleCompleteBtnClick);
-
     divBox.appendChild(titleBox);
     divBox.appendChild(descriptionBox);
     divBox.appendChild(optionBtn);
     divBox.appendChild(deleteBtn);
     divBox.appendChild(editBtn);
-    divBox.appendChild(completeBtn);
 
-    jsNewMemoSection.appendChild(divBox);
+    if (targetList === "toDo") {
+        // go to complete button
+        const completeBtn = document.createElement("button");
+        completeBtn.classList.add("btn", "memo__complete", "hide");
+        const completeIcon = document.createElement("i");
+        completeIcon.classList.add("fas", "fa-check", "fa-lg");
+        completeBtn.appendChild(completeIcon);
+        completeBtn.addEventListener("click", handleCompleteBtnClick);
+
+        // adding completeBtn
+        divBox.appendChild(completeBtn);
+
+        // adding to toDoSection
+        jsNewMemoSection.appendChild(divBox);
+    }
+
+    if (targetList === "completed") {
+        // go to toDoBtn
+        const toDoBtn = document.createElement("button");
+        toDoBtn.classList.add("btn", "memo__toDo", "hide");
+        const toDoIcon = document.createElement("i");
+        toDoIcon.classList.add("fas", "fa-reply", "fa-lg");
+        toDoBtn.appendChild(toDoIcon);
+        toDoBtn.addEventListener("click", handleToDoBtnClick);
+
+        // adding toDoBtn
+        divBox.appendChild(toDoBtn);
+
+        // adding to completedSection
+        jsNewMemoSectionCompleted.appendChild(divBox);
+    }
 }
 
 function handleAddBtnClick(event) {
@@ -229,10 +257,10 @@ function handleAddBtnClick(event) {
         if (newMemoObj.title !== "") {
 
             // Frontend Process
-            paintMemo(newMemoObj);
+            paintMemo(newMemoObj, "toDo");
 
             // Backend Process
-            saveMemo(newMemoObj);
+            saveMemo(newMemoObj, "toDo");
         }
     }
 }
@@ -240,7 +268,7 @@ function handleAddBtnClick(event) {
 
 function initMemo() {
 
-    // 기존의 sessionStorage 내용 로드
+    // 기존의 sessionStorage 할 일들 내용 로드
     const loadedArray = sessionStorage.getItem("toDos");
     let parsedArray;
 
@@ -259,12 +287,38 @@ function initMemo() {
             }
 
             // frontend Process
+            paintMemo(memoObj, "toDo");
+
+            // backend process
+            saveMemo(memoObj, "toDo");
+        });
+    
+    }
+
+    // 기존의 sessionStorage 한 일들 내용 로드
+    const loadedCompletedArray = sessionStorage.getItem("completed");
+    let parsedCompletedArray;
+
+    if (!loadedCompletedArray) {
+        parsedCompletedArray = null;
+    } else {
+        parsedCompletedArray = JSON.parse(loadedCompletedArray);
+    }
+
+    if (parsedCompletedArray) {
+        parsedCompletedArray.forEach(oneMemo => {
+            const memoObj = {
+                title: oneMemo.title,
+                description: oneMemo.description,
+                id: memoCompleteArray.length + 1,
+            };
+
+            // frontend process
             paintMemo(memoObj);
 
             // backend process
             saveMemo(memoObj);
-        });
-    
+        })
     }
 
     // memo click Btn 활성화
