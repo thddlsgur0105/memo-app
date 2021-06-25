@@ -13,8 +13,13 @@ const jsNewMemoSectionCompleted = jsMemoMainCompleted ? (jsMemoMainCompleted.que
 
 let memoArray = [];
 
+const TODOS = "toDos";
+
+const TODO_FLAG = "toDo";
+const COMPLETED_FLAG = "completed";
+
 function saveMemo(array) {
-    sessionStorage.setItem("toDos", JSON.stringify(array));
+    sessionStorage.setItem(TODOS, JSON.stringify(array));
 }
 
 function handleDeleteBtnClick(event) {
@@ -31,7 +36,7 @@ function handleDeleteBtnClick(event) {
 
     // Delete target in Backend
         memoArray = memoArray.filter(oneMemo => oneMemo.id !== parseInt(targetId))
-        sessionStorage.setItem("toDos", JSON.stringify(memoArray))
+        sessionStorage.setItem(TODOS, JSON.stringify(memoArray))
 }
 
 function handleOptionBtnClick(event) {
@@ -121,7 +126,7 @@ function handleEditBtnClick(event) {
                 }
             })
 
-            sessionStorage.setItem("toDos", JSON.stringify(memoArray))
+            sessionStorage.setItem(TODOS, JSON.stringify(memoArray))
 
         }
         
@@ -161,10 +166,10 @@ function handleCompleteBtnClick(event) {
         }
     })
 
-    sessionStorage.setItem("toDos", JSON.stringify(memoArray))
+    sessionStorage.setItem(TODOS, JSON.stringify(memoArray))
     
     // Paint target on frontend
-    paintMemo(goToCompleteObj, "completed");
+    paintMemo(goToCompleteObj, COMPLETED_FLAG);
 
 }
 
@@ -202,10 +207,10 @@ function handleToDoBtnClick(event) {
         }
     })
 
-    sessionStorage.setItem("toDos", JSON.stringify(memoArray))
+    sessionStorage.setItem(TODOS, JSON.stringify(memoArray))
 
     // paint on frontend
-    paintMemo(goToDoObj, "toDo")
+    paintMemo(goToDoObj, TODO_FLAG)
 }
 
 function paintMemo(obj, targetList) {
@@ -255,7 +260,7 @@ function paintMemo(obj, targetList) {
     divBox.appendChild(deleteBtn);
     divBox.appendChild(editBtn);
 
-    if (targetList === "toDo") {
+    if (targetList === TODO_FLAG) {
         // go to complete button
         const completeBtn = document.createElement("button");
         completeBtn.classList.add("btn", "memo__complete", "hide");
@@ -271,7 +276,7 @@ function paintMemo(obj, targetList) {
         jsNewMemoSection.appendChild(divBox);
     }
 
-    if (targetList === "completed") {
+    if (targetList === COMPLETED_FLAG) {
         // go to toDoBtn
         const toDoBtn = document.createElement("button");
         toDoBtn.classList.add("btn", "memo__toDo", "hide");
@@ -317,12 +322,15 @@ function handleAddBtnClick(event) {
         if (newMemoObj.title !== "") {
 
             // Frontend Process
-            paintMemo(newMemoObj, "toDo");
+            paintMemo(newMemoObj, TODO_FLAG);
 
             // Backend Process
             memoArray.push(newMemoObj);
             saveMemo(memoArray);
         }
+
+        // Input 값 초기화
+        [jsMemoInput[0].value, jsMemoInput[1].value] = ["", ""];
     }
 }
 
@@ -330,7 +338,7 @@ function handleAddBtnClick(event) {
 function initMemo() {
 
     // 기존의 sessionStorage 할 일들 내용 로드
-    const loadedArray = sessionStorage.getItem("toDos");
+    const loadedArray = sessionStorage.getItem(TODOS);
     let parsedArray;
 
     if (!loadedArray) {
@@ -351,9 +359,9 @@ function initMemo() {
 
             // frontend Process
             if (initedMemo.completed === false) {
-                paintMemo(initedMemo, "toDo");
+                paintMemo(initedMemo, TODO_FLAG);
             } else {
-                paintMemo(initedMemo, "completed");
+                paintMemo(initedMemo, COMPLETED_FLAG);
             }
 
             // backend Procass
