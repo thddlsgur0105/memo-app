@@ -12,18 +12,9 @@ const jsNewMemoSectionCompleted = jsMemoMainCompleted ? (jsMemoMainCompleted.que
 
 
 let memoArray = [];
-let memoCompleteArray = [];
 
-function saveMemo(obj, targetList) {
-    if (targetList === "toDo") {
-        memoArray.push(obj);
-        sessionStorage.setItem("toDos", JSON.stringify(memoArray));
-    } else if (targetList === "completed") {
-        memoCompleteArray.push(obj);
-        sessionStorage.setItem("completed", JSON.stringify(memoCompleteArray));
-    }
-    // 예외 오류처리
-
+function saveMemo(array) {
+    sessionStorage.setItem("toDos", JSON.stringify(array));
 }
 
 function handleDeleteBtnClick(event) {
@@ -33,21 +24,14 @@ function handleDeleteBtnClick(event) {
         targetNode = targetNode.parentNode;
     }
     const targetMemo = targetNode.parentNode
-    const targetMainSection = targetMemo.parentNode.parentNode;
-
     const targetId = targetMemo.id;
 
     // Delete target in Frontend
     targetMemo.remove();
 
     // Delete target in Backend
-    if (targetMainSection.id === "jsMemoMain") {
         memoArray = memoArray.filter(oneMemo => oneMemo.id !== parseInt(targetId))
         sessionStorage.setItem("toDos", JSON.stringify(memoArray))
-    } else if (targetMainSection.id === "jsMemoMainCompleted") {
-        memoCompleteArray = memoCompleteArray.filter(oneMemo => oneMemo.id !== parseInt(targetId))
-        sessionStorage.setItem("completed", JSON.stringify(memoCompleteArray))
-    }
 }
 
 function handleOptionBtnClick(event) {
@@ -90,7 +74,6 @@ function handleEditBtnClick(event) {
     }
     targetNode.classList.toggle("clicked");
     const targetContainer = targetNode.parentNode;
-    const targetMainSection = targetContainer.parentNode.parentNode;
 
     if (targetNode.classList.contains("clicked")) {
         // replace memo title to input bar
@@ -126,7 +109,6 @@ function handleEditBtnClick(event) {
 
         // edit on backend Section
         const editedContainerId = targetContainer.id;
-        if (targetMainSection.id === "jsMemoMain") {
             memoArray = memoArray.map(oneMemo => {
                 if (oneMemo.id === parseInt(editedContainerId)) {
                     return {
@@ -141,24 +123,8 @@ function handleEditBtnClick(event) {
 
             sessionStorage.setItem("toDos", JSON.stringify(memoArray))
 
-        } else if (targetMainSection.id === "jsMemoMainCompleted") {
-            memoCompleteArray = memoCompleteArray.map(oneMemo => {
-                if (oneMemo.id === parseInt(editedContainerId)) {
-                    return {
-                        title: editedInputBars[0].value,
-                        description: editedInputBars[1].value,
-                        id: oneMemo.id,
-                    }
-                } else {
-                    return oneMemo;
-                }
-            })
-
-            sessionStorage.setItem("completed", JSON.stringify(memoCompleteArray))
-
         }
         
-    }
 }
 
 function handleCompleteBtnClick(event) {
@@ -170,34 +136,36 @@ function handleCompleteBtnClick(event) {
     const targetMemo = targetNode.parentNode;
     const targetId = targetMemo.id;
 
-    // Delete target in Frontend
+    // Delete target on Frontend
     targetMemo.classList.add("go-complete-area")
     targetMemo.addEventListener("animationend", function() {
         this.remove();
     })
 
-    // Delete target in Backend
-    let goCompleteObj;
-    memoArray = memoArray.filter(oneMemo => {
+    let goToCompleteObj;
+
+    // Edit target in Backend
+    memoArray = memoArray.map(oneMemo => {
         if (oneMemo.id === parseInt(targetId)) {
-            goCompleteObj = oneMemo;
+            const newMemoObj = {
+                title: oneMemo.title,
+                description: oneMemo.description,
+                id: oneMemo.id,
+                completed: true,
+            }
+            goToCompleteObj = newMemoObj;
+
+            return newMemoObj;
+        } else {
+            return oneMemo;
         }
-        return oneMemo.id !== parseInt(targetId);
     })
+
     sessionStorage.setItem("toDos", JSON.stringify(memoArray))
-
-    // completed 영역에 해당하는 completeBtn 생성
-    const newMemoObj = {
-        title: goCompleteObj.title,
-        description: goCompleteObj.description,
-        id: memoCompleteArray.length + 1,
-    }
     
-    // paint on frontend
-    paintMemo(newMemoObj, "completed");
+    // Paint target on frontend
+    paintMemo(goToCompleteObj, "completed");
 
-    // paint on backend
-    saveMemo(newMemoObj, "completed");
 }
 
 function handleToDoBtnClick(event) {
@@ -215,28 +183,29 @@ function handleToDoBtnClick(event) {
         this.remove();
     })
 
-    // Delete target in Backend
     let goToDoObj;
-    memoCompleteArray = memoCompleteArray.filter(oneMemo => {
+
+    // Edit target in Backend
+    memoArray = memoArray.map(oneMemo => {
         if (oneMemo.id === parseInt(targetId)) {
-            goToDoObj = oneMemo;
+            const newMemoObj = {
+                title: oneMemo.title,
+                description: oneMemo.description,
+                id: oneMemo.id,
+                completed: false,
+            }
+            goToDoObj = newMemoObj;
+
+            return newMemoObj;
+        } else {
+            return oneMemo;
         }
-        return oneMemo.id !== parseInt(targetId);
     })
-    sessionStorage.setItem("completed", JSON.stringify(memoCompleteArray))
 
-    // completed 영역에 해당하는 completeBtn 생성
-    const newMemoObj = {
-        title: goToDoObj.title,
-        description: goToDoObj.description,
-        id: memoArray.length + 1,
-    }
-    
+    sessionStorage.setItem("toDos", JSON.stringify(memoArray))
+
     // paint on frontend
-    paintMemo(newMemoObj, "toDo");
-
-    // paint on backend
-    saveMemo(newMemoObj, "toDo");
+    paintMemo(goToDoObj, "toDo")
 }
 
 function paintMemo(obj, targetList) {
@@ -335,10 +304,14 @@ function handleAddBtnClick(event) {
         // hide input
         jsMemoInputBox.classList.replace("show", "hide");
 
+        const idLists = memoArray.map(obj => obj.id);
+        const maxId = Math.max.apply(null, idLists);
+
         const newMemoObj = {
             title: jsMemoInput[0].value,
             description: jsMemoInput[1].value,
-            id: memoArray.length + 1,
+            id: memoArray.length === 0 ? 1 : parseInt(maxId) + 1,
+            completed: false,
         }
 
         if (newMemoObj.title !== "") {
@@ -347,7 +320,8 @@ function handleAddBtnClick(event) {
             paintMemo(newMemoObj, "toDo");
 
             // Backend Process
-            saveMemo(newMemoObj, "toDo");
+            memoArray.push(newMemoObj);
+            saveMemo(memoArray);
         }
     }
 }
@@ -367,45 +341,26 @@ function initMemo() {
     
     if (parsedArray) {
         parsedArray.forEach(oneMemo => {
-            const memoObj = {
+
+            const initedMemo = {
                 title: oneMemo.title,
                 description: oneMemo.description,
                 id: memoArray.length + 1,
+                completed: oneMemo.completed,
             }
 
             // frontend Process
-            paintMemo(memoObj, "toDo");
+            if (initedMemo.completed === false) {
+                paintMemo(initedMemo, "toDo");
+            } else {
+                paintMemo(initedMemo, "completed");
+            }
 
-            // backend process
-            saveMemo(memoObj, "toDo");
+            // backend Procass
+            memoArray.push(initedMemo);
+            saveMemo(memoArray);
         });
     
-    }
-
-    // 기존의 sessionStorage 한 일들 내용 로드
-    const loadedCompletedArray = sessionStorage.getItem("completed");
-    let parsedCompletedArray;
-
-    if (!loadedCompletedArray) {
-        parsedCompletedArray = null;
-    } else {
-        parsedCompletedArray = JSON.parse(loadedCompletedArray);
-    }
-
-    if (parsedCompletedArray) {
-        parsedCompletedArray.forEach(oneMemo => {
-            const memoObj = {
-                title: oneMemo.title,
-                description: oneMemo.description,
-                id: memoCompleteArray.length + 1,
-            };
-
-            // frontend process
-            paintMemo(memoObj, "completed");
-
-            // backend process
-            saveMemo(memoObj, "completed");
-        })
     }
 
     // memo click Btn 활성화
