@@ -3,6 +3,7 @@
     height: 100%;
     display: grid;
     justify-items: center;
+    align-items: center;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 2fr 1fr;
     grid-template-areas: "toDo status completed";
@@ -11,6 +12,14 @@
     }
     .side-bar__status {
         grid-area: status;
+        height: 100%;
+        .side-bar__status-bar {
+            width: 300px;
+            height: 30px;
+            margin-top: 70px;
+            border: 2px solid $white;
+            border-radius: 50px;
+        }
     }
     .side-bar__completed {
         grid-area: completed;

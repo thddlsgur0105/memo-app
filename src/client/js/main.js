@@ -4,3 +4,4 @@ import "./nav";
 import "./clock";
 import "./load";
 import "./scroll";
+import "./status";
