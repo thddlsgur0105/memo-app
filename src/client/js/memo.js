@@ -1,3 +1,5 @@
+import { statusCount } from "./status";
+
 const jsMemoHeader = document.querySelector("#jsMemoHeader");
 const jsMemoBtn = jsMemoHeader ? (jsMemoHeader.querySelector("#jsMemoBtn")) : null;
 const jsMemoIcon = jsMemoBtn ? (jsMemoBtn.querySelector("#jsMemoIcon")) : null;
@@ -28,6 +30,7 @@ function handleDeleteBtnClick(event) {
     if (targetNode.tagName === "I") {
         targetNode = targetNode.parentNode;
     }
+
     const targetMemo = targetNode.parentNode
     const targetId = targetMemo.id;
 
@@ -37,6 +40,9 @@ function handleDeleteBtnClick(event) {
     // Delete target in Backend
         memoArray = memoArray.filter(oneMemo => oneMemo.id !== parseInt(targetId))
         sessionStorage.setItem(TODOS, JSON.stringify(memoArray))
+
+    // Update statusBar
+    statusCount();
 }
 
 function handleOptionBtnClick(event) {
@@ -171,6 +177,9 @@ function handleCompleteBtnClick(event) {
     // Paint target on frontend
     paintMemo(goToCompleteObj, COMPLETED_FLAG);
 
+    // Update statusBar
+    statusCount();
+
 }
 
 function handleToDoBtnClick(event) {
@@ -210,7 +219,10 @@ function handleToDoBtnClick(event) {
     sessionStorage.setItem(TODOS, JSON.stringify(memoArray))
 
     // paint on frontend
-    paintMemo(goToDoObj, TODO_FLAG)
+    paintMemo(goToDoObj, TODO_FLAG);
+
+    // Update statusBar
+    statusCount();
 }
 
 function paintMemo(obj, targetList) {
@@ -328,6 +340,9 @@ function handleAddBtnClick(event) {
             memoArray.push(newMemoObj);
             saveMemo(memoArray);
         }
+
+        // Update statusBar
+        statusCount();
 
         // Input 값 초기화
         [jsMemoInput[0].value, jsMemoInput[1].value] = ["", ""];
