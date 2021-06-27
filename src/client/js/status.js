@@ -6,7 +6,7 @@ const jsSideBarStatusBar = jsSideBarStatusContainer ? jsSideBarStatusContainer.q
 export function statusCount() {
     const currentStorage = sessionStorage.getItem("toDos");
     const parsedStorage = JSON.parse(currentStorage)
-    const statusList = parsedStorage.map(item => item.completed);
+    const statusList = parsedStorage ? parsedStorage.map(item => item.completed) : [];
 
     let trueCount = 0; 
     let falseCount = 0;
