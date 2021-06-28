@@ -1,7 +1,5 @@
 # Memo App
 
-![MemoApp Welcome](https://ifh.cc/g/BZN6jJ.png)
-![MemoApp memo](https://ifh.cc/g/ZpIFpS.png)
 
 <hr>
 
