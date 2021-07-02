@@ -1,3 +1,5 @@
+import { btn } from "./btn.js"
+
 class Load {
     constructor() {
         this.jsLoadContainer = document.querySelector("#jsLoadContainer");

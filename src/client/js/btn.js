@@ -1,28 +1,24 @@
 // BTN CLASS
-
-export class ActiveCircle {
-    constructor({size, color, radius, top, left, text}) {
-        this.main = document.getElementById("main");
-        this.node = document.createElement("button");
-        this.StyleCircle({size, color, radius, top, left, text});
+export class Btn {
+    constructor(container) {
+        this.node = container;
+        console.log(container);
+        this.StyleBtn();
         this.addEventListener();
     }
+    
     addEventListener = () => {
         this.node.addEventListener("mousedown", this.handleBtnDown);
         this.node.addEventListener("mouseup", this.handleBtnUp);
     }
-    StyleCircle = ({size, color, radius, top, left, text}) => {
+
+    StyleBtn = () => {
         if (text) {
             this.node.innerHTML = text;
         }
         this.node.style.cssText = `
-            width: ${size};
-            height: ${size};
             background-color: ${color};
             border-radius: ${radius};
-            top: ${top};
-            left: ${left};
-            position: absolute;
             box-shadow: 2px 2px 2px 0px #34495e;
             font-size: 10px;
             font-weight: 600;
@@ -30,6 +26,7 @@ export class ActiveCircle {
         `
         this.main.appendChild(this.node);
     }
+
     handleBtnDown = (event) => {
         // Btn Click Down Movement
         const btn = event.target;
