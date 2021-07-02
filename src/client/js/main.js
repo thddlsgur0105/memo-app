@@ -5,3 +5,4 @@ import "./clock";
 import "./load";
 import "./scroll";
 import "./status";
+import "./btn";
