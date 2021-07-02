@@ -55,7 +55,7 @@
   * ### [-] Btn.js
 * ### **Class** 활용 기능 파일
   * ### [o] Clock.js
-  * ### [-] Load.js
+  * ### [o] Load.js
   * ### [-] Memo.js
   * ### [-] Nav.js
   * ### [-] Scroll.js
