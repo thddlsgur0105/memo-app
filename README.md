@@ -1,5 +1,6 @@
 # Memo App
 
+![Hnet-image](https://user-images.githubusercontent.com/70431221/123586946-79dcd200-d820-11eb-85b3-6786ff812587.gif)
 
 <hr>
 
@@ -45,6 +46,7 @@
 1. *Node.js* 의 활용도가 떨어지고 메모 기능이 부실해보임
 2. *첫 페이지* 에서 사이트 이름에 대한 아이콘 기능이 *Font Awesome* 에 전적으로 의존하고 있음
 3. *유저* 페이지 미완료
+<<<<<<< HEAD
 
 <hr>
 
@@ -61,3 +63,5 @@
   * ### [-] Status.js
 * ### **Class** 관련 적용 파일 저장소
   * ### [-] Main.js
+=======
+>>>>>>> 08edcacde9841f19847571a294a60bb91418f049
