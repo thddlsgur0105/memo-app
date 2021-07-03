@@ -1,5 +1,3 @@
-import { btn } from "./btn.js"
-
 class Load {
     constructor() {
         this.jsLoadContainer = document.querySelector("#jsLoadContainer");
@@ -81,7 +79,7 @@ class Load {
     
         linkContainer.addEventListener("mouseenter", this.handleContainerHover);
         linkContainer.addEventListener("mouseleave", this.handleContainerLeave);
-    
+
         this.jsLoadResult.appendChild(linkContainer);
     }
 

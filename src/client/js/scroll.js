@@ -71,3 +71,21 @@ function initSideBar() {
 if (jsSideBarContainer && jsMemoContainer) {
     initSideBar();
 }
+
+// Class
+
+class Scroll {
+    constructor() {
+        this.jsSideBarContainer = document.querySelector("#jsSideBarContainer");
+        this.jsSideBarToDo = jsSideBarContainer ? jsSideBarContainer.querySelector("#jsSideBarToDo") : null;
+        this.jsSideBarToDoBtn = jsSideBarToDo ? jsSideBarToDo.querySelector("#jsSideBarToDoBtn") : null;
+
+        this.jsSideBarCompleted = jsSideBarContainer ? jsSideBarContainer.querySelector("#jsSideBarCompleted") : null;
+        this.jsSideBarCompletedBtn = jsSideBarCompleted ? jsSideBarCompleted.querySelector("#jsSideBarCompletedBtn") : null;
+
+        this.jsMemoContainer = document.querySelector("#jsMemoContainer");
+        this.jsMemoContainerToDo = jsMemoContainer ? jsMemoContainer.querySelector("#jsMemoContainerToDo") : null;
+        this.jsMemoContainerCompleted = jsMemoContainer ? jsMemoContainer.querySelector("#jsMemoContainerCompleted") : null;
+
+    }
+}

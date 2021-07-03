@@ -52,12 +52,12 @@
 ## **Class** 활용해서 코드 수정
 
 * ### **Class** 활용 부품 파일
-  * ### [-] Btn.js
+  * ### [o] Btn.js
 * ### **Class** 활용 기능 파일
   * ### [o] Clock.js
   * ### [o] Load.js
   * ### [-] Memo.js
-  * ### [-] Nav.js
+  * ### [o] Nav.js
   * ### [-] Scroll.js
   * ### [-] Status.js
 * ### **Class** 관련 적용 파일 저장소

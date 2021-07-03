@@ -1,25 +1,35 @@
-const jsNavBtn = document.querySelector("#jsNavBtn");
-const jsNavIcon = jsNavBtn ? (jsNavBtn.querySelector("i")) : null;
-const jsNavUl = document.querySelector("#jsNavUl")
+// Class
 
-function handleNavBtn(event) {
-    event.preventDefault();
-    jsNavBtn.classList.toggle("btn-clicked");
-    if (jsNavBtn.classList.contains("btn-clicked")) {
-        if (jsNavUl.classList.contains("init-hide")) {
-            jsNavUl.classList.replace("init-hide", "show-slider")
-        } else {
-            jsNavUl.classList.replace("hide-slider", "show-slider")
+class Nav {
+    constructor() {
+        this.jsNavBtn = document.querySelector("#jsNavBtn");
+        this.jsNavIcon = this.jsNavBtn ? (this.jsNavBtn.querySelector("i")) : null;
+        this.jsNavUl = document.querySelector("#jsNavUl");
+        
+        if (this.jsNavBtn && this.jsNavUl) {
+            this.initNav();
         }
-    } else {
-        jsNavUl.classList.replace("show-slider", "hide-slider")
+    }
+
+    // functions
+
+    initNav = () => {
+        this.jsNavBtn.addEventListener("click", this.handleNavBtn);
+    }
+
+    handleNavBtn = (event) => {
+        event.preventDefault();
+        this.jsNavBtn.classList.toggle("btn-clicked");
+        if (this.jsNavBtn.classList.contains("btn-clicked")) {
+            if (this.jsNavUl.classList.contains("init-hide")) {
+                this.jsNavUl.classList.replace("init-hide", "show-slider")
+            } else {
+                this.jsNavUl.classList.replace("hide-slider", "show-slider")
+            }
+        } else {
+            this.jsNavUl.classList.replace("show-slider", "hide-slider")
+        }
     }
 }
 
-function initNav() {
-    jsNavBtn.addEventListener("click", handleNavBtn);
-}
-
-if (jsNavBtn && jsNavUl) {
-    initNav();
-}
+new Nav()

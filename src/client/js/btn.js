@@ -1,9 +1,9 @@
 // BTN CLASS
 export class Btn {
-    constructor(container) {
+    constructor({main, container, color, radius}) {
+        this.main = main;
         this.node = container;
-        console.log(container);
-        this.StyleBtn();
+        this.StyleBtn({color, radius});
         this.addEventListener();
     }
     
@@ -12,10 +12,7 @@ export class Btn {
         this.node.addEventListener("mouseup", this.handleBtnUp);
     }
 
-    StyleBtn = () => {
-        if (text) {
-            this.node.innerHTML = text;
-        }
+    StyleBtn = ({color, radius}) => {
         this.node.style.cssText = `
             background-color: ${color};
             border-radius: ${radius};
