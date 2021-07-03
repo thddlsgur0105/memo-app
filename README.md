@@ -56,9 +56,9 @@
 * ### **Class** 활용 기능 파일
   * ### [o] Clock.js
   * ### [o] Load.js
-  * ### [-] Memo.js
+  * ### [o] Memo.js
   * ### [o] Nav.js
   * ### [o] Scroll.js
-  * ### [-] Status.js
+  * ### [o] Status.js
 * ### **Class** 관련 적용 파일 저장소
   * ### [-] Main.js
