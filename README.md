@@ -58,7 +58,7 @@
   * ### [o] Load.js
   * ### [-] Memo.js
   * ### [o] Nav.js
-  * ### [-] Scroll.js
+  * ### [o] Scroll.js
   * ### [-] Status.js
 * ### **Class** 관련 적용 파일 저장소
   * ### [-] Main.js

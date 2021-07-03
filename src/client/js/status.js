@@ -1,44 +1,50 @@
-const jsSideBarStatus = document.querySelector("#jsSideBarStatus");
-const jsSideBarStatusContainer = jsSideBarStatus ? jsSideBarStatus.querySelector("#jsSideBarStatusContainer") : null;
-const jsSideBarStatusBar = jsSideBarStatusContainer ? jsSideBarStatusContainer.querySelector("#jsSideBarStatusBar") : null;
+// Class
 
+export class Status {
+    constructor() {
+        this.jsSideBarStatus = document.querySelector("#jsSideBarStatus");
+        this.jsSideBarStatusContainer = this.jsSideBarStatus ? this.jsSideBarStatus.querySelector("#jsSideBarStatusContainer") : null;
+        this.jsSideBarStatusBar = this.jsSideBarStatusContainer ? this.jsSideBarStatusContainer.querySelector("#jsSideBarStatusBar") : null;
 
-export function statusCount() {
-    const currentStorage = sessionStorage.getItem("toDos");
-    const parsedStorage = JSON.parse(currentStorage)
-    const statusList = parsedStorage ? parsedStorage.map(item => item.completed) : [];
-
-    let trueCount = 0; 
-    let falseCount = 0;
-
-    statusList.forEach(item => {
-        if (item === true) {
-            trueCount = trueCount + 1;
-        } else {
-            falseCount = falseCount + 1;
+        if (this.jsSideBarStatus) {
+            this.initStatus();
         }
-    });
+    }
 
-    jsSideBarStatusBar.addEventListener("transitionstart", () => {
-        jsSideBarStatusContainer.classList.add("status-focus");
-    })
+    // functions
+    initStatus = () => {
+        // initial count
+        this.statusCount();
+    }
 
-    jsSideBarStatusBar.addEventListener("transitionend", () => {
-        jsSideBarStatusContainer.classList.remove("status-focus");
-    })
-
-    // statusBar update
-    const widthFraction =  trueCount / (trueCount + falseCount);
-    jsSideBarStatusBar.style.width = `${widthFraction * 100}%`;
-}
-
-function initStatus() {
+    statusCount = () => {
+        const currentStorage = sessionStorage.getItem("toDos");
+        const parsedStorage = JSON.parse(currentStorage)
+        const statusList = parsedStorage ? parsedStorage.map(item => item.completed) : [];
     
-    // initial count
-    statusCount();
-
+        let trueCount = 0; 
+        let falseCount = 0;
+    
+        statusList.forEach(item => {
+            if (item === true) {
+                trueCount = trueCount + 1;
+            } else {
+                falseCount = falseCount + 1;
+            }
+        });
+    
+        this.jsSideBarStatusBar.addEventListener("transitionstart", () => {
+            this.jsSideBarStatusContainer.classList.add("status-focus");
+        })
+    
+        this.jsSideBarStatusBar.addEventListener("transitionend", () => {
+            this.jsSideBarStatusContainer.classList.remove("status-focus");
+        })
+    
+        // statusBar update
+        const widthFraction =  trueCount / (trueCount + falseCount);
+        this.jsSideBarStatusBar.style.width = `${widthFraction * 100}%`;
+    }
 }
 
-if (jsSideBarStatus) {
-    initStatus();
-}
+new Status();

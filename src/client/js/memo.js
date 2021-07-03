@@ -1,4 +1,4 @@
-import { statusCount } from "./status";
+import { Status } from "./status"
 
 const jsMemoHeader = document.querySelector("#jsMemoHeader");
 const jsMemoBtn = jsMemoHeader ? (jsMemoHeader.querySelector("#jsMemoBtn")) : null;
@@ -20,10 +20,12 @@ const TODOS = "toDos";
 const TODO_FLAG = "toDo";
 const COMPLETED_FLAG = "completed";
 
+// Done
 function saveMemo(array) {
     sessionStorage.setItem(TODOS, JSON.stringify(array));
 }
 
+// Done
 function handleDeleteBtnClick(event) {
     event.preventDefault();
     let targetNode = event.target;
@@ -42,7 +44,7 @@ function handleDeleteBtnClick(event) {
         sessionStorage.setItem(TODOS, JSON.stringify(memoArray))
 
     // Update statusBar
-    statusCount();
+    new Status();
 }
 
 function handleOptionBtnClick(event) {
@@ -178,7 +180,7 @@ function handleCompleteBtnClick(event) {
     paintMemo(goToCompleteObj, COMPLETED_FLAG);
 
     // Update statusBar
-    statusCount();
+    new Status();
 
 }
 
@@ -222,9 +224,10 @@ function handleToDoBtnClick(event) {
     paintMemo(goToDoObj, TODO_FLAG);
 
     // Update statusBar
-    statusCount();
+    new Status();
 }
 
+// Done
 function paintMemo(obj, targetList) {
 
     // .memo box
@@ -342,14 +345,14 @@ function handleAddBtnClick(event) {
         }
 
         // Update statusBar
-        statusCount();
+        new Status();
 
         // Input 값 초기화
         [jsMemoInput[0].value, jsMemoInput[1].value] = ["", ""];
     }
 }
 
-
+// Done
 function initMemo() {
 
     // 기존의 sessionStorage 할 일들 내용 로드
@@ -391,6 +394,188 @@ function initMemo() {
     jsMemoBtn.addEventListener("click", handleAddBtnClick);
 }
 
+// Done
 if (jsMemoHeader && jsMemoMain) {
     initMemo();
+}
+
+`````
+Memo Class Transition 
+
+`````
+// Class
+
+class Memo {
+    constructor() {
+        this.jsMemoHeader = document.querySelector("#jsMemoHeader");
+        this.jsMemoBtn = this.jsMemoHeader ? (this.jsMemoHeader.querySelector("#jsMemoBtn")) : null;
+        this.jsMemoIcon = this.jsMemoBtn ? (this.jsMemoBtn.querySelector("#jsMemoIcon")) : null;
+        this.jsMemoInputBox = this.jsMemoHeader ? (this.jsMemoHeader.querySelector("#jsMemoInputBox")) : null;
+        this.jsMemoInput = this.jsMemoInputBox ? (this.jsMemoInputBox.querySelectorAll("input")) : null;
+
+        this.jsMemoMain = document.querySelector("#jsMemoMain"); 
+        this.jsNewMemoSection = this.jsMemoMain ? (this.jsMemoMain.querySelector(".memo-section")) : null;
+
+        this.jsMemoMainCompleted = document.querySelector("#jsMemoMainCompleted");
+        this.jsNewMemoSectionCompleted = this.jsMemoMainCompleted ? (this.jsMemoMainCompleted.querySelector(".memo-section")) : null;
+
+
+        this.memoArray = [];
+
+        // Name
+        this.TODOS = "toDos";
+        this.TODO_FLAG = "toDo";
+        this.COMPLETED_FLAG = "completed";
+
+        if (this.jsMemoHeader && this.jsMemoMain) {
+            this.initMemo();
+        }
+    }
+
+    // functions
+    initMemo = () => {
+
+        // 기존의 sessionStorage 할 일들 내용 로드
+        const loadedArray = sessionStorage.getItem(TODOS);
+        let parsedArray;
+    
+        if (!loadedArray) {
+            parsedArray = null;
+        } else {
+            parsedArray = JSON.parse(loadedArray);
+        }
+        
+        if (parsedArray) {
+            parsedArray.forEach(oneMemo => {
+    
+                const initedMemo = {
+                    title: oneMemo.title,
+                    description: oneMemo.description,
+                    id: this.memoArray.length + 1,
+                    completed: oneMemo.completed,
+                }
+    
+                // frontend Process
+                if (initedMemo.completed === false) {
+                    paintMemo(initedMemo, TODO_FLAG);
+                } else {
+                    paintMemo(initedMemo, COMPLETED_FLAG);
+                }
+    
+                // backend Procass
+                this.memoArray.push(initedMemo);
+                this.saveMemo(this.memoArray);
+            });
+        
+        }
+    
+        // memo click Btn 활성화
+        
+        jsMemoBtn.addEventListener("click", handleAddBtnClick);
+    }
+
+    paintMemo = (obj, targetList) => {
+
+        // .memo box
+        const divBox = document.createElement("div");
+        divBox.className = "memo";
+        divBox.id = obj.id;
+    
+        // .memo__title box
+        const titleBox = document.createElement("h2");
+        titleBox.className = "memo__title";
+        titleBox.innerHTML = obj.title;
+    
+        // .memo__description box
+        const descriptionBox = document.createElement("h5");
+        descriptionBox.className = "memo__description";
+        descriptionBox.innerHTML = obj.description;
+    
+        // option button
+        const optionBtn = document.createElement("button");
+        optionBtn.classList.add("btn", "memo__option");
+        const optionIcon = document.createElement("i");
+        optionIcon.classList.add("fas", "fa-chevron-right", "fa-lg");
+        optionBtn.appendChild(optionIcon);
+        optionBtn.addEventListener("click", handleOptionBtnClick);
+    
+        // delete button
+        const deleteBtn = document.createElement("button");
+        deleteBtn.classList.add("btn", "memo__delete", "hide");
+        const deleteIcon = document.createElement("i");
+        deleteIcon.classList.add("fas", "fa-trash", "fa-lg");
+        deleteBtn.appendChild(deleteIcon);
+        deleteBtn.addEventListener("click", this.handleDeleteBtnClick);
+    
+        // edit button
+        const editBtn = document.createElement("button");
+        editBtn.classList.add("btn", "memo__edit", "hide");
+        const editIcon = document.createElement("i");
+        editIcon.classList.add("fas", "fa-pen", "fa-lg");
+        editBtn.appendChild(editIcon);
+        editBtn.addEventListener("click", handleEditBtnClick);
+    
+        divBox.appendChild(titleBox);
+        divBox.appendChild(descriptionBox);
+        divBox.appendChild(optionBtn);
+        divBox.appendChild(deleteBtn);
+        divBox.appendChild(editBtn);
+    
+        if (targetList === this.TODO_FLAG) {
+            // go to complete button
+            const completeBtn = document.createElement("button");
+            completeBtn.classList.add("btn", "memo__complete", "hide");
+            const completeIcon = document.createElement("i");
+            completeIcon.classList.add("fas", "fa-check", "fa-lg");
+            completeBtn.appendChild(completeIcon);
+            completeBtn.addEventListener("click", handleCompleteBtnClick);
+    
+            // adding completeBtn
+            divBox.appendChild(completeBtn);
+    
+            // adding to toDoSection
+            this.jsNewMemoSection.appendChild(divBox);
+        }
+    
+        if (targetList === this.COMPLETED_FLAG) {
+            // go to toDoBtn
+            const toDoBtn = document.createElement("button");
+            toDoBtn.classList.add("btn", "memo__toDo", "hide");
+            const toDoIcon = document.createElement("i");
+            toDoIcon.classList.add("fas", "fa-reply", "fa-lg");
+            toDoBtn.appendChild(toDoIcon);
+            toDoBtn.addEventListener("click", handleToDoBtnClick);
+    
+            // adding toDoBtn
+            divBox.appendChild(toDoBtn);
+    
+            // adding to completedSection
+            this.jsNewMemoSectionCompleted.appendChild(divBox);
+        }
+    }
+
+    saveMemo = (array) => {
+        sessionStorage.setItem(this.TODOS, JSON.stringify(array));
+    }
+
+    handleDeleteBtnClick = (event) => {
+        event.preventDefault();
+        let targetNode = event.target;
+        if (targetNode.tagName === "I") {
+            targetNode = targetNode.parentNode;
+        }
+    
+        const targetMemo = targetNode.parentNode
+        const targetId = targetMemo.id;
+    
+        // Delete target in Frontend
+        targetMemo.remove();
+    
+        // Delete target in Backend
+            this.memoArray = this.memoArray.filter(oneMemo => oneMemo.id !== parseInt(targetId))
+            sessionStorage.setItem(this.TODOS, JSON.stringify(this.memoArray))
+    
+        // Update statusBar
+        new Status();
+    }
 }
