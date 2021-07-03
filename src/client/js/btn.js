@@ -1,29 +1,36 @@
 // BTN CLASS
+
+// 1. Btn(추가 장소, 추가 내용)
+// 2. 기본적인 버튼 모양 Btn
+// 3. 버튼 관련된 Styling
+// 4. extends 버튼 모양 BtnActive
+// 5. 버튼 클릭 관련 Animation Styling
+
 export class Btn {
-    constructor({main, container, color, radius}) {
-        this.main = main;
-        this.node = container;
-        this.StyleBtn({color, radius});
-        this.addEventListener();
+    constructor(content) {
+        this.content = content;
+        this.StyleBtn();
     }
-    
-    addEventListener = () => {
-        this.node.addEventListener("mousedown", this.handleBtnDown);
-        this.node.addEventListener("mouseup", this.handleBtnUp);
-    }
-
-    StyleBtn = ({color, radius}) => {
-        this.node.style.cssText = `
-            background-color: ${color};
-            border-radius: ${radius};
-            box-shadow: 2px 2px 2px 0px #34495e;
-            font-size: 10px;
+    StyleBtn = () => {
+        this.content.style.cssText = `
+            box-shadow: inset 0.5px 0.5px 5px 1px #34495e;
+            font-size: auto;
             font-weight: 600;
-            color: #2c3e50;
         `
-        this.main.appendChild(this.node);
     }
+}
 
+// 추가적인 수정 필요 - eventListener 부분
+export class BtnActive extends Btn {
+    constructor(content) {
+        super(content);
+        // removeEventListenerHover
+        this.addEventListenerClick();
+    }
+    addEventListenerClick = () => {
+        this.content.addEventListener("mousedown", this.handleBtnDown);
+        this.content.addEventListener("mouseup", this.handleBtnUp);
+    }
     handleBtnDown = (event) => {
         // Btn Click Down Movement
         const btn = event.target;

@@ -62,3 +62,5 @@
   * ### [o] Status.js
 * ### **Class** 관련 적용 파일 저장소
   * ### [-] Main.js
+   <hr>
+* ### *SCSS* -> *CLASS* 활용해서 디자인 적용

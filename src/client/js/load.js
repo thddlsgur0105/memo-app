@@ -1,3 +1,5 @@
+import {Btn, BtnActive} from "./btn"
+
 class Load {
     constructor() {
         this.jsLoadContainer = document.querySelector("#jsLoadContainer");
@@ -10,6 +12,12 @@ class Load {
 
         if (this.jsLoadContainer) {
             this.LoadInit();
+
+            // Styling
+            new Btn(this.jsLoadCard);
+            this.jsLoadInput.forEach(input => {
+                new Btn(input);
+            })
         }
     }
 
@@ -143,3 +151,4 @@ class Load {
 }
 
 new Load();
+
