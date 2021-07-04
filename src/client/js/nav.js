@@ -1,3 +1,5 @@
+import { Btn, BtnActive } from "./btn"
+ 
 // Class
 
 class Nav {
@@ -5,9 +7,20 @@ class Nav {
         this.jsNavBtn = document.querySelector("#jsNavBtn");
         this.jsNavIcon = this.jsNavBtn ? (this.jsNavBtn.querySelector("i")) : null;
         this.jsNavUl = document.querySelector("#jsNavUl");
+        this.jsNavLi = this.jsNavUl.querySelectorAll("li");
+
         
         if (this.jsNavBtn && this.jsNavUl) {
             this.initNav();
+
+            // Btn Styling
+            
+            // BtnActive Styling
+            new BtnActive(this.jsNavBtn);
+
+            this.jsNavLi.forEach(li => {
+                new BtnActive(li);
+            })
         }
     }
 

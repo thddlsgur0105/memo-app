@@ -13,11 +13,14 @@ class Load {
         if (this.jsLoadContainer) {
             this.LoadInit();
 
-            // Styling
+            // Btn Styling
             new Btn(this.jsLoadCard);
             this.jsLoadInput.forEach(input => {
                 new Btn(input);
-            })
+            });
+
+            // BtnActive Styling
+            new BtnActive(this.jsLoadInputBtn);
         }
     }
 

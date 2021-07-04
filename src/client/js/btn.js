@@ -21,11 +21,18 @@ export class Btn {
 }
 
 // 추가적인 수정 필요 - eventListener 부분
-export class BtnActive extends Btn {
+export class BtnActive {
     constructor(content) {
-        super(content);
-        // removeEventListenerHover
+        this.content = content;
+        this.StyleBtn();
         this.addEventListenerClick();
+    }
+    StyleBtn = () => {
+        this.content.style.cssText = `
+            box-shadow: 2px 2px 2px 0px #34495e;
+            font-size: auto;
+            font-weight: 600;
+        `;
     }
     addEventListenerClick = () => {
         this.content.addEventListener("mousedown", this.handleBtnDown);
@@ -33,12 +40,18 @@ export class BtnActive extends Btn {
     }
     handleBtnDown = (event) => {
         // Btn Click Down Movement
-        const btn = event.target;
+        let btn = event.target;
+        if (btn.tagName === "I" || btn.tagName === "SPAN") {
+            btn = btn.parentNode;
+        }
         this.btnDownAni(btn);
     }
     handleBtnUp = (event) => {
         // Btn Click Up Movement
-        const btn = event.target;
+        let btn = event.target;
+        if (btn.tagName === "I" || btn.tagName === "SPAN") {
+            btn = btn.parentNode;
+        }
         this.btnUpAni(btn);
     }
     btnDownAni = (btn) => {
