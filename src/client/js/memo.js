@@ -1,4 +1,5 @@
 import { Status } from "./status"
+
 // Class
 
 class Memo {

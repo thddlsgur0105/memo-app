@@ -1,9 +1,14 @@
+import { Btn } from "./btn";
+
 class Clock {
     constructor() {
         this.jsClockContainer = document.querySelector("#jsClockContainer")
         this.jsClockTime = this.jsClockContainer ? this.jsClockContainer.querySelector("#jsClockTime") : null;
         if (this.jsClockContainer) {
             setInterval(this.clockPaint, 100);
+
+            // Btn Styling
+            new Btn(this.jsClockTime)
         }
     }
     clockPaint = () => {

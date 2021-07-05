@@ -6,3 +6,4 @@ import "./load";
 import "./scroll";
 import "./status";
 import "./btn";
+import "./form";

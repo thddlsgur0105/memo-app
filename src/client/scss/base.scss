@@ -18,6 +18,18 @@ body {
         grid-area: head;
         display: flex;
         flex-direction: column;
+        .header__title {
+            width: 150px;
+            height: 40px;
+            padding: 10px;
+            margin: 10px;
+            box-sizing: border-box;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+            background: inherit;
+            text-align: center;
+        }
         .header__btn {
             display: flex;
             justify-content: center;

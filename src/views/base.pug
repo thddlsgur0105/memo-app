@@ -8,7 +8,8 @@ html(lang="en")
         title #{pageTitle} | #{user ? user.username : "비회원"}
     body 
         header.header 
-            span.header__title #{pageTitle}
+            div.header__title#jsNavHeader 
+                span #{pageTitle}
             div.btn.header__btn#jsNavBtn
                 i.fas.fa-bars
         main.main 
@@ -19,7 +20,7 @@ html(lang="en")
             block side-bar 
         aside.aside
             .clock__container#jsClockContainer
-                span.clock__time#jsClockTime 00:00:00
+                div.clock__time#jsClockTime 00:00:00
         include partials/nav.pug
         footer.footer 
             span &copy; #{new Date().getFullYear()} MemoApp 

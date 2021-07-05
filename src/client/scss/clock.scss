@@ -6,6 +6,16 @@
     justify-content: flex-end;
     align-items: flex-start;
     .clock__time {
-        font-size: 30px;
+        font-size: 25px;
+        width: 150px;
+        height: 40px;
+        padding: 7px;
+        margin: 10px;
+        box-sizing: border-box;
+        border: none;
+        border-radius: 20px;
+        outline: none;
+        background: inherit;
+        text-align: center;
     }
 }

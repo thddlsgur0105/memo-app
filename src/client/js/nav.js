@@ -4,16 +4,17 @@ import { Btn, BtnActive } from "./btn"
 
 class Nav {
     constructor() {
+        this.jsNavHeader = document.querySelector("#jsNavHeader");
         this.jsNavBtn = document.querySelector("#jsNavBtn");
         this.jsNavIcon = this.jsNavBtn ? (this.jsNavBtn.querySelector("i")) : null;
         this.jsNavUl = document.querySelector("#jsNavUl");
         this.jsNavLi = this.jsNavUl.querySelectorAll("li");
-
         
         if (this.jsNavBtn && this.jsNavUl) {
             this.initNav();
 
             // Btn Styling
+            new Btn(this.jsNavHeader);
             
             // BtnActive Styling
             new BtnActive(this.jsNavBtn);
