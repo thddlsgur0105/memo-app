@@ -1,3 +1,5 @@
+import { Btn, BtnActive } from "./btn"
+
 // Class
 
 class Scroll {
@@ -15,6 +17,12 @@ class Scroll {
 
         if (this.jsSideBarContainer && this.jsMemoContainer) {
             this.initSideBar();
+
+            // Btn Styling
+
+            // BtnActive Styling
+            new BtnActive(this.jsSideBarToDoBtn);
+            new BtnActive(this.jsSideBarCompletedBtn);
         }
     }
 
@@ -30,7 +38,8 @@ class Scroll {
         }
         
         // 할 일 클릭 버튼 숨김
-        targetNode.classList.replace("show", "hide-bar");
+        targetNode.classList.remove("show")
+        targetNode.classList.replace("up-btn", "hide-bar");
         targetNode.disabled = true;
     
         // 한 일 클릭 버튼 보여주기
@@ -45,6 +54,8 @@ class Scroll {
         });
     }
 
+    // Btn 숨김과 관련된 Animation 처리
+    // Btn Up Animation 완료된 이후에 Btn 숨김 효과 발생 지정
     handleSideBarCompleted = (event) => {
         let targetNode = event.target;
         if (targetNode.tagName === "SPAN") {
@@ -53,7 +64,7 @@ class Scroll {
     
         if (!targetNode.classList.contains("show")) {
             // 한 일 클릭 버튼 숨김 
-            targetNode.classList.add("hide-bar");
+            targetNode.classList.replace("up-btn", "hide-bar");
             targetNode.disabled = true;
     
             // 할 일 클릭 버튼 보여주기
@@ -61,7 +72,8 @@ class Scroll {
             this.jsSideBarToDoBtn.disabled = false;
         } else {
             // 한 일 클릭 버튼 숨김
-            targetNode.classList.replace("show", "hide-bar");
+            targetNode.classList.remove("show")
+            targetNode.classList.replace("up-btn", "hide-bar");
             targetNode.disabled = true;
     
             // 할 일 클릭 버튼 보여주기

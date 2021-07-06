@@ -16,6 +16,7 @@ export class Btn {
             box-shadow: inset 0.5px 0.5px 5px 1px #34495e;
             font-size: auto;
             font-weight: 600;
+            text-shadow: 5px 5px 5px #2980b9;
         `
     }
 }
@@ -32,6 +33,7 @@ export class BtnActive {
             box-shadow: 2px 2px 2px 0px #34495e;
             font-size: auto;
             font-weight: 600;
+            text-shadow: 5px 5px 5px #2980b9;
         `;
     }
     addEventListenerClick = () => {

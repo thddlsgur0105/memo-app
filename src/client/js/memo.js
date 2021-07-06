@@ -1,4 +1,5 @@
 import { Status } from "./status"
+import { Btn, BtnActive } from "./btn"
 
 // Class
 
