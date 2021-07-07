@@ -2,9 +2,9 @@ extends base.pug
 include mixins/card
 
 block content 
-    .search__box 
-        .user-profile 
-            .card.card-profile 
+    .search__box#jsSearch
+        .user-profile
+            .card.card-profile#jsSearchProfile
                 .card__img 
                     i.fas.fa-user-alt.fa-lg
                     span 내 정보
@@ -15,7 +15,7 @@ block content
                         span= `이메일: ${user.email}`
                     .card__location   
                         span= `거주지: ${user.location}`                  
-            .card.card-profile.card-profile-friends 
+            .card.card-profile.card-profile-friends#jsSearchFriends
                 .card__img 
                     i.fas.fa-user-friends.fa-lg
                     span 친구목록
@@ -26,16 +26,16 @@ block content
                                 i.fas.fa-user.fa-lg  
                             .card__description.hide 
                                 span=one
-        .search-container 
-            .search__border-box
+        .search-container
+            .search__border-box#jsSearchBox 
                 .search-bar
                     form.form.search-bar__form(method="GET")
-                        input.form__input(type="text", name="searchingBy", placeholder="검색할 유저의 이름을 입력하세요.")
-                        input.btn.form__btn(type="submit", value="검색")
+                        input.form__input#jsSearchBoxInput(type="text", name="searchingBy", placeholder="검색할 유저의 이름을 입력하세요.")
+                        input.btn.form__btn#jsSearchBoxBtn(type="submit", value="검색")
 
-                .search-result
+                .search-result#jsSearchResult 
                     h2 검색결과
-                    .search-result__container 
+                    .search-result__container#jsSearchResultContainer 
                         for user in searchingUsers 
                             +card(user)
     

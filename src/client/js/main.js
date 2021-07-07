@@ -1,10 +1,15 @@
 import "../scss/styles.scss";
+
+// COMPONENTS
+import "./clock";
+import "./btn";
+
+// MAIN JS
+import "./status";
+import "./scroll";
+import "./footer";
 import "./memo";
 import "./nav";
-import "./clock";
 import "./load";
-import "./scroll";
-import "./status";
-import "./btn";
 import "./form";
-import "./footer";
+import "./profile";
