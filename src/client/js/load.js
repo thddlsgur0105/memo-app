@@ -75,6 +75,7 @@ class Load {
     
         linkAnchor.appendChild(linkIcon);
         linkAnchor.appendChild(linkSpan);
+        new BtnActive(linkAnchor);
     
         // delete Btn
         const deleteBtn = document.createElement("button");
@@ -84,6 +85,7 @@ class Load {
         const deleteIcon = document.createElement("i");
         deleteIcon.classList.add("fas", "fa-trash");
         deleteBtn.appendChild(deleteIcon);
+        new Btn(deleteBtn);
         
         linkContainer.appendChild(linkAnchor);
         linkContainer.appendChild(deleteBtn);
