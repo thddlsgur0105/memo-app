@@ -4,7 +4,6 @@
 ![Hnet-image](https://user-images.githubusercontent.com/70431221/123586946-79dcd200-d820-11eb-85b3-6786ff812587.gif)
 
 ### *버튼 스타일 후*
-![Hnet-image-after](https://user-images.githubusercontent.com/70431221/124791355-f2613280-df86-11eb-84ac-6cd66654e344.gif)
 
 <hr>
 
