@@ -27,6 +27,14 @@ class Memo {
 
         if (this.jsMemoHeader && this.jsMemoMain) {
             this.initMemo();
+
+            // Btn Styling
+            this.jsMemoInput.forEach(input => {
+                new Btn(input)
+            })
+
+            // BtnAcive Styling
+            new BtnActive(this.jsMemoBtn)
         }
     }
 
@@ -95,6 +103,8 @@ class Memo {
         const optionIcon = document.createElement("i");
         optionIcon.classList.add("fas", "fa-chevron-right", "fa-lg");
         optionBtn.appendChild(optionIcon);
+        // BtnAcive Styling
+        new BtnActive(optionBtn)
         optionBtn.addEventListener("click", this.handleOptionBtnClick);
     
         // delete button
@@ -103,6 +113,8 @@ class Memo {
         const deleteIcon = document.createElement("i");
         deleteIcon.classList.add("fas", "fa-trash", "fa-lg");
         deleteBtn.appendChild(deleteIcon);
+        // BtnAcive Styling
+        new BtnActive(deleteBtn)
         deleteBtn.addEventListener("click", this.handleDeleteBtnClick);
     
         // edit button
@@ -111,6 +123,8 @@ class Memo {
         const editIcon = document.createElement("i");
         editIcon.classList.add("fas", "fa-pen", "fa-lg");
         editBtn.appendChild(editIcon);
+        // BtnAcive Styling
+        new BtnActive(editBtn);
         editBtn.addEventListener("click", this.handleEditBtnClick);
     
         divBox.appendChild(titleBox);
@@ -118,6 +132,9 @@ class Memo {
         divBox.appendChild(optionBtn);
         divBox.appendChild(deleteBtn);
         divBox.appendChild(editBtn);
+
+        // Btn Styling
+        new Btn(divBox);
     
         if (targetList === this.TODO_FLAG) {
             // go to complete button
@@ -126,6 +143,8 @@ class Memo {
             const completeIcon = document.createElement("i");
             completeIcon.classList.add("fas", "fa-check", "fa-lg");
             completeBtn.appendChild(completeIcon);
+            // BtnAcive Styling
+            new BtnActive(completeBtn);
             completeBtn.addEventListener("click", this.handleCompleteBtnClick);
     
             // adding completeBtn
@@ -142,6 +161,8 @@ class Memo {
             const toDoIcon = document.createElement("i");
             toDoIcon.classList.add("fas", "fa-reply", "fa-lg");
             toDoBtn.appendChild(toDoIcon);
+            // BtnAcive Styling
+            new BtnActive(toDoBtn);
             toDoBtn.addEventListener("click", this.handleToDoBtnClick);
     
             // adding toDoBtn
@@ -280,9 +301,9 @@ class Memo {
         const targetId = targetMemo.id;
     
         // Delete target on Frontend
-        targetMemo.classList.add("go-complete-area")
         targetMemo.addEventListener("animationend", function() {
-            this.remove();
+            targetMemo.classList.add("go-complete-area")
+            setTimeout(() => this.remove(), 400);
         })
     
         let goToCompleteObj;
@@ -324,9 +345,9 @@ class Memo {
         const targetId = targetMemo.id;
     
         // Delete target in Frontend
-        targetMemo.classList.add("go-toDo-area")
         targetMemo.addEventListener("animationend", function() {
-            this.remove();
+            targetMemo.classList.add("go-toDo-area")
+            setTimeout(() => this.remove(), 400);
         })
     
         let goToDoObj;

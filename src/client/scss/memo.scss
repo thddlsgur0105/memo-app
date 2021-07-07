@@ -31,11 +31,7 @@
     grid-gap: 10px;
 
     .memo {
-        border: 2px solid $white;
         transition: all .5s ease-in-out;
-        &:hover {
-            transform: scale(1.05);
-        }
     }
 
     .memo__description,

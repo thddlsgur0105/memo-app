@@ -1,5 +1,7 @@
 // Class
 
+import { Btn } from "./btn";
+
 export class Status {
     constructor() {
         this.jsSideBarStatus = document.querySelector("#jsSideBarStatus");
@@ -8,6 +10,11 @@ export class Status {
 
         if (this.jsSideBarStatus) {
             this.initStatus();
+
+            // Btn Styling
+            new Btn(this.jsSideBarStatusContainer)
+
+            // BtnActive Styling
         }
     }
 

@@ -17,13 +17,13 @@
             width: 300px;
             height: 30px;
             margin-top: 70px;
-            border: 2px solid $white;
             border-radius: 50px;
             overflow-x: hidden;
             .side-bar__status-bar {
                 width: 0%;
                 height: 100%;
                 background-color: $white;
+                box-shadow: 2px 2px 3px 0px #34495e;
                 border-radius: 50px;
                 transition: all 1s ease-in-out;
             }

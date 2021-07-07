@@ -21,7 +21,6 @@ export class Btn {
     }
 }
 
-// 추가적인 수정 필요 - eventListener 부분
 export class BtnActive {
     constructor(content) {
         this.content = content;
