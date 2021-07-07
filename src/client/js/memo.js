@@ -246,6 +246,9 @@ class Memo {
             titleInputBar.type = "text";
             titleInputBar.value = titleContainer.innerHTML;
             titleInputBar.classList.add("input");
+
+            // InputBar Btn Styling
+            new Btn(titleInputBar);
             targetContainer.replaceChild(titleInputBar, titleContainer)
     
             // replace memo description to input bar
@@ -254,6 +257,9 @@ class Memo {
             descriptionInputBar.type = "text";
             descriptionInputBar.value = descriptionContainer.innerHTML;
             descriptionInputBar.classList.add("input");
+
+            // InputBar Btn Styling
+            new Btn(descriptionInputBar);
             targetContainer.replaceChild(descriptionInputBar, descriptionContainer)
         } else {
             const editedInputBars = targetContainer.querySelectorAll("input.input");

@@ -22,7 +22,7 @@ html(lang="en")
             .clock__container#jsClockContainer
                 div.clock__time#jsClockTime 00:00:00
         include partials/nav.pug
-        footer.footer 
-            span &copy; #{new Date().getFullYear()} MemoApp 
+        footer.footer#jsFooter 
+            .footer__content#jsFooterContent &copy; #{new Date().getFullYear()} MemoApp 
         block script
         script(src="https://kit.fontawesome.com/6478f529f2.js", crossorigin="anonymous")

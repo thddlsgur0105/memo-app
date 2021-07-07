@@ -7,3 +7,4 @@ import "./scroll";
 import "./status";
 import "./btn";
 import "./form";
+import "./footer";

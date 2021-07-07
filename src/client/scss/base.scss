@@ -59,6 +59,18 @@ body {
         display: flex;
         justify-content: flex-end;
         align-items: flex-end;
+        .footer__content {
+            width: 215px;
+            height: 40px;
+            padding: 10px;
+            margin: 10px;
+            box-sizing: border-box;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+            background: inherit;
+            text-align: center;
+        }
     }
 }
 
