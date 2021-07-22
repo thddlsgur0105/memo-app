@@ -8,6 +8,8 @@ class Nav {
         this.jsNavContainer = document.querySelector("#jsNavContainer");
         this.jsNavMemo = this.jsNavContainer.querySelector("#jsNavMemo");
         this.jsNavLoad = this.jsNavContainer.querySelector("#jsNavLoad");
+
+        this.jsMainContainer = document.querySelector("#jsMainContainer");
         
         // Btn & BtnActive Styling
         new Btn(this.jsNavHeader);
@@ -22,7 +24,18 @@ class Nav {
 
     navInit = () => {
         // Btn 클릭 시 Slider 설정 필요
+        this.jsNavMemo.addEventListener("click", this.handleNavMemoClick);
+        this.jsNavLoad.addEventListener("click", this.handleNavLoadClick);
     }
+
+    handleNavMemoClick = (event) => {
+        console.log(event.target);
+    }
+
+    handleNavLoadClick = (event) => {
+        console.log(event.target);
+    }
+
 }
 
 new Nav();

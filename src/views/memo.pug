@@ -2,7 +2,7 @@ extends base.pug
 include mixins/toDo.pug
 
 block content 
-    section.main-container     
+    section.main-container#jsMainContainer 
         section.memo-container#jsMemoContainer 
             section.memo-container__toDo#jsMemoContainerToDo  
                 header.memo-header#jsMemoHeader 
@@ -16,7 +16,7 @@ block content
             section.memo-container__completed#jsMemoContainerCompleted 
                 main.memo-complete#jsMemoMainCompleted   
                     section.memo-section
-        section.load-container 
+        section.load-container#jsLoadContainer 
             .welcome__container#jsLoadContainer 
                 .welcome__card#jsLoadCard 
                     .input-box.welcome__input-box#jsLoadInputBox
