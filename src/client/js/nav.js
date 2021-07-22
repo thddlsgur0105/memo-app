@@ -21,7 +21,7 @@ class Nav {
     }
 
     navInit = () => {
-        
+        // Btn 클릭 시 Slider 설정 필요
     }
 }
 

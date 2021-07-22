@@ -2,20 +2,29 @@ extends base.pug
 include mixins/toDo.pug
 
 block content 
-    section.memo-container#jsMemoContainer 
-        section.memo-container__toDo#jsMemoContainerToDo  
-            header.memo-header#jsMemoHeader 
-                .input-box.hide#jsMemoInputBox 
-                    input.input(type="text", placeholder="할 일")
-                    input.input(type="text", placeholder="세부정보")
-                button.btn.memo-btn#jsMemoBtn 
-                    i.fas.fa-plus#jsMemoIcon 
-            main.memo-notComplete#jsMemoMain  
-                section.memo-section
-        section.memo-container__completed#jsMemoContainerCompleted 
-            main.memo-complete#jsMemoMainCompleted   
-                section.memo-section
-
+    section.main-container     
+        section.memo-container#jsMemoContainer 
+            section.memo-container__toDo#jsMemoContainerToDo  
+                header.memo-header#jsMemoHeader 
+                    .input-box.hide#jsMemoInputBox 
+                        input.input(type="text", placeholder="할 일")
+                        input.input(type="text", placeholder="세부정보")
+                    button.btn.memo-btn#jsMemoBtn 
+                        i.fas.fa-plus#jsMemoIcon 
+                main.memo-notComplete#jsMemoMain  
+                    section.memo-section
+            section.memo-container__completed#jsMemoContainerCompleted 
+                main.memo-complete#jsMemoMainCompleted   
+                    section.memo-section
+        section.load-container 
+            .welcome__container#jsLoadContainer 
+                .welcome__card#jsLoadCard 
+                    .input-box.welcome__input-box#jsLoadInputBox
+                        input.input.welcome__input(type="text", placeholder="사이트 이름(영어)")
+                        input.input.welcome__input(type="text", placeholder="링크 주소")
+                        button.btn.welcome__btn#jsLoadInputBtn 
+                            span 링크 저장
+                    .welcome__result#jsLoadResult 
 
 block side-bar 
     section.side-bar__container#jsSideBarContainer 
