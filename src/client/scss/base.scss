@@ -8,7 +8,7 @@ body {
     display: grid;
     grid-template-areas: 
         "head side-bar aside"
-        "nav main ."
+        ". main ."
         ". . footer";
     grid-template-rows: 1fr 5fr 1fr;
     grid-template-columns: 1fr 3fr 1fr;

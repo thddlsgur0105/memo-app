@@ -10,8 +10,11 @@ html(lang="en")
         header.header 
             div.header__title#jsNavHeader 
                 span #{pageTitle}
-            div.btn.header__btn#jsNavBtn
-                i.fas.fa-bars
+            ul.nav__btns#jsNavContainer 
+                li.btn.header__btn#jsNavMemo
+                    i.far.fa-sticky-note
+                li.btn.header__btn#jsNavLoad 
+                    i.far.fa-smile 
         main.main 
             if (errorMessage)
                 p=errorMessage 
@@ -21,7 +24,6 @@ html(lang="en")
         aside.aside
             .clock__container#jsClockContainer
                 div.clock__time#jsClockTime 00:00:00
-        include partials/nav.pug
         footer.footer#jsFooter 
             .footer__content#jsFooterContent &copy; #{new Date().getFullYear()} MemoApp 
         block script
