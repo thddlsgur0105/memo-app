@@ -25,7 +25,7 @@ export class Status {
     }
 
     statusCount = () => {
-        const currentStorage = sessionStorage.getItem("toDos");
+        const currentStorage = localStorage.getItem("toDos");
         const parsedStorage = JSON.parse(currentStorage)
         const statusList = parsedStorage ? parsedStorage.map(item => item.completed) : [];
     
