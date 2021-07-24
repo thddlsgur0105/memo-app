@@ -8,7 +8,7 @@ class Load {
         this.jsLoadInput = this.jsLoadInputBox ? (this.jsLoadInputBox.querySelectorAll("input")) : null;
         this.jsLoadInputBtn = this.jsLoadInputBox ? (this.jsLoadInputBox.querySelector("#jsLoadInputBtn")) : null;
         this.jsLoadResult = this.jsLoadCard ? (this.jsLoadCard.querySelector("#jsLoadResult")) : null;
-        this.flagArray;
+        this.flagArray = [];
 
         if (this.jsLoadContainer) {
             this.LoadInit();
@@ -30,7 +30,6 @@ class Load {
         const loadedArray = localStorage.getItem("links");
         const parsedArray = JSON.parse(loadedArray);
         if (parsedArray) {
-            this.flagArray = [];
             parsedArray.forEach((parsedOne) => {
                 const newObj = {
                     name: parsedOne.name,

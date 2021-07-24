@@ -41,8 +41,8 @@ class Memo {
     // functions
     initMemo = () => {
 
-        // 기존의 sessionStorage 할 일들 내용 로드
-        const loadedArray = sessionStorage.getItem(this.TODOS);
+        // 기존의 localStorage 할 일들 내용 로드
+        const loadedArray = localStorage.getItem(this.TODOS);
         let parsedArray;
     
         if (!loadedArray) {
@@ -174,7 +174,7 @@ class Memo {
     }
 
     saveMemo = (array) => {
-        sessionStorage.setItem(this.TODOS, JSON.stringify(array));
+        localStorage.setItem(this.TODOS, JSON.stringify(array));
     }
 
     handleDeleteBtnClick = (event) => {
@@ -192,7 +192,7 @@ class Memo {
     
         // Delete target in Backend
             this.memoArray = this.memoArray.filter(oneMemo => oneMemo.id !== parseInt(targetId))
-            sessionStorage.setItem(this.TODOS, JSON.stringify(this.memoArray))
+            localStorage.setItem(this.TODOS, JSON.stringify(this.memoArray))
     
         // Update statusBar
         new Status();
@@ -291,7 +291,7 @@ class Memo {
                     }
                 })
     
-                sessionStorage.setItem(this.TODOS, JSON.stringify(this.memoArray))
+                localStorage.setItem(this.TODOS, JSON.stringify(this.memoArray))
     
             }
             
@@ -331,7 +331,7 @@ class Memo {
             }
         })
     
-        sessionStorage.setItem(this.TODOS, JSON.stringify(this.memoArray))
+        localStorage.setItem(this.TODOS, JSON.stringify(this.memoArray))
         
         // Paint target on frontend
         this.paintMemo(goToCompleteObj, this.COMPLETED_FLAG);
@@ -375,7 +375,7 @@ class Memo {
             }
         })
     
-        sessionStorage.setItem(this.TODOS, JSON.stringify(this.memoArray))
+        localStorage.setItem(this.TODOS, JSON.stringify(this.memoArray))
     
         // paint on frontend
         this.paintMemo(goToDoObj, this.TODO_FLAG);

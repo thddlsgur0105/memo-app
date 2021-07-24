@@ -44,12 +44,12 @@ body {
     .main {
         grid-area: main;
         overflow-x: hidden;
+        overflow-y: hidden;
         .main-container {
             display: flex;
             flex-direction: column;
             width: 100%;
             height: 200%;
-            background-color: red;
         }
     }
     .side-bar {

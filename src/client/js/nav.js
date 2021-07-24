@@ -28,12 +28,20 @@ class Nav {
         this.jsNavLoad.addEventListener("click", this.handleNavLoadClick);
     }
 
-    handleNavMemoClick = (event) => {
-        console.log(event.target);
+    handleNavMemoClick = () => {
+        this.jsMainContainer.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+            inline: "nearest",
+        })
     }
 
-    handleNavLoadClick = (event) => {
-        console.log(event.target);
+    handleNavLoadClick = () => {
+        this.jsMainContainer.scrollIntoView({
+            behavior: "smooth",
+            block: "end",
+            inline: "start",
+        })
     }
 
 }

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <title>메모장</title>
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="header__title" id="jsNavHeader">
+        <span>메모장</span>
+      </div>
+      <ul class="nav__btns" id="jsNavContainer">
+        <li class="btn header__btn" id="jsNavMemo">
+          <i class="far fa-sticky-note"></i>
+        </li>
+        <li class="btn header__btn" id="jsNavLoad">
+          <i class="far fa-smile"> </i>
+        </li>
+      </ul>
+    </header>
+
+    <main class="main">
+      <section class="main-container" id="jsMainContainer">
+        <section class="memo-container" id="jsMemoContainer">
+          <section class="memo-container__toDo" id="jsMemoContainerToDo">
+            <header class="memo-header" id="jsMemoHeader">
+              <div class="input-box hide" id="jsMemoInputBox">
+                <input class="input" type="text" placeholder="할 일" /><input
+                  class="input"
+                  type="text"
+                  placeholder="세부정보"
+                />
+              </div>
+              <button class="btn memo-btn" id="jsMemoBtn">
+                <i class="fas fa-plus" id="jsMemoIcon"> </i>
+              </button>
+            </header>
+            <main class="memo-notComplete" id="jsMemoMain">
+              <section class="memo-section"></section>
+            </main>
+          </section>
+          <section
+            class="memo-container__completed"
+            id="jsMemoContainerCompleted"
+          >
+            <main class="memo-complete" id="jsMemoMainCompleted">
+              <section class="memo-section"></section>
+            </main>
+          </section>
+        </section>
+        <section class="load-container" id="jsLoadContainer">
+          <div class="welcome__container" id="jsLoadContainer">
+            <div class="welcome__card" id="jsLoadCard">
+              <div class="input-box welcome__input-box" id="jsLoadInputBox">
+                <input
+                  class="input welcome__input"
+                  type="text"
+                  placeholder="사이트 이름(영어)"
+                /><input
+                  class="input welcome__input"
+                  type="text"
+                  placeholder="링크 주소"
+                /><button class="btn welcome__btn" id="jsLoadInputBtn">
+                  <span>링크 저장</span>
+                </button>
+              </div>
+              <div class="welcome__result" id="jsLoadResult"></div>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <aside class="side-bar">
+      <section class="side-bar__container" id="jsSideBarContainer">
+        <div class="side-bar__toDo" id="jsSideBarToDo">
+          <button
+            class="btn side-bar__btn side-bar__btn-left init-hide-bar"
+            id="jsSideBarToDoBtn"
+            disabled="disabled"
+          >
+            <span class="side-bar__span">할 일</span>
+          </button>
+        </div>
+        <div class="side-bar__status" id="jsSideBarStatus">
+          <div class="side-bar__status-container" id="jsSideBarStatusContainer">
+            <div class="side-bar__status-bar" id="jsSideBarStatusBar"></div>
+          </div>
+        </div>
+        <div class="side-bar__completed" id="jsSideBarCompleted">
+          <button
+            class="btn side-bar__btn side-bar__btn-right"
+            id="jsSideBarCompletedBtn"
+          >
+            <span class="side-bar__span">한 일</span>
+          </button>
+        </div>
+      </section>
+    </aside>
+
+    <aside class="aside">
+      <div class="clock__container" id="jsClockContainer">
+        <div class="clock__time" id="jsClockTime">00:00:00</div>
+      </div>
+    </aside>
+
+    <footer class="footer" id="jsFooter">
+      <div class="footer__content" id="jsFooterContent">
+        &copy; 2021 MemoApp
+      </div>
+    </footer>
+
+    <script
+      src="https://kit.fontawesome.com/6478f529f2.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/assets/js/main.js"></script>
+  </body>
+</html>
