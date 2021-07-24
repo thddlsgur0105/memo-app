@@ -234,3 +234,31 @@
 .up-btn {
     animation: up-btn .2s ease-in-out forwards;
 }
+
+/* Rotate Icon Event */ 
+
+@keyframes clockwise {
+    0% {
+        transform: rotateZ(0);
+    }
+    100% {
+        transform: rotateZ(180deg);
+    }
+}
+
+.clockwise {
+    animation: clockwise .3s ease-in-out forwards;
+}
+
+@keyframes anticlockwise {
+    0% {
+        transform: rotateZ(180deg);
+    }
+    100% {
+        transform: rotateZ(0);
+    }
+}
+
+.anticlockwise {
+    animation: anticlockwise .3s ease-in-out forwards;
+}

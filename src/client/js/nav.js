@@ -10,14 +10,15 @@ class Nav {
         this.jsNavLoad = this.jsNavContainer.querySelector("#jsNavLoad");
 
         this.jsMainContainer = document.querySelector("#jsMainContainer");
-        
+        this.jsHeaderContainer = this.jsNavHeader.querySelector("#jsHeaderContainer");
+
         // Btn & BtnActive Styling
         new Btn(this.jsNavHeader);
         new BtnActive(this.jsNavMemo);
         new BtnActive(this.jsNavLoad);
 
         // Functions
-        if (this.jsNavContainer) {
+        if (this.jsNavContainer && this.jsMainContainer && this.jsHeaderContainer) {
             this.navInit();
         }
     }
@@ -34,6 +35,13 @@ class Nav {
             block: "start",
             inline: "nearest",
         })
+
+        this.jsHeaderContainer.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+            inline: "nearest",
+        })
+        
     }
 
     handleNavLoadClick = () => {
@@ -41,6 +49,12 @@ class Nav {
             behavior: "smooth",
             block: "end",
             inline: "start",
+        })
+
+        this.jsHeaderContainer.scrollIntoView({
+            behavior: "smooth",
+            block: "end",
+            inline: "nearest",
         })
     }
 

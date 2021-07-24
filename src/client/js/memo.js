@@ -216,7 +216,11 @@ class Memo {
     
             // targetOptionBtn direction changes to left
             const targetIcon = targetNode.querySelector("i")
-            targetIcon.classList.replace("fa-chevron-right", "fa-chevron-left")
+            if (targetIcon.classList.contains("anticlockwise")) {
+                targetIcon.classList.replace("anticlockwise", "clockwise");
+            } else {
+                targetIcon.classList.add("clockwise");
+            }
         } else {
             // hide all option Btns
             const targetHideBtns = targetContainer.querySelectorAll("button.show");
@@ -226,7 +230,7 @@ class Memo {
     
             // targetOptionBtn direction changes to right
             const targetIcon = targetNode.querySelector("i")
-            targetIcon.classList.replace("fa-chevron-left", "fa-chevron-right")
+            targetIcon.classList.replace("clockwise", "anticlockwise");
         }
     }
     
