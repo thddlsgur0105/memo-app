@@ -67,14 +67,7 @@ export const logout = async (req, res) => {
     return res.redirect("/")
 };
 
-// 메모 데이터베이스와 연동 X
 export const memo = async (req, res) => {
-    const { id } = req.params;
-    const { user } = req.session;
-    if (id !== String(user._id)) {
-        return res.redirect("/")
-    }
-
     return res.render("memo", { pageTitle: "메모장" });    
 };
 
