@@ -37,6 +37,8 @@
     }
 }
 
+// delBtn Animation
+
 @keyframes show-btn {
     0% {
         transform: translate(-50%, -50%);
@@ -58,8 +60,31 @@
     100% {
         transform: translate(-50%, -50%);
         opacity: 0;
-        // ?
-        display: none;
+    }
+}
+
+// goBtn Animation
+
+@keyframes show-go-btn {
+    0% {
+        transform: translate(-50%, -50%);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-190%, -30%);
+        opacity: 1;
+    }
+}
+
+@keyframes hide-go-btn {
+    0% {
+        transform: translate(-190%, -30%);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -50%);
+        opacity: 0;
     }
 }
 
@@ -152,6 +177,8 @@
     display: none;
 }
 
+// delBtn Animation
+
 .show-btn {
     animation: show-btn .2s ease-in-out forwards;
 }
@@ -159,6 +186,17 @@
 .hide-btn {
     animation: hide-btn .2s ease-in-out forwards;
 }
+
+// goBtn Animation
+
+.show-go-btn {
+    animation: show-go-btn .2s ease-in-out forwards;
+}
+
+.hide-go-btn {
+    animation: hide-go-btn .2s ease-in-out forwards;
+}
+
 
 .hide-bar {
     animation: hide-bar .2s ease-in-out forwards;
@@ -261,4 +299,9 @@
 
 .anticlockwise {
     animation: anticlockwise .3s ease-in-out forwards;
+}
+
+// Btn Fix 
+.fixed {
+    transform: translate(-190%, -30%);
 }

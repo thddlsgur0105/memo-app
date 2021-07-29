@@ -56,12 +56,7 @@ class Load {
         // container
         const linkContainer = document.createElement("div");
         linkContainer.className = "welcome__container";
-    
-        // anchor
-        const linkAnchor = document.createElement("a");
-        linkAnchor.classList.add("welcome__link")
-        linkAnchor.href = link;
-        linkAnchor.id = id;
+        linkContainer.id = id;
     
         // icon
         const linkIcon = document.createElement("i");
@@ -72,25 +67,40 @@ class Load {
         linkSpan.innerHTML = name;
         linkSpan.style.display = "none";
     
-        linkAnchor.appendChild(linkIcon);
-        linkAnchor.appendChild(linkSpan);
-        new BtnActive(linkAnchor);
+        linkContainer.appendChild(linkIcon);
+        linkContainer.appendChild(linkSpan);
+        new BtnActive(linkContainer);
     
         // delete Btn
         const deleteBtn = document.createElement("button");
         deleteBtn.classList.add("btn", "link__btn", "hide");
-        deleteBtn.addEventListener("click", this.handleDeleteBtnClick);
+        deleteBtn.id = "delBtn";
+        deleteBtn.addEventListener("mousedown", this.handleDeleteBtnClick);
         
         const deleteIcon = document.createElement("i");
         deleteIcon.classList.add("fas", "fa-trash");
         deleteBtn.appendChild(deleteIcon);
-        new Btn(deleteBtn);
+        new BtnActive(deleteBtn);
+
+        // anchor Btn
+        const goBtn = document.createElement("a");
+        goBtn.classList.add("btn", "link__btn", "hide");
+        goBtn.id = "goBtn";
+        goBtn.addEventListener("mousedown", () => {
+            goBtn.classList.add("fixed");
+            return location.href = link;
+        });
+
+        const goIcon = document.createElement("i");
+        goIcon.classList.add("fas", "fa-external-link-alt");
+        goBtn.appendChild(goIcon)
+        new BtnActive(goBtn)
+
         
-        linkContainer.appendChild(linkAnchor);
         linkContainer.appendChild(deleteBtn);
+        linkContainer.appendChild(goBtn);
     
-        linkContainer.addEventListener("mouseenter", this.handleContainerHover);
-        linkContainer.addEventListener("mouseleave", this.handleContainerLeave);
+        linkContainer.addEventListener("click", this.handleContainerClick)
 
         this.jsLoadResult.appendChild(linkContainer);
     }
@@ -124,7 +134,7 @@ class Load {
             targetNode = targetNode.parentNode;
         } 
         const targetContainer = targetNode.parentNode;
-        const targetId = targetContainer.querySelector("a").id;
+        const targetId = targetContainer.id;
         
         // frontend process
         this.jsLoadResult.removeChild(targetContainer);
@@ -134,23 +144,41 @@ class Load {
         this.saveLink(this.flagArray);
     }
 
-    handleContainerHover = (event) => {
-        const targetContainer = event.target;
-        const targetBtn = targetContainer.querySelector(".link__btn");
-        if (targetContainer.classList.contains("leaved")) {
-            targetContainer.classList.replace("leaved", "hovered");
-            targetBtn.classList.replace("hide-btn", "show-btn");
-        } else {
-            targetContainer.classList.add("hovered");
-            targetBtn.classList.replace("hide", "show-btn");
+    handleContainerClick = (event) => {
+        let targetNode = event.target;
+        if (targetNode.tagName === "I") {
+            targetNode = targetNode.parentNode;
         }
+        const targetDelBtn = targetNode.querySelector("#delBtn");
+        const targetGoBtn = targetNode.querySelector("#goBtn");
+        
+        targetNode.classList.toggle("click");
+        if (targetNode.classList.contains("click")) {
+            // Show delBtn
+            // 오류 발생 부분 -> 아마 부모요소 안에 optionBtns를 추가해 클릭 이벤트 중복 때문인 듯
+            targetDelBtn.classList.replace("hide", "show-btn");
+            
+            // Show goBtn
+            targetGoBtn.classList.replace("hide", "show-go-btn");
+        } else {
+            // Hide delbtn
+            targetDelBtn.classList.replace("show-btn", "hide-btn");
+            targetDelBtn.addEventListener("animationend", this.targetDelBtnHide);
+
+            // Hide goBtn
+            targetGoBtn.classList.replace("show-go-btn", "hide-go-btn");
+            targetGoBtn.addEventListener("animationend", this.targetGoBtnHide);
+            }
     }
 
-    handleContainerLeave = (event) => {
-        const targetContainer = event.target;
-        const targetBtn = targetContainer.querySelector(".link__btn");
-        targetContainer.classList.replace("hovered", "leaved");
-        targetBtn.classList.replace("show-btn", "hide-btn");
+    targetDelBtnHide = (event) => {
+        const targetNode = event.target;
+        targetNode.classList.replace("hide-btn", "hide");
+    }
+
+    targetGoBtnHide = (event) => {
+        const targetNode = event.target;
+        targetNode.classList.replace("hide-go-btn", "hide");
     }
 }
 

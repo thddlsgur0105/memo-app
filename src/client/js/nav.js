@@ -36,11 +36,11 @@ class Nav {
             inline: "nearest",
         })
 
-        this.jsHeaderContainer.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-            inline: "nearest",
-        })
+        // this.jsHeaderContainer.scrollIntoView({
+        //     behavior: "smooth",
+        //     block: "start",
+        //     inline: "nearest",
+        // })
         
     }
 
@@ -51,11 +51,11 @@ class Nav {
             inline: "start",
         })
 
-        this.jsHeaderContainer.scrollIntoView({
-            behavior: "smooth",
-            block: "end",
-            inline: "nearest",
-        })
+        // this.jsHeaderContainer.scrollIntoView({
+        //     behavior: "smooth",
+        //     block: "end",
+        //     inline: "nearest",
+        // })
     }
 
 }
