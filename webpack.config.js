@@ -3,6 +3,7 @@ const path = require("path");
 
 module.exports = {
     entry: "./src/client/js/main.js",
+    devtool: 'eval-cheap-module-source-map',
     output: {
         filename: "js/main.js",
         path: path.resolve(__dirname, "assets"),
@@ -12,7 +13,7 @@ module.exports = {
         filename: "css/styles.css"
     })],
     watch: true,
-    mode: "development",
+    mode: "production",
     module: {
         rules: [
             {
