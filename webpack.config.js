@@ -13,7 +13,7 @@ module.exports = {
         filename: "css/styles.css"
     })],
     watch: true,
-    mode: "production",
+    mode: "development",
     module: {
         rules: [
             {
